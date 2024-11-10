@@ -1,0 +1,22 @@
+user_id,exercise_id,category,difficulty,cultural_context,user_country,user_age_group,user_proficiency,rating
+1,101,Grammar,Easy,Anime,Japan,18-25,Beginner,4
+1,102,Vocabulary,Medium,Kpop,Japan,18-25,Beginner,3
+1,103,Pronunciation,Hard,Kdrama,Japan,18-25,Beginner,2
+2,104,Grammar,Easy,Horror,India,26-35,Intermediate,5
+2,101,Vocabulary,Medium,Anime,India,26-35,Intermediate,4
+2,102,Pronunciation,Hard,Kpop,India,26-35,Intermediate,3
+3,103,Grammar,Easy,Kdrama,USA,36-45,Advanced,5
+3,104,Vocabulary,Medium,Horror,USA,36-45,Advanced,4
+3,101,Pronunciation,Hard,Anime,USA,36-45,Advanced,3
+4,102,Grammar,Easy,Kpop,South Korea,18-25,Beginner,4
+4,103,Vocabulary,Medium,Kdrama,South Korea,18-25,Beginner,3
+4,104,Pronunciation,Hard,Horror,South Korea,18-25,Beginner,2
+5,101,Grammar,Easy,Anime,China,26-35,Intermediate,4
+5,102,Vocabulary,Medium,Kpop,China,26-35,Intermediate,3
+5,103,Pronunciation,Hard,Kdrama,China,26-35,Intermediate,5
+6,104,Grammar,Easy,Horror,Japan,36-45,Advanced,4
+6,101,Vocabulary,Medium,Anime,Japan,36-45,Advanced,5
+6,102,Pronunciation,Hard,Kpop,Japan,36-45,Advanced,3
+7,103,Grammar,Easy,Kdrama,India,18-25,Beginner,4
+7,104,Vocabulary,Medium,Horror,India,18-25,Beginner,3
+7,101,Pronunciation,Hard,Anime,India,18-25,Beginner,2
