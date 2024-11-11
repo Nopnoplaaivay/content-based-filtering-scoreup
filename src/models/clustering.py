@@ -17,7 +17,7 @@ class QuestionClustering:
             model = KMeans(n_clusters=n_clusters, random_state=42)
             labels = model.fit_predict(X)
             score = silhouette_score(X, labels)
-            LOGGER.info(f"Number of clusters: {n_clusters}, Silhouette Score: {score:.4f}")
+            # LOGGER.info(f"Number of clusters: {n_clusters}, Silhouette Score: {score:.4f}")
 
             if score > best_score:
                 best_score = score
