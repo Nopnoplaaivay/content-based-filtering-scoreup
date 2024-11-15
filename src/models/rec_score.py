@@ -29,12 +29,12 @@ class RecScore:
         self.leitner_score = self.leitner()
 
     # Forgetting curve score
-    def forgetting_curve_score(self):
-        max_created_at = self.group_df['created_at'].max()
-        # print(f"Max created_at: {max_created_at}")
-        time_diff = (TimeUtils.vn_current_time() - max_created_at).total_seconds() / 3600
-
-        return 1 - np.exp(-time_diff / 24)
+    # def forgetting_curve_score(self):
+    #     max_created_at = self.group_df['created_at'].max()
+    #     # print(f"Max created_at: {max_created_at}")
+    #     time_diff = (TimeUtils.vn_current_time() - max_created_at).total_seconds() / 3600
+    #
+    #     return 1 - np.exp(-time_diff / 24)
     
     def leitner(self):
         question_stats = self.group_df.agg({
