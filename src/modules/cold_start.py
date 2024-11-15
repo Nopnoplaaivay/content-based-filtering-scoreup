@@ -2,7 +2,7 @@ import pandas as pd
 import json
 import random
 
-from src.models.rec_score import RecScore
+from src.modules.rec_score import RecScore
 from src.db import LogsDB
 
 

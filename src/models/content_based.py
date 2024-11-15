@@ -4,11 +4,11 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 from sklearn import linear_model
 
-from src.models.feature_vectors import FeaturesVector
+from src.modules.feature_vectors import FeaturesVector
 
 FeaturesVector.generate_features_vector()
 
-class ContentBased:
+class ContentBasedModel:
 
     def __init__(self, ratings: pd.DataFrame):
         self.ratings = ratings
