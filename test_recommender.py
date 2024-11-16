@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 
-from src.models import ContentBasedModel
+from src.models.content_based import ContentBasedModel
 from src.db import RatingCollection
 np.set_printoptions(precision=2)  # 2 digits after .
 

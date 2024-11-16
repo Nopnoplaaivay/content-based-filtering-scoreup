@@ -1,11 +1,13 @@
 import json
 import re
+import os
 import numpy as np
 import pandas as pd
 
 from src.db.questions import QuestionsCollection
 from src.models.questions_cluster import QuestionClustering   
 from src.utils.encode_utils import EncodeQuestionsUtils
+from src.utils.logger import LOGGER
 
 def combine_features(row):
     return np.append(row['concept_embedding'], row['difficulty'])
@@ -20,7 +22,39 @@ class QuestionsMap:
         self.encoder = EncodeQuestionsUtils()
         self.clustering_model = QuestionClustering()
 
-    def get_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+    def get_cluster_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        try:
+            if os.path.exists(f"src/tmp/mapping/{notion_database_id}_cluster_map.json"):
+                with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "r") as f:
+                    cluster_map = json.load(f)
+                return cluster_map
+            else:
+                LOGGER.error(f"Cluster map not found for {notion_database_id}")
+                self.gen_qcmap(notion_database_id=notion_database_id)
+                with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "r") as f:
+                    cluster_map = json.load(f)
+                return cluster_map
+        except Exception as e:
+            LOGGER.error(f"Error fetching cluster map: {e}")
+            return None
+
+    def get_question_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        try:
+            if os.path.exists(f"src/tmp/mapping/{notion_database_id}_question_map.json"):
+                with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "r") as f:
+                    question_map = json.load(f)
+                return question_map
+            else:
+                LOGGER.error(f"Question map not found for {notion_database_id}")
+                self.gen_qcmap(notion_database_id=notion_database_id)
+                with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "r") as f:
+                    question_map = json.load(f)
+                return question_map
+        except Exception as e:
+            LOGGER.error(f"Error fetching question map: {e}")
+            return None
+
+    def gen_qcmap(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         questions_collection = QuestionsCollection(notion_database_id=notion_database_id)
         raw_questions = questions_collection.fetch_all_questions()
         questions_df = questions_collection.preprocess_questions(raw_questions=raw_questions)
@@ -34,7 +68,7 @@ class QuestionsMap:
         cluster_labels = self.clustering_model.predict(X)
         questions_df['cluster'] = cluster_labels
 
-        questions_df.to_csv(f"src/data/{notion_database_id}_questions_cluster.csv", index=False)
+        # questions_df.to_csv(f"src/data/{notion_database_id}_questions_cluster.csv", index=False)
 
         question_map = questions_df.set_index('question_id')['cluster'].to_dict()
 
@@ -44,12 +78,8 @@ class QuestionsMap:
         temp_df['difficulty'] = temp_df['difficulty'].astype(float)
 
         temp_df['combined_features'] = temp_df.apply(combine_features, axis=1)
-        print(type(temp_df['combined_features']))
-        print(type(temp_df['combined_features'].iloc[0]))
-        print(temp_df['combined_features'].iloc[0])
 
         cluster_features = temp_df.groupby('cluster')['combined_features'].apply(lambda x: np.mean(np.stack(x), axis=0)).reset_index()
-        print(cluster_features.head())
 
         # Convert the combined features back to separate columns for easier readability
         combined_features_df = pd.DataFrame(cluster_features['combined_features'].tolist(), index=cluster_features['cluster'])
@@ -69,11 +99,13 @@ class QuestionsMap:
                 "question_id": question_ids
             }
 
-        with open(f"src/data/{notion_database_id}_cluster_map.json", "w") as f:
+        # Save cluster_map, question_map in json format
+        os.makedirs('src/tmp/mapping', exist_ok=True)
+        with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "w") as f:
             json.dump(cluster_map, f)
 
         question_map = questions_df.set_index('question_id')['cluster'].to_dict()
-        with open(f"src/data/{notion_database_id}_question_map.json", "w") as f:
+        with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "w") as f:
             json.dump(question_map, f)
 
-        return question_map, cluster_map
+        # return question_map, cluster_map
