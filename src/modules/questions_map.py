@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from src.db.questions import QuestionsCollection
-from src.models.clustering import QuestionClustering   
+from src.models.questions_cluster import QuestionClustering   
 from src.utils.encode_utils import EncodeQuestionsUtils
 
 def combine_features(row):
@@ -13,7 +13,6 @@ def combine_features(row):
 def clean_and_convert_embedding(embedding_str):
     cleaned_str = re.sub(r'[\[\]]', '', embedding_str)
     return np.fromstring(cleaned_str, sep=' ')
-
 
 class QuestionsMap:
     def __init__(self):

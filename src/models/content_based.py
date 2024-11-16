@@ -1,45 +1,58 @@
+import os
 import numpy as np
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
-from sklearn import linear_model
 
 from src.modules.feature_vectors import FeaturesVector
+from src.utils.logger import LOGGER
 
 FeaturesVector.generate_features_vector()
 
 class ContentBasedModel:
 
-    def __init__(self, ratings: pd.DataFrame):
-        self.ratings = ratings
-        self.n_users = ratings['user_id'].nunique()
+    def __init__(self):
         self.feature_vectors = np.array(list(FeaturesVector.FEATURES_VECTOR.values()))
-        self.split_data()
+        self.n_users = None
+        self.rating_train = None
+        self.rating_test = None
 
-    def split_data(self):
-        rating_train_base = pd.DataFrame(columns=self.ratings.columns)
-        rating_test_base = pd.DataFrame(columns=self.ratings.columns)
+    def save_weights(self):
+        dir = 'src/tmp/weights'
+        if not os.path.exists(dir):
+            os.makedirs(dir)
+        np.save('src/tmp/weights/content_based_model_weights.npy', self.Yhat)
 
-        # Group the data by user_id and split each group
-        for user_id, group in self.ratings.groupby('user_id'):
-            train, test = train_test_split(group, test_size=0.2, random_state=42)
-            rating_train_base = pd.concat([rating_train_base, train])
-            rating_test_base = pd.concat([rating_test_base, test])
+    def load_weights(self):
+        try:
+            self.Yhat = np.load('src/tmp/weights/content_based_model_weights.npy')
+            LOGGER.info("Loaded weights successfully.")
+        except Exception as e:
+            LOGGER.error(f"Error loading weights: {e}")
+            LOGGER.info("Start training model...")
+            self.train()
 
 
-        rating_train_base = rating_train_base.sort_values(by='user_id').reset_index(drop=True)
-        rating_test_base = rating_test_base.sort_values(by='user_id').reset_index(drop=True)
-        rating_train_base.to_csv('user_cluster_ratings_train.csv', index=False)
-        rating_test_base.to_csv('user_cluster_ratings_test.csv', index=False)
+    def train_test_split_data(self, ratings_df, test_size=0.2, random_state=42):
+        rating_train = pd.DataFrame(columns=ratings_df.columns)
+        rating_test = pd.DataFrame(columns=ratings_df.columns)
 
-        # Convert to matrix: np array
-        self.rating_train = rating_train_base.values
-        self.rating_test = rating_test_base.values
+        for _, group in ratings_df.groupby('user_id'):
+            train, test = train_test_split(group, test_size=test_size, random_state=random_state)
+            rating_train = pd.concat([rating_train, train])
+            rating_test = pd.concat([rating_test, test])
 
-    @staticmethod
-    def get_items_rated_by_user(rate_matrix, user_id):
+        rating_train_base = rating_train.sort_values(by='user_id').reset_index(drop=True)
+        rating_test_base = rating_test.sort_values(by='user_id').reset_index(drop=True)
+
+        rating_train = rating_train_base.values
+        rating_test = rating_test_base.values
+
+        return rating_train, rating_test
+
+    def get_items_rated_by_user(self, rate_matrix, user_id):
         """
-        in each line of rate_matrix, we have infor: user_id, item_id, rating (scores), time_stamp
+        in each line of rate_matrix, we have infor: user_id, cluster, rating (scores), time_stamp
         we care about the first three values
         return (item_ids, scores) rated by user user_id
         """
@@ -48,21 +61,26 @@ class ContentBasedModel:
         # we need to +1 to user_id since in the rate_matrix, id starts from 1 
         # while index in python starts from 0
         ids = np.where(y == user_id)[0] 
-        item_ids = rate_matrix[ids, 1] # index starts from 0 
-        scores = rate_matrix[ids, 2]
-        return (item_ids, scores)
+        clusters = rate_matrix[ids, 1]
+        ratings = rate_matrix[ids, 2]
+        return (clusters, ratings)
 
-    def train(self):
-        d = self.feature_vectors.shape[1]
+    def train(self, ratings_df: pd.DataFrame):
+
+        self.n_users = ratings_df['user_id'].nunique()
+        self.rating_train, self.rating_test = self.train_test_split_data(ratings_df, test_size=0.2, random_state=42)
+        feature_vectors = np.array(list(FeaturesVector.FEATURES_VECTOR.values()))
+
+        d = feature_vectors.shape[1]
         W = np.zeros((d, self.n_users))
         b = np.zeros((1, self.n_users))
 
         for n in range(self.n_users):
             user_id = n + 1
-            ids, scores = self.get_items_rated_by_user(self.rating_train, user_id)
-            ids = list(map(int, ids))
+            clusters, scores = self.get_items_rated_by_user(self.rating_train, user_id)
+            clusters = list(map(int, clusters))
             clf = Ridge(alpha=1.0, fit_intercept = True)
-            Xhat = self.feature_vectors[ids, :]
+            Xhat = feature_vectors[clusters, :]
 
             clf.fit(Xhat, scores) 
             W[:, n] = clf.coef_
@@ -70,7 +88,9 @@ class ContentBasedModel:
 
         self.W = W
         self.b = b
-        self.Yhat = self.feature_vectors.dot(W) + b
+        self.Yhat = feature_vectors.dot(W) + b
+        self.save_weights()
+        LOGGER.info("Training completed.")
 
     def test_pred(self, user_id):
         ids, scores = self.get_items_rated_by_user(self.rating_test, user_id)

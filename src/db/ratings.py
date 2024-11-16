@@ -1,5 +1,7 @@
 import pandas as pd
 import random
+import json
+import os
 
 from src.db.connection import MongoDBConnection
 from src.utils.time_utils import TimeUtils
@@ -27,28 +29,49 @@ class RatingCollection:
         finally:
             self.connection.close()
 
-    # def preprocess_ratings(self, raw_ratings):
-    #     try:
-    #         data = []
-    #         for question in raw_ratings:
-    #             question_id = question['_id']
-    #             chapter = question['chapter']
-    #             difficulty = f"{question['difficulty']:.2f}"
-    #             tag_name = question['properties']['tags']['multi_select'][0]['name']
-    #             content = question['properties']['question']['rich_text'][0]['plain_text']
-    #             data.append({
-    #                 'question_id': question_id,
-    #                 'chapter': chapter,
-    #                 'difficulty': difficulty,
-    #                 'concept': tag_name,
-    #                 'content': content
-    #             })
+    def training_data(self):
+        '''
+        Generate training data for training the model
+        Returns pd.DataFrame with columns:  user_id, cluster, rating
+        Note: The key is user_id and cluster (newest rating updated)
+        '''
+        try:
+            self.connection.connect()
+            db = self.connection.get_database()
+            collection = db[self.collection_name]
+            
+            ratings = list(collection.find({"notionDatabaseId": self.notion_database_id}))
+            LOGGER.info(f"Fetched {len(ratings)} ratings from the database.")
+            ratings_df = pd.DataFrame(ratings)
+            ratings_df = ratings_df.sort_values(by='updated_at', ascending=False)
+            ratings_df = ratings_df.drop_duplicates(subset=['user_id', 'cluster'], keep='first')
+            ratings_df = ratings_df[['user_id', 'cluster', 'rating']]
+            ratings_df = ratings_df.reset_index(drop=True)
 
-    #         df = pd.DataFrame(data)
-    #         return df
-    #     except Exception as e:
-    #         LOGGER.error(f"Error preprocessing ratings: {e}")
-    #         raise e
+            # Label encode user_id 
+            user_ids = ratings_df['user_id'].unique()
+            user_map = {user_id: idx + 1 for idx, user_id in enumerate(user_ids)}
+            ratings_df['user_id_encoded'] = ratings_df['user_id'].map(user_map)
+
+            ratings_df = ratings_df.drop(columns=['user_id'])
+            ratings_df = ratings_df.rename(columns={'user_id_encoded': 'user_id'})
+            ratings_df = ratings_df[['user_id', 'cluster', 'rating']]
+
+            LOGGER.info(f"Generated training data with {ratings_df.shape[0]} entries.")
+
+            # save user_map to a file
+            dir = 'src/tmp/users'
+            if not os.path.exists(dir):
+                os.makedirs(dir)
+            with open("src/tmp/users/user_map.json", "w") as f:
+                json.dump(user_map, f)
+            
+            return ratings_df
+        except Exception as e:
+            LOGGER.error(f"Error generating training data: {e}")
+            raise e
+        finally:
+            self.connection.close()
 
 
     def upsert(self, rating):
@@ -82,9 +105,6 @@ class RatingCollection:
                 result = collection.insert_one(rating)
                 LOGGER.info(f"Inserted rating with ID: {result.inserted_id}")
 
-            # result = collection.insert_one(rating)
-            # LOGGER.info(f"Inserted question with ID: {result.inserted_id}")
-            # return result.inserted_id
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")
             raise e

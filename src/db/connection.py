@@ -26,7 +26,7 @@ class MongoDBConnection:
         """Close the MongoDB connection."""
         if self.client:
             self.client.close()
-            LOGGER.info("MongoDB connection closed.")
+            # LOGGER.info("MongoDB connection closed.")
 
     def get_database(self):
         """Get the connected database."""

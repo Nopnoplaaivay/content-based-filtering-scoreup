@@ -3,7 +3,7 @@ import numpy as np
 
 from flask import Blueprint, request, jsonify
 
-from src.models import ContentBasedModel
+from src.recommender import Recommender
 from src.utils.logger import LOGGER
 
 recommend_bp = Blueprint('recommend', __name__)
@@ -11,9 +11,9 @@ recommend_bp = Blueprint('recommend', __name__)
 @recommend_bp.route('/recommend', methods=['POST'])
 def recommend():
     user_id = request.json['user_id']
-    ratings = pd.read_csv('user_cluster_ratings.csv')
-    model = ContentBasedModel(ratings)
-    model.train()
-    recommended_items = model.pred(user_id)
-    LOGGER.info(f"Recommended Exercise: {recommended_items}")
-    return jsonify({"recommended_items": "success"})
+    recommender = Recommender()
+    best_cluster_index, best_cluster_rating = recommender.recommend(user_id, max_items=5)
+
+    LOGGER.info(f"BEST CLUSTER INDEX: {best_cluster_index}")
+    LOGGER.info(f"BEST CLUSTER RATING: {best_cluster_rating}")
+    return jsonify({"cluster": int(best_cluster_index), "predicted_rating": float(best_cluster_rating)})
