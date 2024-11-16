@@ -1,5 +1,6 @@
 import json
 
-from src.modules.questions_map import QuestionsMap
-question_map = QuestionsMap().get_map()
-# print(json.dumps(question_map, indent=4))
+from src.modules.items_map import ItemsMap
+# features_vector = ItemsMap().get_features_vector()
+# print(features_vector)
+ItemsMap().gen_qcmap()

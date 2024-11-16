@@ -2,6 +2,7 @@ import pandas as pd
 import random
 import json
 import os
+import pymongo
 
 from src.db.connection import MongoDBConnection
 from src.utils.time_utils import TimeUtils
@@ -12,6 +13,22 @@ class RatingCollection:
         self.connection = MongoDBConnection()
         self.collection_name = "ratings"
         self.notion_database_id = notion_database_id
+
+    def fetch_ratings_by_user(self, user_id):
+        """Fetch all ratings by a specific user from the MongoDB collection."""
+        try:
+            self.connection.connect()
+            db = self.connection.get_database()
+            collection = db[self.collection_name]
+
+            ratings = list(collection.find({"user_id": user_id}))
+            LOGGER.info(f"Fetched {len(ratings)} ratings for user {user_id}.")
+            return ratings
+        except Exception as e:
+            LOGGER.error(f"Error fetching ratings by user: {e}")
+            raise e
+        finally:
+            self.connection.close()
 
     def fetch_all_ratings(self):
         """Fetch all ratings from the MongoDB collection."""
@@ -73,8 +90,7 @@ class RatingCollection:
         finally:
             self.connection.close()
 
-
-    def upsert(self, rating):
+    def upsert(self, data):
         """Insert a new question into the collection."""
         try:
             self.connection.connect()
@@ -83,27 +99,54 @@ class RatingCollection:
 
             # rating_example = {
             #     "user_id": "669d16e11db84069209550bd",
-            #     "cluster": 1,
-            #     "rating": 5
+            #     "data": {
+            #           "clusters": [2, 7, 12],
+            #           "rating": 4
+            #     }
             # }
 
             # Check if user has rated the cluster before
-            user_id = rating['user_id']
-            cluster = rating['cluster']
-            existing_rating = collection.find_one({"user_id": user_id, "cluster": cluster})
-            if existing_rating:
-                # Update the existing rating
-                existing_rating['rating'] = rating['rating']
-                existing_rating['updated_at'] = TimeUtils.vn_current_time()
-                result = collection.update_one({"_id": existing_rating['_id']}, {"$set": existing_rating})
-                LOGGER.info(f"Updated rating with ID: {existing_rating['_id']} - New Rating: {rating['rating']}")
-            else:
-                # Insert a new rating
-                rating['notionDatabaseId'] = self.notion_database_id
-                rating['created_at'] = TimeUtils.vn_current_time()
-                rating['updated_at'] = TimeUtils.vn_current_time()
-                result = collection.insert_one(rating)
-                LOGGER.info(f"Inserted rating with ID: {result.inserted_id}")
+            user_id = data['user_id']
+            clusters = data['data']['clusters']
+            rating = data['data']['rating']
+            messages = {
+                "user_id": user_id,
+                "inserted": [],
+                "updated": []
+            }
+            for cluster in clusters:
+                existing_rating = collection.find_one({"user_id": user_id, "cluster": cluster})
+                if existing_rating:
+                    # Update the existing rating
+                    try:
+                        existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
+                        existing_rating['updated_at'] = TimeUtils.vn_current_time()
+                        result = collection.update_one({"_id": existing_rating['_id']}, {"$set": existing_rating})
+                        message = f"Updated rating with cluster {cluster} - New Rating: {existing_rating['rating']}"
+                        LOGGER.info(message)
+                        messages['updated'].append(message)
+                    except Exception as e:
+                        LOGGER.error(f"Error updating rating: {e}")
+                        raise e
+                else:
+                    try:
+                        # Insert a new rating
+                        new_rating = {
+                            "user_id": user_id,
+                            "cluster": cluster,
+                            "rating": rating,
+                            "notionDatabaseId": self.notion_database_id,
+                            "created_at": TimeUtils.vn_current_time(),
+                            "updated_at": TimeUtils.vn_current_time()
+                        }
+                        result = collection.insert_one(new_rating)
+                        message = f"Inserted rating with cluster: {cluster} - Rating: {new_rating['rating']}"
+                        LOGGER.info(message)
+                        messages["inserted"].append(message)
+                    except Exception as e:
+                        LOGGER.error(f"Error inserting rating: {e}")
+                        raise e
+            return messages
 
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")

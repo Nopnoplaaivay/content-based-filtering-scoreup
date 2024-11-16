@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from flask import Blueprint, request, jsonify
 
-from src.models import ContentBasedModel
+from src.models.content_based import ContentBasedModel
 from src.db import RatingCollection
 from src.utils.logger import LOGGER
 

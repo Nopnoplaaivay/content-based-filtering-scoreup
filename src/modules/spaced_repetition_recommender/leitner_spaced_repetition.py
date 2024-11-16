@@ -3,7 +3,7 @@ import pandas as pd
 
 from src.utils.time_utils import TimeUtils
 
-class RecScore:
+class LeitnerSpacedRepetition:
     NEVER_ATTEMPTED = 0 # Never attempted
     FREQUENTLY_WRONG = 1 # Frequently wrong (correct_ratio < 0.3)
     OCCASIONALLY_WRONG = 2 # Occasionally wrong (0.3 <= correct_ratio < 0.5)
@@ -24,20 +24,9 @@ class RecScore:
     CORRECT_RATIO_THRESHOLD = 0.7  # Correct ratio threshold to be considered "frequently correct"
     WRONG_RATIO_THRESHOLD = 0.7  # Wrong ratio threshold to be considered "frequently wrong"
 
-    def __init__(self, group_df):
-        self.group_df = group_df
-        self.leitner_score = self.leitner()
-
-    # Forgetting curve score
-    # def forgetting_curve_score(self):
-    #     max_created_at = self.group_df['created_at'].max()
-    #     # print(f"Max created_at: {max_created_at}")
-    #     time_diff = (TimeUtils.vn_current_time() - max_created_at).total_seconds() / 3600
-    #
-    #     return 1 - np.exp(-time_diff / 24)
-    
-    def leitner(self):
-        question_stats = self.group_df.agg({
+    @classmethod
+    def leitner_score(cls, group_df):
+        question_stats = group_df.agg({
             'score': ['count', 'mean', 'std'],
             'created_at': 'max'
         }).round(3)
@@ -46,23 +35,22 @@ class RecScore:
 
         # Determine current box 
         if question_stats['score']['count'] == 0:
-            current_box = RecScore.NEVER_ATTEMPTED
-        elif question_stats['score']['count'] < RecScore.ATTEMPT_THRESHOLD:
+            current_box = cls.NEVER_ATTEMPTED
+        elif question_stats['score']['count'] < cls.ATTEMPT_THRESHOLD:
             if question_stats['score']['mean'] < 0.5:
-                current_box = RecScore.OCCASIONALLY_WRONG 
+                current_box = cls.OCCASIONALLY_WRONG
             else:
-                current_box = RecScore.CORRECT
+                current_box = cls.CORRECT
         else:
-            if question_stats['score']['mean'] >= RecScore.CORRECT_RATIO_THRESHOLD:
-                current_box = RecScore.FREQUENTLY_CORRECT
-            elif question_stats['score']['mean'] <= RecScore.WRONG_RATIO_THRESHOLD:
-                current_box = RecScore.FREQUENTLY_WRONG
+            if question_stats['score']['mean'] >= cls.CORRECT_RATIO_THRESHOLD:
+                current_box = cls.FREQUENTLY_CORRECT
+            elif question_stats['score']['mean'] <= cls.WRONG_RATIO_THRESHOLD:
+                current_box = cls.FREQUENTLY_WRONG
             else:
-                current_box = RecScore.OCCASIONALLY_WRONG
+                current_box = cls.OCCASIONALLY_WRONG
 
         days_since_last_attempt = (TimeUtils.vn_current_time() - question_stats['created_at']['max']).days
-        next_review_days = RecScore.REVIEW_INTERVALS[current_box]
+        next_review_days = cls.REVIEW_INTERVALS[current_box]
 
-        srs_score = max(0, min(days_since_last_attempt / next_review_days, 5))
-
-        return srs_score
+        leitner_score = max(0, min(days_since_last_attempt / next_review_days, 5))
+        return leitner_score

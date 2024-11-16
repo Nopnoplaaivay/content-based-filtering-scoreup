@@ -16,7 +16,7 @@ def clean_and_convert_embedding(embedding_str):
     cleaned_str = re.sub(r'[\[\]]', '', embedding_str)
     return np.fromstring(cleaned_str, sep=' ')
 
-class QuestionsMap:
+class ItemsMap:
     def __init__(self):
         
         self.encoder = EncodeQuestionsUtils()
@@ -54,6 +54,25 @@ class QuestionsMap:
             LOGGER.error(f"Error fetching question map: {e}")
             return None
 
+    def get_features_vector(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        try:
+            if os.path.exists(f"src/tmp/features_vector/{notion_database_id}_features_vector.json"):
+                with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
+                    features_vector = json.load(f)
+                # Transform features vector to numpy array
+                features_vector = np.array(list(features_vector.values()))
+                return features_vector
+            else:
+                LOGGER.error(f"Features vector not found for {notion_database_id}")
+                self.gen_qcmap(notion_database_id=notion_database_id)
+                with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
+                    features_vector = json.load(f)
+                features_vector = np.array(list(features_vector.values()))
+                return features_vector
+        except Exception as e:
+            LOGGER.error(f"Error fetching features vector: {e}")
+            return None
+
     def gen_qcmap(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         questions_collection = QuestionsCollection(notion_database_id=notion_database_id)
         raw_questions = questions_collection.fetch_all_questions()
@@ -68,9 +87,7 @@ class QuestionsMap:
         cluster_labels = self.clustering_model.predict(X)
         questions_df['cluster'] = cluster_labels
 
-        # questions_df.to_csv(f"src/data/{notion_database_id}_questions_cluster.csv", index=False)
-
-        question_map = questions_df.set_index('question_id')['cluster'].to_dict()
+        # question_map = questions_df.set_index('question_id')['cluster'].to_dict()
 
         # Create feature vector for each cluster
         temp_df = questions_df.drop(columns=['question_id', 'concept', 'content'])
@@ -99,6 +116,11 @@ class QuestionsMap:
                 "question_id": question_ids
             }
 
+        # Generate features vector
+        features_vector = {}
+        for key, value in cluster_map.items():
+            features_vector[key] = value["features_vector"]
+
         # Save cluster_map, question_map in json format
         os.makedirs('src/tmp/mapping', exist_ok=True)
         with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "w") as f:
@@ -108,4 +130,7 @@ class QuestionsMap:
         with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "w") as f:
             json.dump(question_map, f)
 
-        # return question_map, cluster_map
+        # Save features vector
+        os.makedirs('src/tmp/features_vector', exist_ok=True)
+        with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "w") as f:
+            json.dump(features_vector, f)

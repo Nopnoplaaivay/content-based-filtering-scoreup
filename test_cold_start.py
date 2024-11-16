@@ -1,3 +1,4 @@
-from src.modules.cold_start import ColdStart
+from src.modules.spaced_repetition_recommender.lsr_recommender import LSRRecommender
 
-ColdStart().recommend("669d16e11db84069209550bd")
+items = LSRRecommender().recommend("669d16e11db84069209550bd")
+print(items)

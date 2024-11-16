@@ -1,9 +1,7 @@
-import pandas as pd
-import numpy as np
-
 from flask import Blueprint, request, jsonify
-from src.db.ratings import RatingCollection
 
+from src.db.ratings import RatingCollection
+from src.utils.logger import LOGGER
 rating_collection = RatingCollection()
 
 upsert_bp = Blueprint('upsert_rating', __name__)
@@ -13,13 +11,7 @@ def upsert():
     global rating_collection
 
     data = request.json
-    user_id = data['user_id']
-    cluster = data['cluster']
-    rating = data['rating']
+    LOGGER.info(f"Upserting rating: {data}")
 
-    rating_collection.upsert({
-        "user_id": user_id,
-        "cluster": cluster,
-        "rating": rating
-    })
-    return jsonify({"status": "success"})
+    messages = rating_collection.upsert(data)
+    return jsonify({"status": "success", "messages": messages})

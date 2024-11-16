@@ -4,23 +4,20 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
-from src.modules.feature_vectors import FeaturesVector
+from src.modules.items_map import ItemsMap
 from src.utils.logger import LOGGER
-
-FeaturesVector.generate_features_vector()
 
 class ContentBasedModel:
 
     def __init__(self):
-        self.feature_vectors = np.array(list(FeaturesVector.FEATURES_VECTOR.values()))
+        self.feature_vectors = ItemsMap().get_features_vector()
         self.n_users = None
         self.rating_train = None
         self.rating_test = None
 
     def save_weights(self):
         dir = 'src/tmp/weights'
-        if not os.path.exists(dir):
-            os.makedirs(dir)
+        os.makedirs(dir, exist_ok=True)
         np.save('src/tmp/weights/content_based_model_weights.npy', self.Yhat)
 
     def load_weights(self):
@@ -69,7 +66,7 @@ class ContentBasedModel:
 
         self.n_users = ratings_df['user_id'].nunique()
         self.rating_train, self.rating_test = self.train_test_split_data(ratings_df, test_size=0.2, random_state=42)
-        feature_vectors = np.array(list(FeaturesVector.FEATURES_VECTOR.values()))
+        feature_vectors = self.feature_vectors
 
         d = feature_vectors.shape[1]
         W = np.zeros((d, self.n_users))

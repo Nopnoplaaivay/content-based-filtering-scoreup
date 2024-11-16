@@ -1,6 +1,3 @@
-import pandas as pd
-import numpy as np
-
 from flask import Blueprint, request, jsonify
 
 from src.recommender import Recommender
@@ -12,8 +9,8 @@ recommend_bp = Blueprint('recommend', __name__)
 def recommend():
     user_id = request.json['user_id']
     recommender = Recommender()
-    best_cluster_index, best_cluster_rating = recommender.recommend(user_id, max_items=5)
+    # best_cluster_index, best_cluster_rating = recommender.recommend(user_id, max_items=5)
+    recommendations = recommender.recommend(user_id)
+    LOGGER.info(f"Recommendations for user {user_id}: {recommendations}")
 
-    LOGGER.info(f"BEST CLUSTER INDEX: {best_cluster_index}")
-    LOGGER.info(f"BEST CLUSTER RATING: {best_cluster_rating}")
-    return jsonify({"cluster": int(best_cluster_index), "predicted_rating": float(best_cluster_rating)})
+    return jsonify({"status": "success", "recommendations": recommendations})

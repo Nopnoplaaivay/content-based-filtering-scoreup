@@ -1,0 +1,1 @@
+from src.modules.content_based_recommender.content_based_recommender import ContentBasedRecommender
