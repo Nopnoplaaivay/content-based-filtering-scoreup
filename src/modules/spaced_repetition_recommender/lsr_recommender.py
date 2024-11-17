@@ -2,14 +2,14 @@ import pandas as pd
 import random
 import json
 
+from src.db import LogsCollection, QuestionsCollection
 from src.modules.items_map import ItemsMap
 from src.modules.spaced_repetition_recommender.leitner_spaced_repetition import LeitnerSpacedRepetition
-from src.db import LogsDB
 
 class LSRRecommender:
 
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        self.logs_collection = LogsDB(notion_database_id=notion_database_id)
+        self.logs_collection = LogsCollection(notion_database_id=notion_database_id)
 
     def recommend(self, user_id, max_exercises=10):
         # Get items map
@@ -52,6 +52,7 @@ class LSRRecommender:
                 random.shuffle(exercises)
                 for exercise in exercises:
                     if len(recommendations["exercise_ids"]) < max_exercises:
+                        exercise = QuestionsCollection().fetch_question(exercise)
                         recommendations["exercise_ids"].append(exercise)
                     else:
                         break

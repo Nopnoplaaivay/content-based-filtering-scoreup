@@ -5,10 +5,6 @@ from gensim.models import Word2Vec
 from underthesea import word_tokenize
 
 from sklearn.preprocessing import LabelEncoder, StandardScaler
-from sklearn.ensemble import RandomForestClassifier  
-from sklearn.metrics import accuracy_score
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
 from gensim.models import Word2Vec
 
 class EncodeQuestionsUtils:

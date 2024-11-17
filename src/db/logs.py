@@ -4,7 +4,7 @@ from datetime import datetime
 from src.db.connection import MongoDBConnection
 from src.utils.logger import LOGGER
 
-class LogsDB:
+class LogsCollection:
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         self.connection = MongoDBConnection()
         self.collection_name = "logs-questions"
@@ -46,8 +46,6 @@ class LogsDB:
         try:
             data = []
             for log in raw_logs:
-                # log_id = log['_id']
-
                 user_id = log['user_id']
                 question_id = log['exercise_id']
                 chapter = log['chapter']

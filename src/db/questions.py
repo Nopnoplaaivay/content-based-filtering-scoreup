@@ -9,6 +9,22 @@ class QuestionsCollection:
         self.collection_name = "questions"
         self.notion_database_id = notion_database_id
 
+    def fetch_question(self, question_id):
+        """Fetch a question from the MongoDB collection by its ID."""
+        try:
+            self.connection.connect()
+            db = self.connection.get_database()
+            collection = db[self.collection_name]
+            
+            question = collection.find_one({"_id": question_id})
+            LOGGER.info(f"Fetched question with ID: {question_id}")
+            return question
+        except Exception as e:
+            LOGGER.error(f"Error fetching question: {e}")
+            raise e
+        finally:
+            self.connection.close()
+
     def fetch_all_questions(self):
         """Fetch all questions from the MongoDB collection."""
         try:

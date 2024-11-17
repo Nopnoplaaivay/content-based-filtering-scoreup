@@ -2,6 +2,7 @@ import json
 import random
 import numpy as np
 
+from src.db import QuestionsCollection
 from src.modules.items_map import ItemsMap
 from src.models.content_based import ContentBasedModel
 from src.utils.logger import LOGGER
@@ -38,9 +39,12 @@ class ContentBasedRecommender:
                 random.shuffle(exercises)
                 for exercise in exercises:
                     if len(recommendations["exercise_ids"]) < max_exercises:
+                        # Fetch exercise from database
+                        exercise = QuestionsCollection().fetch_question(exercise)
                         recommendations["exercise_ids"].append(exercise)
                     else:
                         break
+
         messages = [
             "These questions connect to multiple topics you’ve studied before, helping you see the bigger picture and build integrated knowledge."
             , "Based on your learning history and preferences, these questions aligns well with your strengths and areas of improvement, offering a perfect next step."
@@ -65,4 +69,5 @@ class ContentBasedRecommender:
             return user_map
         except Exception as e:
             LOGGER.error(f"Error loading user map: {e}")
+            LOGGER.info("Please call train model api first (POST /train) to generate user map.")
             return None
