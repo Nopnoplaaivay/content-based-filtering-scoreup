@@ -7,10 +7,11 @@ recommend_bp = Blueprint('recommend', __name__)
 
 @recommend_bp.route('/recommend', methods=['POST'])
 def recommend():
-    user_id = request.json['user_id']
-    recommender = Recommender()
-    # best_cluster_index, best_cluster_rating = recommender.recommend(user_id, max_items=5)
-    recommendations = recommender.recommend(user_id)
-    LOGGER.info(f"Recommendations for user {user_id}: {recommendations}")
-
-    return jsonify({"status": "success", "recommendations": recommendations})
+    try:
+        user_id = request.json['user_id']
+        recommender = Recommender()
+        recommendations = recommender.recommend(user_id)
+        return jsonify({"status": "success", "recommendations": recommendations})
+    except Exception as e:
+        LOGGER.error(f"Error in recommend: {e}")
+        return jsonify({"status": "error", "message": str(e)})

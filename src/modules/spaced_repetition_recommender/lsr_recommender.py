@@ -22,31 +22,46 @@ class LSRRecommender:
         self.logs_df.dropna(subset=['cluster'], inplace=True)
         self.logs_df['cluster'] = self.logs_df['cluster'].astype(int)
 
-        cols = ['user_id', 'cluster', 'rec_score']
+        cols = ['user_id', 'cluster', 'rec_score', 'message']
         Y = pd.DataFrame(columns=cols)
         group_user_cluster = self.logs_df.groupby(['cluster'])
 
         rows = []
         for cluster, group_df in group_user_cluster:
-            rec_score = LeitnerSpacedRepetition.leitner_score(group_df)
-            print(f"rec_score: {rec_score}")
-            rows.append([user_id, cluster, rec_score])
+            rec_score, message = LeitnerSpacedRepetition.leitner_score(group_df)
+            rows.append([user_id, cluster, rec_score, message])
 
         Y = pd.concat([Y, pd.DataFrame(rows, columns=cols)], ignore_index=True)
         Y = Y.sort_values(by='rec_score', ascending=False)
 
         clusters = Y['cluster'].values
-        recommendations = []
+        message = Y['message'].iloc[0]
+        recommendations = {
+            "exercise_ids": [],
+            "clusters": [],
+            "message": None,
+        }
 
         for cluster in clusters:
-            cluster_str = str(cluster[0]) 
+            cluster_str = str(cluster[0])
+            if len(recommendations["exercise_ids"]) >= max_exercises:
+                break
             if cluster_str in cluster_map:
+                recommendations["clusters"].append(int(cluster_str))
                 exercises = cluster_map[cluster_str]["question_id"]
                 random.shuffle(exercises)
                 for exercise in exercises:
-                    if len(recommendations) < max_exercises:
-                        recommendations.append(exercise)
+                    if len(recommendations["exercise_ids"]) < max_exercises:
+                        recommendations["exercise_ids"].append(exercise)
                     else:
                         break
+
+        if recommendations["exercise_ids"]:
+            recommendations["message"] = (f"{message}")
+        else:
+            recommendations["message"] = (
+                f"Hi User {user_id}, we currently have no recommendations for you. "
+                "Please try answering more questions to generate new suggestions!"
+            )
 
         return recommendations

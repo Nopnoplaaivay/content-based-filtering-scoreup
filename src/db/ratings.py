@@ -23,7 +23,7 @@ class RatingCollection:
 
             ratings = list(collection.find({"user_id": user_id}))
             LOGGER.info(f"Fetched {len(ratings)} ratings for user {user_id}.")
-            return ratings
+            return ratings if len(ratings) > 0 else None
         except Exception as e:
             LOGGER.error(f"Error fetching ratings by user: {e}")
             raise e
@@ -46,7 +46,7 @@ class RatingCollection:
         finally:
             self.connection.close()
 
-    def training_data(self):
+    def get_training_data(self):
         '''
         Generate training data for training the model
         Returns pd.DataFrame with columns:  user_id, cluster, rating

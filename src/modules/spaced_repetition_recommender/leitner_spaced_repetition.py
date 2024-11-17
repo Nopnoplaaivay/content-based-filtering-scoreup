@@ -10,6 +10,12 @@ class LeitnerSpacedRepetition:
     CORRECT = 3 # Correct (0.5 <= correct_ratio < 0.7)
     FREQUENTLY_CORRECT = 4 # Frequently correct (correct_ratio >= 0.7)
 
+    NEVER_ATTEMPTED_MESSAGE = "This cluster was never attempted, and it is recommended to start practicing these questions."
+    FREQUENTLY_WRONG_MESSAGE = "Your performance in this field has been frequently incorrect, so focused practice is highly recommended."
+    OCCASIONALLY_WRONG_MESSAGE = "Your performance in this field has been occasionally incorrect, indicating a need for improvement."
+    CORRECT_MESSAGE = "You have performed well in this field, but consistent review is important to maintain your understanding."
+    FREQUENTLY_CORRECT_MESSAGE = "You have frequently answered questions in this field correctly. A periodic review is recommended to retain knowledge."
+
     # Define the review intervals for each box
     REVIEW_INTERVALS = {
         NEVER_ATTEMPTED: 1, # 1 day
@@ -53,4 +59,18 @@ class LeitnerSpacedRepetition:
         next_review_days = cls.REVIEW_INTERVALS[current_box]
 
         leitner_score = max(0, min(days_since_last_attempt / next_review_days, 5))
-        return leitner_score
+
+        message = None
+        # Generate a reason based on the current box
+        if current_box == cls.NEVER_ATTEMPTED:
+            message = cls.NEVER_ATTEMPTED_MESSAGE
+        elif current_box == cls.FREQUENTLY_WRONG:
+            message = cls.FREQUENTLY_WRONG_MESSAGE
+        elif current_box == cls.OCCASIONALLY_WRONG:
+            message = cls.OCCASIONALLY_WRONG_MESSAGE
+        elif current_box == cls.CORRECT:
+            message = cls.CORRECT_MESSAGE
+        elif current_box == cls.FREQUENTLY_CORRECT:
+            message = cls.FREQUENTLY_CORRECT_MESSAGE
+
+        return leitner_score, message

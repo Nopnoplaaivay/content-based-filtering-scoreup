@@ -35,9 +35,10 @@ class ContentBasedModel:
         rating_test = pd.DataFrame(columns=ratings_df.columns)
 
         for _, group in ratings_df.groupby('user_id'):
-            train, test = train_test_split(group, test_size=test_size, random_state=random_state)
-            rating_train = pd.concat([rating_train, train])
-            rating_test = pd.concat([rating_test, test])
+            if len(group) >= 2:
+                train, test = train_test_split(group, test_size=test_size, random_state=random_state)
+                rating_train = pd.concat([rating_train, train])
+                rating_test = pd.concat([rating_test, test])
 
         rating_train_base = rating_train.sort_values(by='user_id').reset_index(drop=True)
         rating_test_base = rating_test.sort_values(by='user_id').reset_index(drop=True)
@@ -76,10 +77,12 @@ class ContentBasedModel:
             user_id = n + 1
             clusters, scores = self.get_items_rated_by_user(self.rating_train, user_id)
             clusters = list(map(int, clusters))
+            if len(clusters) == 0:
+                continue  # The rating train may not have any rating of user n
             clf = Ridge(alpha=1.0, fit_intercept = True)
             Xhat = feature_vectors[clusters, :]
 
-            clf.fit(Xhat, scores) 
+            clf.fit(Xhat, scores)
             W[:, n] = clf.coef_
             b[0, n] = clf.intercept_
 

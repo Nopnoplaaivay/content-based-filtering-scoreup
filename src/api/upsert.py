@@ -10,8 +10,12 @@ upsert_bp = Blueprint('upsert_rating', __name__)
 def upsert():
     global rating_collection
 
-    data = request.json
-    LOGGER.info(f"Upserting rating: {data}")
+    try:
+        data = request.json
+        LOGGER.info(f"Upserting rating: {data}")
 
-    messages = rating_collection.upsert(data)
-    return jsonify({"status": "success", "messages": messages})
+        messages = rating_collection.upsert(data)
+        return jsonify({"status": "success", "messages": messages})
+    except Exception as e:
+        LOGGER.error(f"Error in upsert: {e}")
+        return jsonify({"status": "error", "message": str(e)})
