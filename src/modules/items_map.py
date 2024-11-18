@@ -18,7 +18,6 @@ def clean_and_convert_embedding(embedding_str):
 
 class ItemsMap:
     def __init__(self):
-        
         self.encoder = EncodeQuestionsUtils()
         self.clustering_model = QuestionClustering()
 
@@ -115,6 +114,16 @@ class ItemsMap:
                 "features_vector": features_vector,
                 "question_id": question_ids
             }
+
+        # Calculate cluster difficulty = average difficulty of questions in cluster
+        questions_df['difficulty'] = questions_df['difficulty'].astype(float)
+        cluster_difficulty = questions_df.groupby('cluster')['difficulty'].mean().reset_index()
+        cluster_difficulty.columns = ['cluster', 'cluster_difficulty']
+
+        for cluster in cluster_difficulty['cluster']:
+            cluster_str = str(cluster)
+            if cluster_str in cluster_map:
+                cluster_map[cluster_str]['cluster_difficulty'] = cluster_difficulty[cluster_difficulty['cluster'] == cluster]['cluster_difficulty'].values[0]
 
         # Generate features vector
         features_vector = {}
