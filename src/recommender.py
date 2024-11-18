@@ -1,6 +1,3 @@
-import numpy as np
-import json
-
 from src.db import RatingCollection
 from src.modules.content_based_recommender import ContentBasedRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender

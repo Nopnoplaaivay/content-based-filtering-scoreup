@@ -1,5 +1,4 @@
 import pandas as pd
-from datetime import datetime
 
 from src.db.connection import MongoDBConnection
 from src.utils.logger import LOGGER
