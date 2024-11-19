@@ -20,7 +20,7 @@ class Recommender:
         if user_ratings is None:
             LOGGER.info(f"User {user_id} has not rated any items. Recommending cold start items.")
             random_number = random.random()
-            if random_number < 0.75:
+            if random_number < 0.5:
                 return self.cs_recommend(user_id)
             else:
                 return self.llr_recommend(user_id)

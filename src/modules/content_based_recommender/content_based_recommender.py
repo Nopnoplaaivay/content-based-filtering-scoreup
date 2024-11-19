@@ -52,6 +52,7 @@ class ContentBasedRecommender:
             , "This question aligns closely with topics you’ve shown interest in, ensuring the learning experience remains both challenging and motivating."
             , "This question is slightly more advanced and explores related concepts to those you've already mastered. It’s chosen to push your boundaries and keep your learning engaging."
         ]
+
         if recommendations:
             recommendations["message"] = (f"{random.choice(messages)}")
         else:
