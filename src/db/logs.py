@@ -70,3 +70,23 @@ class LogsCollection:
         except Exception as e:
             LOGGER.error(f"Error preprocessing logs: {e}")
             raise e
+
+    def cal_user_level(self, user_id):
+        '''
+        Calculate user level based on logs
+        '''
+        try:
+            logs = self.fetch_logs_by_user(user_id)
+            logs_df = self.preprocess_logs(logs)
+            avg_score = logs_df['score'].mean()
+            if avg_score <= 0.33:
+                return 'Beginner'
+            elif avg_score <= 0.66:
+                return 'Intermediate'
+            else:
+                return 'Advanced'
+        except Exception as e:
+            LOGGER.error(f"Error calculating user level: {e}")
+            raise e
+        finally:
+            self.connection.close()

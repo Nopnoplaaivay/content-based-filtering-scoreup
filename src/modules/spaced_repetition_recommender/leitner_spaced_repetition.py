@@ -9,6 +9,9 @@ class LeitnerSpacedRepetition:
     OCCASIONALLY_WRONG = 2 # Occasionally wrong (0.3 <= correct_ratio < 0.5)
     CORRECT = 3 # Correct (0.5 <= correct_ratio < 0.7)
     FREQUENTLY_CORRECT = 4 # Frequently correct (correct_ratio >= 0.7)
+    # MASTERED
+    # 100% CORRECT
+    # BOOKMARKEDz
 
     NEVER_ATTEMPTED_MESSAGE = "This cluster was never attempted, and it is recommended to start practicing these questions."
     FREQUENTLY_WRONG_MESSAGE = "Your performance in this field has been frequently incorrect, so focused practice is highly recommended."

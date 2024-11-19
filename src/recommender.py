@@ -1,6 +1,9 @@
+import random
+
 from src.db import RatingCollection
 from src.modules.content_based_recommender import ContentBasedRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
+from src.modules.learner_level_recommender import LLRRecommender
 from src.utils.logger import LOGGER
 
 class Recommender:
@@ -12,9 +15,15 @@ class Recommender:
         # Check if user has rated any items
         rating_collection = RatingCollection()
         user_ratings = rating_collection.fetch_ratings_by_user(user_id)
+        
+        # if user has not rated any items, recommend cold start items (75% of the time recommend LSR items, 25% of the time recommend LLR items)
         if user_ratings is None:
             LOGGER.info(f"User {user_id} has not rated any items. Recommending cold start items.")
-            return self.cs_recommend(user_id)
+            random_number = random.random()
+            if random_number < 0.5:
+                return self.cs_recommend(user_id)
+            else:
+                return self.llr_recommend(user_id)
         else:
             LOGGER.info(f"User {user_id} has rated items. Recommending based on content.")
             return self.cb_recommend(user_id)
@@ -25,4 +34,8 @@ class Recommender:
     
     def cs_recommend(self, user_id, max_exercises=5):
         recommendations = self.lsr_recommender.recommend(user_id, max_exercises=max_exercises)
+        return recommendations
+    
+    def llr_recommend(self, user_id, max_exercises=5):
+        recommendations = LLRRecommender().recommend(user_id, max_exercises=max_exercises)
         return recommendations
