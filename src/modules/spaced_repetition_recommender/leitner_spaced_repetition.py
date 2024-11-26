@@ -13,11 +13,17 @@ class LeitnerSpacedRepetition:
     # 100% CORRECT
     # BOOKMARKEDz
 
-    NEVER_ATTEMPTED_MESSAGE = "This cluster was never attempted, and it is recommended to start practicing these questions."
-    FREQUENTLY_WRONG_MESSAGE = "Your performance in this field has been frequently incorrect, so focused practice is highly recommended."
-    OCCASIONALLY_WRONG_MESSAGE = "Your performance in this field has been occasionally incorrect, indicating a need for improvement."
-    CORRECT_MESSAGE = "You have performed well in this field, but consistent review is important to maintain your understanding."
-    FREQUENTLY_CORRECT_MESSAGE = "You have frequently answered questions in this field correctly. A periodic review is recommended to retain knowledge."
+    # NEVER_ATTEMPTED_MESSAGE = "This cluster was never attempted, and it is recommended to start practicing these questions."
+    # FREQUENTLY_WRONG_MESSAGE = "Your performance in this field has been frequently incorrect, so focused practice is highly recommended."
+    # OCCASIONALLY_WRONG_MESSAGE = "Your performance in this field has been occasionally incorrect, indicating a need for improvement."
+    # CORRECT_MESSAGE = "You have performed well in this field, but consistent review is important to maintain your understanding."
+    # FREQUENTLY_CORRECT_MESSAGE = "You have frequently answered questions in this field correctly. A periodic review is recommended to retain knowledge."
+
+    NEVER_ATTEMPTED_MESSAGE = "Nhóm câu hỏi này chưa từng được bạn thử, và chúng tôi khuyến nghị bạn nên bắt đầu luyện tập ngay."
+    FREQUENTLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thường xuyên sai, do đó, cần tập trung luyện tập."
+    OCCASIONALLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thỉnh thoảng không tốt, cho thấy cần cải thiện thêm."
+    CORRECT_MESSAGE = "Bạn đã làm tốt trong lĩnh vực này, nhưng việc ôn tập thường xuyên là rất quan trọng để duy trì sự hiểu biết."
+    FREQUENTLY_CORRECT_MESSAGE = "Bạn thường xuyên trả lời đúng các câu hỏi trong lĩnh vực này. Việc ôn tập định kỳ được khuyến nghị để duy trì kiến thức."
 
     # Define the review intervals for each box
     REVIEW_INTERVALS = {

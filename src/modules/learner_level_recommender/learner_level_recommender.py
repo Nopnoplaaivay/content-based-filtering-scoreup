@@ -25,10 +25,16 @@ class LLRRecommender:
         # Xác định cấp độ người học
         user_level = self.logs_collection.cal_user_level(user_id)
 
+        # messages = {
+        #     "Beginner": "We picked these Beginner level questions for you to help you get started!",
+        #     "Intermediate": "We picked these Intermediate level questions for you to help you improve your skills!",
+        #     "Advanced": "We picked these Advanced level questions for you to challenge your knowledge!"
+        # }
+
         messages = {
-            "Beginner": "We picked these Beginner level questions for you to help you get started!",
-            "Intermediate": "We picked these Intermediate level questions for you to help you improve your skills!",
-            "Advanced": "We picked these Advanced level questions for you to challenge your knowledge!"
+            "Beginner": "Chúng tôi đã chọn những câu hỏi cấp độ Cơ bản để giúp bạn bắt đầu!",
+            "Intermediate": "Chúng tôi đã chọn những câu hỏi cấp độ Trung bình để giúp bạn cải thiện kỹ năng!",
+            "Advanced": "Chúng tôi đã chọn những câu hỏi cấp độ Nâng cao để thử thách kiến thức của bạn!"
         }
 
         # Gợi ý câu hỏi phù hợp
