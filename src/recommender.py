@@ -11,7 +11,7 @@ class Recommender:
         self.cb_recommender = ContentBasedRecommender()
         self.lsr_recommender = LSRRecommender()
 
-    def recommend(self, user_id):
+    def recommend(self, user_id, max_exercises=5):
         # Check if user has rated any items
         rating_collection = RatingCollection()
         user_ratings = rating_collection.fetch_ratings_by_user(user_id)
@@ -21,12 +21,12 @@ class Recommender:
             LOGGER.info(f"User {user_id} has not rated any items. Recommending cold start items.")
             random_number = random.random()
             if random_number < 0.5:
-                return self.cs_recommend(user_id)
+                return self.cs_recommend(user_id, max_exercises=max_exercises)
             else:
-                return self.llr_recommend(user_id)
+                return self.llr_recommend(user_id, max_exercises=max_exercises)
         else:
             LOGGER.info(f"User {user_id} has rated items. Recommending based on content.")
-            return self.cb_recommend(user_id)
+            return self.cb_recommend(user_id, max_exercises=max_exercises)
         
     def cb_recommend(self, user_id, max_exercises=5):
         recommendations = self.cb_recommender.recommend(user_id, max_exercises=max_exercises)
