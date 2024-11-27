@@ -1,50 +1,24 @@
 import pandas as pd
-import random
 import json
 import os
-import pymongo
 
-from src.db.connection import MongoDBConnection
-from src.utils.time_utils import TimeUtils
+from src.db.base import Base
+from src.db.users import Users
 from src.utils.logger import LOGGER
+from src.utils.time_utils import TimeUtils
 
-class RatingCollection:
+class Ratings(Base):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        self.connection = MongoDBConnection()
-        self.collection_name = "ratings"
-        self.notion_database_id = notion_database_id
+        super().__init__(collection_name="ratings", notion_database_id=notion_database_id)
 
     def fetch_ratings_by_user(self, user_id):
-        """Fetch all ratings by a specific user from the MongoDB collection."""
         try:
-            self.connection.connect()
-            db = self.connection.get_database()
-            collection = db[self.collection_name]
-
-            ratings = list(collection.find({"user_id": user_id}))
-            LOGGER.info(f"Fetched {len(ratings)} ratings for user {user_id}.")
+            query = {"user_id": user_id}
+            ratings = list(self.fetch_all(query))
             return ratings if len(ratings) > 0 else None
         except Exception as e:
             LOGGER.error(f"Error fetching ratings by user: {e}")
             raise e
-        finally:
-            self.connection.close()
-
-    def fetch_all_ratings(self):
-        """Fetch all ratings from the MongoDB collection."""
-        try:
-            self.connection.connect()
-            db = self.connection.get_database()
-            collection = db[self.collection_name]
-            
-            ratings = list(collection.find({"notionDatabaseId": self.notion_database_id}))
-            LOGGER.info(f"Fetched {len(ratings)} ratings from the database.")
-            return ratings
-        except Exception as e:
-            LOGGER.error(f"Error fetching ratings: {e}")
-            raise e
-        finally:
-            self.connection.close()
 
     def get_training_data(self):
         '''
@@ -53,12 +27,8 @@ class RatingCollection:
         Note: The key is user_id and cluster (newest rating updated)
         '''
         try:
-            self.connection.connect()
-            db = self.connection.get_database()
-            collection = db[self.collection_name]
-            
-            ratings = list(collection.find({"notionDatabaseId": self.notion_database_id}))
-            LOGGER.info(f"Fetched {len(ratings)} ratings from the database.")
+            ratings = self.fetch_all()
+            # LOGGER.info(f"Fetched {len(ratings)} ratings from the database.")
             ratings_df = pd.DataFrame(ratings)
             ratings_df = ratings_df.sort_values(by='updated_at', ascending=False)
             ratings_df = ratings_df.drop_duplicates(subset=['user_id', 'cluster'], keep='first')
@@ -67,19 +37,37 @@ class RatingCollection:
 
             # Label encode user_id 
             user_ids = ratings_df['user_id'].unique()
+            
+            # Load existing user_map
+            user_map_path = "src/tmp/users/user_map.json"
+            if os.path.exists(user_map_path):
+                with open(user_map_path, "r") as f:
+                    try:
+                        user_map = json.load(f)
+                        if user_map is None:
+                            user_map = {}
+                    except json.JSONDecodeError:
+                        user_map = {}
+            else:
+                user_map = {}
+
+            users = Users()
+            for user_id in user_ids:
+                if user_id not in user_map:
+                    # print(user_id, type(user_id))
+                    user_info = users.fetch_user_info(user_id=user_id)
+                    LOGGER.info(f"CBF model available for new user: {user_info}")
+
             user_map = {user_id: idx + 1 for idx, user_id in enumerate(user_ids)}
             ratings_df['user_id_encoded'] = ratings_df['user_id'].map(user_map)
-
             ratings_df = ratings_df.drop(columns=['user_id'])
             ratings_df = ratings_df.rename(columns={'user_id_encoded': 'user_id'})
             ratings_df = ratings_df[['user_id', 'cluster', 'rating']]
-
             LOGGER.info(f"Generated training data with {ratings_df.shape[0]} entries.")
 
             # save user_map to a file
             dir = 'src/tmp/users'
-            if not os.path.exists(dir):
-                os.makedirs(dir)
+            os.makedirs(dir, exist_ok=True)
             with open("src/tmp/users/user_map.json", "w") as f:
                 json.dump(user_map, f)
             
@@ -87,25 +75,9 @@ class RatingCollection:
         except Exception as e:
             LOGGER.error(f"Error generating training data: {e}")
             raise e
-        finally:
-            self.connection.close()
 
     def upsert(self, data):
-        """Insert a new question into the collection."""
         try:
-            self.connection.connect()
-            db = self.connection.get_database()
-            collection = db[self.collection_name]
-
-            # rating_example = {
-            #     "user_id": "669d16e11db84069209550bd",
-            #     "data": {
-            #           "clusters": [2, 7, 12],
-            #           "rating": 4
-            #     }
-            # }
-
-            # Check if user has rated the cluster before
             user_id = data['user_id']
             clusters = data['data']['clusters']
             rating = data['data']['rating']
@@ -114,80 +86,38 @@ class RatingCollection:
                 "inserted": [],
                 "updated": []
             }
-            for cluster in clusters:
-                existing_rating = collection.find_one({"user_id": user_id, "cluster": cluster})
-                if existing_rating:
-                    # Update the existing rating
-                    try:
-                        existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
-                        existing_rating['updated_at'] = TimeUtils.vn_current_time()
-                        result = collection.update_one({"_id": existing_rating['_id']}, {"$set": existing_rating})
-                        message = f"Updated rating with cluster {cluster} - New Rating: {existing_rating['rating']}"
-                        LOGGER.info(message)
-                        messages['updated'].append(message)
-                    except Exception as e:
-                        LOGGER.error(f"Error updating rating: {e}")
-                        raise e
-                else:
-                    try:
-                        # Insert a new rating
-                        new_rating = {
-                            "user_id": user_id,
-                            "cluster": cluster,
-                            "rating": rating,
-                            "notionDatabaseId": self.notion_database_id,
-                            "created_at": TimeUtils.vn_current_time(),
-                            "updated_at": TimeUtils.vn_current_time()
-                        }
-                        result = collection.insert_one(new_rating)
-                        message = f"Inserted rating with cluster: {cluster} - Rating: {new_rating['rating']}"
-                        LOGGER.info(message)
-                        messages["inserted"].append(message)
-                    except Exception as e:
-                        LOGGER.error(f"Error inserting rating: {e}")
-                        raise e
-            return messages
 
+            for cluster in clusters:
+                query = {"user_id": user_id, "cluster": cluster}
+                existing_rating = self.fetch_all(query)[0] if self.fetch_all(query) else None
+
+                # Upsert the rating
+                self.connect()
+                if existing_rating:
+                    existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
+                    existing_rating['updated_at'] = TimeUtils.vn_current_time()
+                    message = f"Updated rating with cluster {cluster} - New Rating: {existing_rating['rating']}"  
+                    messages["updated"].append(message)             
+                    
+                    # Update the existing rating
+                    self.connection.update_one(query, {"$set": existing_rating})
+                else:
+                    new_rating = {
+                        "user_id": user_id,
+                        "cluster": cluster,
+                        "rating": rating,
+                        "notionDatabaseId": self.notion_database_id,
+                        "created_at": TimeUtils.vn_current_time(),
+                        "updated_at": TimeUtils.vn_current_time()
+                    }
+                    message = f"Inserted rating with cluster {cluster} - Rating: {rating}"
+                    messages["inserted"].append(message)
+
+                    # Insert a new rating
+                    self.connection.insert_one(new_rating)
+                self.close()
+
+            return messages
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")
             raise e
-        finally:
-            self.connection.close()
-
-    def generate_random_ratings(self, num_entries=100):
-        """Generate random rating data."""
-        user_ids = ["669d16e11db84069209550bd", "66f258f4f515ebc548e191f3", "66f2591ff515ebc548e19223"]
-        clusters = list(range(1, 36))
-        ratings = [round(random.randint(1, 5)) for _ in range(num_entries)]
-        
-        data = []
-        for _ in range(num_entries):
-            entry = {
-                "notionDatabaseId": self.notion_database_id,
-                "user_id": random.choice(user_ids),
-                "cluster": random.choice(clusters),
-                "rating": random.choice(ratings),
-                "created_at": TimeUtils.vn_current_time(),
-                "updated_at": TimeUtils.vn_current_time()
-            }
-            data.append(entry)
-        
-        return data
-
-    def insert_random_ratings(self, num_entries=100):
-        """Insert random rating data into the collection."""
-        try:
-            self.connection.connect()
-            db = self.connection.get_database()
-            collection = db[self.collection_name]
-            
-            random_ratings = self.generate_random_ratings(num_entries)
-            result = collection.insert_many(random_ratings)
-            LOGGER.info(f"Inserted {len(result.inserted_ids)} random ratings.")
-            return result.inserted_ids
-        except Exception as e:
-            LOGGER.error(f"Error inserting random ratings: {e}")
-            raise e
-        finally:
-            self.connection.close()
-

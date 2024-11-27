@@ -1,20 +1,27 @@
 from flask import Blueprint, request, jsonify
 
-from src.db.ratings import RatingCollection
+from src.models.content_based import ContentBasedModel
+from src.db import Ratings
 from src.utils.logger import LOGGER
-rating_collection = RatingCollection()
+
+ratings = Ratings()
 
 upsert_bp = Blueprint('upsert_rating', __name__)
 
 @upsert_bp.route('/upsert', methods=['POST'])
 def upsert():
-    global rating_collection
-
+    global ratings
+    # Pipeline: Ratings.upsert -> train model
     try:
         data = request.json
-        LOGGER.info(f"Upserting rating: {data}")
+        messages = ratings.upsert(data)
+        LOGGER.info(f"Upserted rating completed: {data}")
 
-        messages = rating_collection.upsert(data)
+        # Train model
+        ratings = Ratings()
+        ratings_df = ratings.get_training_data()
+        model = ContentBasedModel()
+        model.train(ratings_df=ratings_df)
         return jsonify({"status": "success", "messages": messages})
     except Exception as e:
         LOGGER.error(f"Error in upsert: {e}")

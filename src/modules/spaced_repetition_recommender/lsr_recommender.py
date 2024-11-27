@@ -1,16 +1,15 @@
 import pandas as pd
 import random
-import json
 
-from src.db import LogsCollection, QuestionsCollection
+from src.db import Logs, Questions
 from src.modules.items_map import ItemsMap
 from src.modules.spaced_repetition_recommender.leitner_spaced_repetition import LeitnerSpacedRepetition
 
 class LSRRecommender:
 
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        self.logs_collection = LogsCollection(notion_database_id=notion_database_id)
-        self.questions_collection = QuestionsCollection(notion_database_id=notion_database_id)
+        self.logs = Logs(notion_database_id=notion_database_id)
+        self.questions = Questions(notion_database_id=notion_database_id)
 
     def recommend(self, user_id, max_exercises=10):
         # Get items map
@@ -18,7 +17,7 @@ class LSRRecommender:
         cluster_map = ItemsMap().get_cluster_map()
 
         # Preprocess logs
-        self.logs_df = self.logs_collection.preprocess_logs(raw_logs=self.logs_collection.fetch_logs_by_user(user_id))
+        self.logs_df = self.logs.preprocess_logs(raw_logs=self.logs.fetch_logs_by_user(user_id))
         self.logs_df['cluster'] = self.logs_df['question_id'].map(questions_map)
         self.logs_df.dropna(subset=['cluster'], inplace=True)
         self.logs_df['cluster'] = self.logs_df['cluster'].astype(int)
@@ -53,7 +52,7 @@ class LSRRecommender:
                 random.shuffle(exercises)
                 for exercise in exercises:
                     if len(recommendations["exercise_ids"]) < max_exercises:
-                        exercise = self.questions_collection.fetch_question(exercise)
+                        exercise = self.questions.fetch_one(id=exercise)
                         recommendations["exercise_ids"].append(exercise)
                     else:
                         break

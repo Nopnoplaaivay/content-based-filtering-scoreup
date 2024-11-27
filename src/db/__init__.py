@@ -1,3 +1,4 @@
-from src.db.questions import QuestionsCollection
-from src.db.logs import LogsCollection
-from src.db.ratings import RatingCollection
+from src.db.users import Users
+from src.db.questions import Questions
+from src.db.logs import Logs
+from src.db.ratings import Ratings

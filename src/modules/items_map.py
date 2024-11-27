@@ -4,7 +4,7 @@ import os
 import numpy as np
 import pandas as pd
 
-from src.db.questions import QuestionsCollection
+from src.db import Questions
 from src.models.questions_cluster import QuestionClustering   
 from src.utils.encode_utils import EncodeQuestionsUtils
 from src.utils.logger import LOGGER
@@ -73,9 +73,9 @@ class ItemsMap:
             return None
 
     def gen_qcmap(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        questions_collection = QuestionsCollection(notion_database_id=notion_database_id)
-        raw_questions = questions_collection.fetch_all_questions()
-        questions_df = questions_collection.preprocess_questions(raw_questions=raw_questions)
+        questions = Questions(notion_database_id=notion_database_id)
+        raw_questions = questions.fetch_all()
+        questions_df = questions.preprocess_questions(raw_questions=raw_questions)
         
         # Prepare X
         X = self.encoder.encode(questions_df)
@@ -85,8 +85,6 @@ class ItemsMap:
         # Predict cluster
         cluster_labels = self.clustering_model.predict(X)
         questions_df['cluster'] = cluster_labels
-
-        # question_map = questions_df.set_index('question_id')['cluster'].to_dict()
 
         # Create feature vector for each cluster
         temp_df = questions_df.drop(columns=['question_id', 'concept', 'content'])

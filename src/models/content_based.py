@@ -4,6 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
+from src.db import Ratings
 from src.modules.items_map import ItemsMap
 from src.utils.logger import LOGGER
 
@@ -26,9 +27,10 @@ class ContentBasedModel:
             LOGGER.info("Loaded weights successfully.")
         except Exception as e:
             LOGGER.error(f"Error loading weights: {e}")
-            LOGGER.info("Start training model...")
-            self.train()
-
+            ratings = Ratings()
+            ratings_df = ratings.get_training_data()
+            LOGGER.info("Training model...")
+            self.train(ratings_df)
 
     def train_test_split_data(self, ratings_df, test_size=0.2, random_state=42):
         rating_train = pd.DataFrame(columns=ratings_df.columns)

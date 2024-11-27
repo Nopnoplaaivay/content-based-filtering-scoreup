@@ -1,9 +1,9 @@
 import pandas as pd
 import numpy as np
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify
 
 from src.models.content_based import ContentBasedModel
-from src.db import RatingCollection
+from src.db import Ratings
 from src.utils.logger import LOGGER
 
 training_bp = Blueprint('training', __name__)
@@ -12,7 +12,8 @@ training_bp = Blueprint('training', __name__)
 def train():
     try:
         '''Prepare training data'''
-        ratings_df = RatingCollection().get_training_data()
+        ratings = Ratings()
+        ratings_df = ratings.get_training_data()
 
         '''Train model'''
         LOGGER.info("Training model...")

@@ -2,7 +2,7 @@ import json
 import random
 import numpy as np
 
-from src.db import QuestionsCollection
+from src.db import Questions
 from src.modules.items_map import ItemsMap
 from src.models.content_based import ContentBasedModel
 from src.utils.logger import LOGGER
@@ -39,19 +39,10 @@ class ContentBasedRecommender:
                 random.shuffle(exercises)
                 for exercise in exercises:
                     if len(recommendations["exercise_ids"]) < max_exercises:
-                        # Fetch exercise from database
-                        exercise = QuestionsCollection().fetch_question(exercise)
+                        exercise = Questions().fetch_one(id=exercise)
                         recommendations["exercise_ids"].append(exercise)
                     else:
                         break
-
-        # messages = [
-        #     "These questions connect to multiple topics you’ve studied before, helping you see the bigger picture and build integrated knowledge."
-        #     , "Based on your learning history and preferences, these questions aligns well with your strengths and areas of improvement, offering a perfect next step."
-        #     , "These questions is a great way to reinforce your understanding of a key concept, helping you retain and apply knowledge more effectively."
-        #     , "This question aligns closely with topics you’ve shown interest in, ensuring the learning experience remains both challenging and motivating."
-        #     , "This question is slightly more advanced and explores related concepts to those you've already mastered. It’s chosen to push your boundaries and keep your learning engaging."
-        # ]
 
         messages = [
             "Những câu hỏi này kết nối với nhiều chủ đề bạn đã học trước đây, giúp bạn nhìn thấy bức tranh toàn diện và xây dựng kiến thức tích hợp.",
