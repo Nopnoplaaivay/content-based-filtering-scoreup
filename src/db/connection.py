@@ -17,7 +17,7 @@ class MongoDBConnection:
         try:
             self.client = MongoClient(self.url)
             self.db = self.client[self.db_name]
-            LOGGER.info(f"Connected to MongoDB database: {self.db_name}")
+            # LOGGER.info(f"Connected to MongoDB database: {self.db_name}")
         except Exception as e:
             LOGGER.error(f"Error connecting to MongoDB: {e}")
             raise e
