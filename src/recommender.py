@@ -16,7 +16,6 @@ class Recommender:
         # Check if user has rated any items
         ratings = Ratings()
         user_ratings = ratings.fetch_ratings_by_user(user_id)
-        
         if user_ratings is None:
             if random.random() < 0.99:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")

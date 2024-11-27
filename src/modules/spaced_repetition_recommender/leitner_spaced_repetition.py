@@ -13,11 +13,17 @@ class LeitnerSpacedRepetition:
     # 100% CORRECT
     # BOOKMARKEDz
 
-    NEVER_ATTEMPTED_MESSAGE = "Nhóm câu hỏi này chưa từng được bạn thử, và chúng tôi khuyến nghị bạn nên bắt đầu luyện tập ngay."
-    FREQUENTLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thường xuyên sai, do đó, cần tập trung luyện tập."
-    OCCASIONALLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thỉnh thoảng không tốt, cho thấy cần cải thiện thêm."
-    CORRECT_MESSAGE = "Bạn đã làm tốt trong lĩnh vực này, nhưng việc ôn tập thường xuyên là rất quan trọng để duy trì sự hiểu biết."
-    FREQUENTLY_CORRECT_MESSAGE = "Bạn thường xuyên trả lời đúng các câu hỏi trong lĩnh vực này. Việc ôn tập định kỳ được khuyến nghị để duy trì kiến thức."
+    # NEVER_ATTEMPTED_MESSAGE = "Nhóm câu hỏi này chưa từng được bạn thử, và chúng tôi khuyến nghị bạn nên bắt đầu luyện tập ngay."
+    # FREQUENTLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thường xuyên sai, do đó, cần tập trung luyện tập."
+    # OCCASIONALLY_WRONG_MESSAGE = "Hiệu suất của bạn trong lĩnh vực này thỉnh thoảng không tốt, cho thấy cần cải thiện thêm."
+    # CORRECT_MESSAGE = "Bạn đã làm tốt trong lĩnh vực này, nhưng việc ôn tập thường xuyên là rất quan trọng để duy trì sự hiểu biết."
+    # FREQUENTLY_CORRECT_MESSAGE = "Bạn thường xuyên trả lời đúng các câu hỏi trong lĩnh vực này. Việc ôn tập định kỳ được khuyến nghị để duy trì kiến thức."
+
+    NEVER_ATTEMPTED_MESSAGE = "NEVER_ATTEMPTED_MESSAGE"
+    FREQUENTLY_WRONG_MESSAGE = "FREQUENTLY_WRONG_MESSAGE"
+    OCCASIONALLY_WRONG_MESSAGE = "OCCASIONALLY_WRONG_MESSAGE"
+    CORRECT_MESSAGE = "CORRECT_MESSAGE"
+    FREQUENTLY_CORRECT_MESSAGE = "FREQUENTLY_CORRECT_MESSAGE"
 
     # Define the review intervals for each box
     REVIEW_INTERVALS = {

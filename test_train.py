@@ -4,15 +4,16 @@ from src.db import Logs
 from src.db import Questions
 from src.db import Ratings
 from src.db import Users
+from src.db import Concepts
 
 from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
     '''Train model'''
-    ratings_df = Ratings().get_training_data()
-    LOGGER.info("Training model...")
-    model = ContentBasedModel()
-    model.train(ratings_df=ratings_df)
+    # ratings_df = Ratings().get_training_data()
+    # LOGGER.info("Training model...")
+    # model = ContentBasedModel()
+    # model.train(ratings_df=ratings_df)
 
     # user = UsersCollection().fetch_user(user_id="67021b10012649250e92b7da")
     # print(user)
@@ -59,4 +60,10 @@ if __name__ == "__main__":
     # user = users.fetch_user_info(user_id="67021b10012649250e92b7da")
     # print(user)
 
-    
+    # concepts = Concepts()
+    # concept = concepts.fetch_one(id="may-tinh-dien-tu")
+    # print(concept["title"])
+
+    from src.recommender import Recommender
+    recommendations = Recommender().recommend("66f22bf5c5434edfec4e3acf", max_exercises=10)
+    print(recommendations)

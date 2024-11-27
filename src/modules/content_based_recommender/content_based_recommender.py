@@ -2,13 +2,16 @@ import json
 import random
 import numpy as np
 
-from src.db import Questions
+from src.db import Questions, Concepts, Users
 from src.modules.items_map import ItemsMap
 from src.models.content_based import ContentBasedModel
 from src.utils.logger import LOGGER
 
 class ContentBasedRecommender:
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        self.questions = Questions(notion_database_id=notion_database_id)
+        self.concepts = Concepts(notion_database_id=notion_database_id)
+        self.users = Users()
         self.model = ContentBasedModel()
         self.model.load_weights()
         self.user_map = self.load_user_map()
@@ -24,10 +27,12 @@ class ContentBasedRecommender:
         # Get descending order of predicted ratings index
         recommendations = {
             "exercise_ids": [],
+            "knowledge_concepts": [],
             "clusters": [],
             "message": None,
         }
 
+        knowledge_concepts = set()
         clusters = np.argsort(predicted_ratings)[::-1]
         for cluster in clusters:
             cluster_str = str(cluster)
@@ -39,17 +44,20 @@ class ContentBasedRecommender:
                 random.shuffle(exercises)
                 for exercise in exercises:
                     if len(recommendations["exercise_ids"]) < max_exercises:
-                        exercise = Questions().fetch_one(id=exercise)
+                        exercise = self.questions.fetch_one(id=exercise)
+                        concept = exercise["properties"]["tags"]["multi_select"][0]["name"]
+                        knowledge_concepts.add(concept)
                         recommendations["exercise_ids"].append(exercise)
                     else:
                         break
 
+        recommendations["knowledge_concepts"] = [self.concepts.fetch_one(id=concept)["title"] for concept in list(knowledge_concepts)]
+        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('name')} Ơi!"
+        concept_message = ", ".join(recommendations["knowledge_concepts"])
         messages = [
-            "Những câu hỏi này kết nối với nhiều chủ đề bạn đã học trước đây, giúp bạn nhìn thấy bức tranh toàn diện và xây dựng kiến thức tích hợp.",
-            "Dựa trên lịch sử học tập và sở thích của bạn, những câu hỏi này phù hợp với thế mạnh và những lĩnh vực cần cải thiện của bạn, mang đến bước tiếp theo hoàn hảo.",
-            "Những câu hỏi này là cách tuyệt vời để củng cố hiểu biết về một khái niệm chính, giúp bạn ghi nhớ và áp dụng kiến thức hiệu quả hơn.",
-            "Câu hỏi này phù hợp chặt chẽ với các chủ đề bạn đã thể hiện sự quan tâm, đảm bảo trải nghiệm học tập vừa mang tính thách thức vừa đầy động lực.",
-            "Câu hỏi này hơi nâng cao và khám phá các khái niệm liên quan đến những gì bạn đã thành thạo. Nó được chọn để thúc đẩy giới hạn của bạn và giữ cho việc học luôn hấp dẫn."
+            f"{hi_message} Những câu hỏi này sẽ giúp cậu làm quen với đa dạng các chủ đề {concept_message} cậu đã học trước đây. Hãy thử sức nhé!",
+            f"{hi_message} Dựa trên lịch sử học tập và sở thích của cậu, những câu hỏi {concept_message} phù hợp với thế mạnh của cậu. Hãy thử sức nhé!",
+            f"{hi_message} Những câu hỏi {concept_message} sẽ giúp cậu khám phá các khái niệm liên quan đến những gì bạn đã thành thạo và yêu thích. Hãy thử sức nhé!"
         ]
 
         if recommendations:
