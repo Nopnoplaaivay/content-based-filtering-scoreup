@@ -25,7 +25,7 @@ if __name__ == "__main__":
     # print("-" * 100)
 
     # logs_2 = Logs()
-    # raw_logs = logs_2.fetch_logs_by_user(user_id="67021b10012649250e92b7da")
+    # raw_logs = logs_2.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
     # logs_df = logs_2.preprocess_logs(raw_logs)
     # print(logs_df.head())
 
@@ -44,17 +44,15 @@ if __name__ == "__main__":
     # ratings = ratings_2.get_training_data()
     # print(ratings)
 
-    # data = {
-    #     "user_id": "66ed84437f5170a9671f1ba2",
-    #     "data": {
-    #         "clusters": [            
-    #             2
-    #         ],
-    #         "rating": 5
-    #     }
-    # }
-    # ratings = Ratings()
-    # ratings.upsert(data)
+    data = {
+        "user_id": "67021b10012649250e92b7da",
+        "data": {
+            "clusters": [2],
+            "rating": 5
+        }
+    }
+    ratings = Ratings()
+    ratings.upsert(data)
 
     # users = Users()
     # user = users.fetch_user_info(user_id="67021b10012649250e92b7da")
@@ -64,6 +62,6 @@ if __name__ == "__main__":
     # concept = concepts.fetch_one(id="may-tinh-dien-tu")
     # print(concept["title"])
 
-    from src.recommender import Recommender
-    recommendations = Recommender().recommend("66f22bf5c5434edfec4e3acf", max_exercises=10)
-    print(recommendations)
+    # from src.recommender import Recommender
+    # recommendations = Recommender().recommend("67021b10012649250e92b7da", max_exercises=10)
+    # print(recommendations)

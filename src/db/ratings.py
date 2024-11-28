@@ -116,6 +116,7 @@ class Ratings(Base):
                     # Insert a new rating
                     self.connection.insert_one(new_rating)
                 self.close()
+            LOGGER.info(f"Upserted ratings {messages}.")
 
             return messages
         except Exception as e:

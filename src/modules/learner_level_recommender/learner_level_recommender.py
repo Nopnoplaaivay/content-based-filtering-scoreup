@@ -68,8 +68,7 @@ class LLRRecommender:
             recommendations["message"] = (f"{messages[user_level]}")
         else:
             recommendations["message"] = (
-                f"Hi User {user_id}, we currently have no recommendations for you. "
-                "Please try answering more questions to generate new suggestions!"
+                f"{hi_message}, ScoreUp Tips! Hãy luyện tập thêm bài tập để có thể mở khóa chức năng gợi ý nha!"
             )
         
         return recommendations

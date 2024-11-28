@@ -57,16 +57,16 @@ class ContentBasedRecommender:
         messages = [
             f"{hi_message} Những câu hỏi này sẽ giúp cậu làm quen với đa dạng các chủ đề {concept_message} cậu đã học trước đây. Hãy thử sức nhé!",
             f"{hi_message} Dựa trên lịch sử học tập và sở thích của cậu, những câu hỏi {concept_message} phù hợp với thế mạnh của cậu. Hãy thử sức nhé!",
-            f"{hi_message} Những câu hỏi {concept_message} sẽ giúp cậu khám phá các khái niệm liên quan đến những gì bạn đã thành thạo và yêu thích. Hãy thử sức nhé!"
+            f"{hi_message} Những câu hỏi {concept_message} sẽ giúp cậu khám phá các khái niệm liên quan đến những gì cậu đã thành thạo và yêu thích. Hãy thử sức nhé!"
         ]
 
         if recommendations:
             recommendations["message"] = (f"{random.choice(messages)}")
         else:
             recommendations["message"] = (
-                f"Hi User {user_id}, we currently have no recommendations for you. "
-                "Please try answering more questions to generate new suggestions!"
+                f"{hi_message}, ScoreUp Tips! Hãy luyện tập thêm bài tập để có thể mở khóa chức năng gợi ý nha!"
             )
+        
 
         return recommendations
 
