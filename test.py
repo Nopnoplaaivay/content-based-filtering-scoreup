@@ -11,26 +11,13 @@ from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
     '''Train model'''
-    # user = UsersCollection().fetch_user(user_id="67021b10012649250e92b7da")
-    # print(user)
-
-    # logs = LogsCollection()
-    # raw_logs = logs.fetch_logs_by_user(user_id="67021b10012649250e92b7da")
+    # logs = Logs()
+    # raw_logs = logs.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
     # logs_df = logs.preprocess_logs(raw_logs)
-    # print(logs_df.head())
-    # print("-" * 100)
-
-    # logs_2 = Logs()
-    # raw_logs = logs_2.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
-    # logs_df = logs_2.preprocess_logs(raw_logs)
     # print(logs_df.head())
 
     # ratings = Ratings()
     # ratings = ratings.get_training_data()
-    # print(ratings)
-
-    # ratings_2 = RatingCollection()
-    # ratings = ratings_2.get_training_data()
     # print(ratings)
 
     # data = {
@@ -66,13 +53,18 @@ if __name__ == "__main__":
     # questions = Questions()
     # raw_questions = questions.fetch_all()
     # questions_df = questions.preprocess_questions(raw_questions)
-    # Print full df, not truncated
     # import pandas as pd
     # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     #     print(questions_df)
     #     # export to csv
     #     questions_df.to_csv("questions.csv", index=False)
 
-    from src.db import Difficulty
-    difficulty = Difficulty()
-    difficulty.update()
+    # from src.db import Difficulty
+    # difficulty = Difficulty()
+    # difficulty.update()
+
+    from src.modules.items_map import ItemsMap
+
+    items_map = ItemsMap()
+    items_map.gen_qcmap()
+
