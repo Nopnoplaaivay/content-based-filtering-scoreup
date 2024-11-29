@@ -1,4 +1,4 @@
-from src.models.content_based import CBFModel
+from src.models.cbf_model import CBFModel
 from src.modules.content_based_recommender import CBFRecommender
 
 from src.db import Logs
@@ -24,13 +24,6 @@ if __name__ == "__main__":
     # raw_logs = logs_2.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
     # logs_df = logs_2.preprocess_logs(raw_logs)
     # print(logs_df.head())
-
-    # questions = QuestionsCollection()
-    # question = questions.fetch_question(question_id="fc084299-5fff-4543-b5f6-5a7971b93da6")
-    # print(question)
-    # questions_2 = Questions()
-    # question = questions_2.fetch_one(id="fc084299-5fff-4543-b5f6-5a7971b93da6")
-    # print(question)
 
     # ratings = Ratings()
     # ratings = ratings.get_training_data()
@@ -62,11 +55,24 @@ if __name__ == "__main__":
     # recommendations = Recommender().recommend("67021b10012649250e92b7da", max_exercises=10)
     # print(recommendations)
 
-    ratings_df = Ratings().get_training_data()
-    LOGGER.info("Training model...")
-    model = CBFModel()
-    model.train(ratings_df=ratings_df)
+    # ratings_df = Ratings().get_training_data()
+    # LOGGER.info("Training model...")
+    # model = CBFModel()
+    # model.train(ratings_df=ratings_df)
 
-    cbf_recommender = CBFRecommender()
-    
-    print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb"))
+    # cbf_recommender = CBFRecommender()
+    # print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb").head(30))
+
+    # questions = Questions()
+    # raw_questions = questions.fetch_all()
+    # questions_df = questions.preprocess_questions(raw_questions)
+    # Print full df, not truncated
+    # import pandas as pd
+    # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
+    #     print(questions_df)
+    #     # export to csv
+    #     questions_df.to_csv("questions.csv", index=False)
+
+    from src.db import Difficulty
+    difficulty = Difficulty()
+    difficulty.update()

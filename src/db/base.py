@@ -54,3 +54,14 @@ class Base:
             raise e
         finally:
             self.close()
+
+    def update_one(self, query, update):
+        try:
+            self.connect()
+            self.connection.update_one(query, update)
+            # LOGGER.info(f"Updated document with query: {query}.")
+        except Exception as e:
+            LOGGER.error(f"Error updating document: {e}")
+            raise e
+        finally:
+            self.close()

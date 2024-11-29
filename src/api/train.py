@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from flask import Blueprint, jsonify
 
-from src.models.content_based import CBFModel
+from src.models.cbf_model import CBFModel
 from src.db import Ratings
 from src.utils.logger import LOGGER
 

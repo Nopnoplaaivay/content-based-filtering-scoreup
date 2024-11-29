@@ -5,7 +5,7 @@ import pandas as pd
 
 from src.db import Questions, Concepts, Users
 from src.modules.items_map import ItemsMap
-from src.models.content_based import CBFModel
+from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
 class CBFRecommender:
@@ -23,6 +23,8 @@ class CBFRecommender:
 
         user_id_encoded = self.user_map[user_id]
         user_index = user_id_encoded - 1
+
+        self.model.load_weights()
         predicted_ratings = self.model.Yhat[:, user_index]
 
         # Get descending order of predicted ratings index
@@ -84,6 +86,8 @@ class CBFRecommender:
         cluster_map = ItemsMap().get_cluster_map()
         user_id_encoded = self.user_map[user_id]
         user_index = user_id_encoded - 1
+
+        self.model.load_weights()
         predicted_ratings = self.model.Yhat[:, user_index]
         clusters = np.argsort(predicted_ratings)[::-1]
 

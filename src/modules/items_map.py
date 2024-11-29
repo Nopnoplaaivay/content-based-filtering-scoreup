@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 from src.db import Questions
-from src.models.questions_cluster import QuestionClustering   
+from src.models.cluster_model import QuestionClustering
 from src.utils.encode_utils import EncodeQuestionsUtils
 from src.utils.logger import LOGGER
 

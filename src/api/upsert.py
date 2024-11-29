@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from src.models.content_based import CBFModel
+from src.models.cbf_model import CBFModel
 from src.db import Ratings
 from src.utils.logger import LOGGER
 
