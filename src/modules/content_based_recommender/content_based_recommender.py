@@ -1,18 +1,19 @@
 import json
 import random
 import numpy as np
+import pandas as pd
 
 from src.db import Questions, Concepts, Users
 from src.modules.items_map import ItemsMap
-from src.models.content_based import ContentBasedModel
+from src.models.content_based import CBFModel
 from src.utils.logger import LOGGER
 
-class ContentBasedRecommender:
+class CBFRecommender:
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         self.questions = Questions(notion_database_id=notion_database_id)
         self.concepts = Concepts(notion_database_id=notion_database_id)
         self.users = Users()
-        self.model = ContentBasedModel()
+        self.model = CBFModel()
         self.model.load_weights()
         self.user_map = self.load_user_map()
 
@@ -66,7 +67,6 @@ class ContentBasedRecommender:
             recommendations["message"] = (
                 f"{hi_message}, ScoreUp Tips! Hãy luyện tập thêm bài tập để có thể mở khóa chức năng gợi ý nha!"
             )
-        
 
         return recommendations
 
@@ -79,3 +79,19 @@ class ContentBasedRecommender:
             LOGGER.error(f"Error loading user map: {e}")
             LOGGER.info("Please call train model api first (POST /train) to generate user map.")
             return None
+
+    def get_priority_list(self, user_id):
+        cluster_map = ItemsMap().get_cluster_map()
+        user_id_encoded = self.user_map[user_id]
+        user_index = user_id_encoded - 1
+        predicted_ratings = self.model.Yhat[:, user_index]
+        clusters = np.argsort(predicted_ratings)[::-1]
+
+        # create priority df with cluster, predicted rating
+        priority_df = []
+        for cluster in clusters:
+            cluster_str = str(cluster)
+            if cluster_str in cluster_map:
+                priority_df.append({"cluster": int(cluster_str), "rating": predicted_ratings[cluster]})
+        priority_df = pd.DataFrame(priority_df)
+        return priority_df

@@ -1,6 +1,6 @@
 from flask import Blueprint, request, jsonify
 
-from src.models.content_based import ContentBasedModel
+from src.models.content_based import CBFModel
 from src.db import Ratings
 from src.utils.logger import LOGGER
 
@@ -20,7 +20,7 @@ def upsert():
         # Train model
         ratings = Ratings()
         ratings_df = ratings.get_training_data()
-        model = ContentBasedModel()
+        model = CBFModel()
         model.train(ratings_df=ratings_df)
         return jsonify({"status": "success", "messages": messages})
     except Exception as e:

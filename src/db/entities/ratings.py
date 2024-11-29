@@ -3,7 +3,7 @@ import json
 import os
 
 from src.db.base import Base
-from src.db.users import Users
+from src.db.entities.users import Users
 from src.utils.logger import LOGGER
 from src.utils.time_utils import TimeUtils
 

@@ -8,7 +8,7 @@ from src.db import Ratings
 from src.modules.items_map import ItemsMap
 from src.utils.logger import LOGGER
 
-class ContentBasedModel:
+class CBFModel:
 
     def __init__(self):
         self.feature_vectors = ItemsMap().get_features_vector()
@@ -81,7 +81,7 @@ class ContentBasedModel:
             clusters = list(map(int, clusters))
             if len(clusters) == 0:
                 continue  # The rating train may not have any rating of user n
-            clf = Ridge(alpha=1.0, fit_intercept = True)
+            clf = Ridge(alpha=1.0, fit_intercept=True)
             Xhat = feature_vectors[clusters, :]
 
             clf.fit(Xhat, scores)
@@ -91,6 +91,7 @@ class ContentBasedModel:
         self.W = W
         self.b = b
         self.Yhat = feature_vectors.dot(W) + b
+        print(self.Yhat)
         self.save_weights()
         LOGGER.info("Training completed.")
 

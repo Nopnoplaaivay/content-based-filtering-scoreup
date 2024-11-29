@@ -1,4 +1,5 @@
-from src.models.content_based import ContentBasedModel
+from src.models.content_based import CBFModel
+from src.modules.content_based_recommender import CBFRecommender
 
 from src.db import Logs
 from src.db import Questions
@@ -10,11 +11,6 @@ from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
     '''Train model'''
-    # ratings_df = Ratings().get_training_data()
-    # LOGGER.info("Training model...")
-    # model = ContentBasedModel()
-    # model.train(ratings_df=ratings_df)
-
     # user = UsersCollection().fetch_user(user_id="67021b10012649250e92b7da")
     # print(user)
 
@@ -44,15 +40,15 @@ if __name__ == "__main__":
     # ratings = ratings_2.get_training_data()
     # print(ratings)
 
-    data = {
-        "user_id": "67021b10012649250e92b7da",
-        "data": {
-            "clusters": [2],
-            "rating": 5
-        }
-    }
-    ratings = Ratings()
-    ratings.upsert(data)
+    # data = {
+    #     "user_id": "6747fa55dc9599b62cbebcdb",
+    #     "data": {
+    #         "clusters": [5, 9, 2, 3, 4],
+    #         "rating": 5
+    #     }
+    # }
+    # ratings = Ratings()
+    # ratings.upsert(data)
 
     # users = Users()
     # user = users.fetch_user_info(user_id="67021b10012649250e92b7da")
@@ -65,3 +61,12 @@ if __name__ == "__main__":
     # from src.recommender import Recommender
     # recommendations = Recommender().recommend("67021b10012649250e92b7da", max_exercises=10)
     # print(recommendations)
+
+    ratings_df = Ratings().get_training_data()
+    LOGGER.info("Training model...")
+    model = CBFModel()
+    model.train(ratings_df=ratings_df)
+
+    cbf_recommender = CBFRecommender()
+    
+    print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb"))

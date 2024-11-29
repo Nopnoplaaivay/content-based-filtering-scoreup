@@ -1,14 +1,14 @@
 import random
 
 from src.db import Ratings, Logs, Users
-from src.modules.content_based_recommender import ContentBasedRecommender
+from src.modules.content_based_recommender import CBFRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
 from src.modules.learner_level_recommender import LLRRecommender
 from src.utils.logger import LOGGER
 
 class Recommender:
     def __init__(self):
-        self.cb_recommender = ContentBasedRecommender()
+        self.cb_recommender = CBFRecommender()
         self.lsr_recommender = LSRRecommender()
         self.llr_recommender = LLRRecommender()
 
@@ -38,7 +38,7 @@ class Recommender:
                 LOGGER.info(f"Recommending based on user level.")
                 return self.llr_recommend(user_id, max_exercises=max_exercises)
         else:
-            if random.random() < 0.8:
+            if random.random() < 0.9:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")
                 return self.lsr_recommend(user_id, max_exercises=max_exercises)
             else:

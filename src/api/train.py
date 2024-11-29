@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from flask import Blueprint, jsonify
 
-from src.models.content_based import ContentBasedModel
+from src.models.content_based import CBFModel
 from src.db import Ratings
 from src.utils.logger import LOGGER
 
@@ -17,7 +17,7 @@ def train():
 
         '''Train model'''
         LOGGER.info("Training model...")
-        model = ContentBasedModel()
+        model = CBFModel()
         model.train(ratings_df=ratings_df)
         return jsonify({"status": "success"})
     except Exception as e:

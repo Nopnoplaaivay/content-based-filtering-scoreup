@@ -84,6 +84,5 @@ class LSRRecommender:
             recommendations["message"] = (
                 f"{hi_message}, ScoreUp Tips! Hãy luyện tập thêm bài tập để có thể mở khóa chức năng gợi ý nha!"
             )
-        
 
         return recommendations
