@@ -35,15 +35,24 @@ if __name__ == "__main__":
     # ratings.upsert(data)
 
 
-    ratings_df = Ratings().get_training_data()
     LOGGER.info("Training model...")
     model = CBFModel()
-    model.train(ratings_df=ratings_df)
-    model.load_weights()
-    print(model.Yhat)
+    # ratings_df = Ratings().get_training_data()
+    # model.train(ratings_df=ratings_df)
+    # model.load_weights()
+    # print(model.Yhat)
+
     #
-    # cbf_recommender = CBFRecommender()
-    # print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb").head(30))
+    cbf_recommender = CBFRecommender()
+    p_list = cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb")
+    print(p_list.head(30))
+    user_predicted_ratings = p_list["rating"].values
+
+    current_min, current_max = user_predicted_ratings.min(), user_predicted_ratings.max()
+    desired_min, desired_max = 0, 5
+
+    user_predicted_ratings = (user_predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
+    print(user_predicted_ratings)
 
     # questions = Questions()
     # raw_questions = questions.fetch_all()
