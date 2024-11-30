@@ -34,23 +34,14 @@ if __name__ == "__main__":
     # ratings = Ratings()
     # ratings.upsert(data)
 
-    # users = Users()
-    # user = users.fetch_user_info(user_id="67021b10012649250e92b7da")
-    # print(user)
-
-    # concepts = Concepts()
-    # concept = concepts.fetch_one(id="may-tinh-dien-tu")
-    # print(concept["title"])
-
-    # from src.recommender import Recommender
-    # recommendations = Recommender().recommend("67021b10012649250e92b7da", max_exercises=10)
-    # print(recommendations)
 
     ratings_df = Ratings().get_training_data()
     LOGGER.info("Training model...")
     model = CBFModel()
     model.train(ratings_df=ratings_df)
-
+    model.load_weights()
+    print(model.Yhat)
+    #
     # cbf_recommender = CBFRecommender()
     # print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb").head(30))
 
