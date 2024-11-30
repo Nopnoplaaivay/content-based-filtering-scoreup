@@ -10,13 +10,6 @@ from src.models.cluster_model import QuestionClustering
 from src.utils.encode_utils import EncodeQuestionsUtils
 from src.utils.logger import LOGGER
 
-def combine_features(row):
-    return np.append(row['concept_embedding'], row['difficulty'])
-
-def clean_and_convert_embedding(embedding_str):
-    cleaned_str = re.sub(r'[\[\]]', '', embedding_str)
-    return np.fromstring(cleaned_str, sep=' ')
-
 class ItemsMap:
     def __init__(self):
         self.encoder = EncodeQuestionsUtils()
@@ -61,15 +54,17 @@ class ItemsMap:
                 with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
                     features_vector = json.load(f)
                 # Transform features vector to numpy array
-                features_vector = np.array(list(features_vector.values()))
-                return features_vector
+                transformed_features_vector = np.array(list(features_vector.values()))
+
+                return transformed_features_vector
             else:
                 LOGGER.error(f"Features vector not found for {notion_database_id}")
                 self.gen_qcmap(notion_database_id=notion_database_id)
                 with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
                     features_vector = json.load(f)
-                features_vector = np.array(list(features_vector.values()))
-                return features_vector
+                # Transform features vector to numpy array
+                transformed_features_vector = np.array(list(features_vector.values()))  
+                return transformed_features_vector
         except Exception as e:
             LOGGER.error(f"Error fetching features vector: {e}")
             return None
@@ -82,14 +77,22 @@ class ItemsMap:
         
         # Prepare df
         question_df, cluster_df = self.cluster_model.gen_cluster_df(raw_questions_df)
+        # LOGGER.info(f"Clustered questions: {question_df}")
+        # LOGGER.info(f"Clustered features: {cluster_df}")
 
         cluster_map = {}
-        for cluster in cluster_df['cluster']:
+        for cluster in cluster_df['cluster'].unique():
             cluster_str = str(cluster)
-            features_vector = cluster_df[cluster_df['cluster'] == cluster].iloc[:, :-2].values.tolist()
+            features_vectors = cluster_df[cluster_df['cluster'] == cluster].iloc[:, :-2].values
+
+            # get cluster features_vector
+            centroid = features_vectors.mean(axis=0)
+            cluster_centroid = centroid.tolist()
+            print(f"Cluster {cluster} centroid: {cluster_centroid}")
+
             question_ids = raw_questions_df[raw_questions_df['cluster'] == cluster]['question_id'].tolist()
             cluster_map[cluster_str] = {
-                "features_vector": features_vector,
+                "features_vector": cluster_centroid,
                 "question_id": question_ids
             }
 

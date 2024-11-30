@@ -12,10 +12,11 @@ class ClusterModel:
     def __init__(self, n_clusters=66):
         self.n_clusters = n_clusters
         self.kmeans = KMeans(n_clusters=n_clusters, random_state=42)
-        self.sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
 
     def gen_cluster_df(self, df):
-        text_features = self.sentence_model.encode(df['content'].tolist())
+        LOGGER.info('Generating cluster model...')
+        sentence_model = SentenceTransformer('all-MiniLM-L6-v2')
+        text_features = sentence_model.encode(df['content'].tolist())
 
         # One-hot encode 'chapter' and 'concept'
         encoder = OneHotEncoder()
@@ -35,5 +36,12 @@ class ClusterModel:
         # Create df with clusters only with reduced features
         clustered_df = pd.DataFrame(reduced_features, columns=[f'feature_{i}' for i in range(reduced_features.shape[1])])
         clustered_df['cluster'] = df['cluster']
+        clustered_df['question_id'] = df['question_id']
+
+        # Sort by cluster
+        clustered_df = clustered_df.sort_values(by='cluster').reset_index(drop=True)
+
+        # df.to_csv("df.csv", index=False)
+        # clustered_df.to_csv("clustered_df.csv", index=False)
 
         return df, clustered_df

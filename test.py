@@ -1,3 +1,7 @@
+import os
+import json
+os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
+
 from src.models.cbf_model import CBFModel
 from src.modules.content_based_recommender import CBFRecommender
 
@@ -42,10 +46,10 @@ if __name__ == "__main__":
     # recommendations = Recommender().recommend("67021b10012649250e92b7da", max_exercises=10)
     # print(recommendations)
 
-    # ratings_df = Ratings().get_training_data()
-    # LOGGER.info("Training model...")
-    # model = CBFModel()
-    # model.train(ratings_df=ratings_df)
+    ratings_df = Ratings().get_training_data()
+    LOGGER.info("Training model...")
+    model = CBFModel()
+    model.train(ratings_df=ratings_df)
 
     # cbf_recommender = CBFRecommender()
     # print(cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb").head(30))
@@ -63,8 +67,11 @@ if __name__ == "__main__":
     # difficulty = Difficulty()
     # difficulty.update()
 
-    from src.modules.items_map import ItemsMap
+    # from src.modules.items_map import ItemsMap
+    # items_map = ItemsMap()
+    # items_map.gen_qcmap()
+    # features_vector = items_map.get_features_vector()
+    # print(features_vector.shape)
 
-    items_map = ItemsMap()
-    items_map.gen_qcmap()
-
+    # cluster_map = items_map.get_cluster_map()
+    # print(cluster_map)
