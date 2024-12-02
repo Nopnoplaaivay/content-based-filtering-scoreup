@@ -1,10 +1,7 @@
 from flask import Blueprint, request, jsonify
 
 from src.models.cbf_model import CBFModel
-from src.db import Ratings
 from src.utils.logger import LOGGER
-
-ratings = Ratings()
 
 upsert_bp = Blueprint('upsert_rating', __name__)
 
@@ -17,11 +14,9 @@ def upsert():
         messages = ratings.upsert(data)
         LOGGER.info(f"Upserted rating completed: {data}")
 
-        # Train model
-        ratings = Ratings()
-        ratings_df = ratings.get_training_data()
+
         model = CBFModel()
-        model.train(ratings_df=ratings_df)
+        model.train()
         return jsonify({"status": "success", "messages": messages})
     except Exception as e:
         LOGGER.error(f"Error in upsert: {e}")

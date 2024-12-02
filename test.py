@@ -24,26 +24,25 @@ if __name__ == "__main__":
     # ratings = ratings.get_training_data()
     # print(ratings)
 
-    data = {
-        "user_id": "67021b10012649250e92b7da",
-        "data": {
-            "clusters": [43, 47],
-            "rating": 1
-        }
-    }
-    ratings = Ratings()
-    ratings.upsert(data)
+    # data = {
+    #     "user_id": "67021b10012649250e92b7da",
+    #     "data": {
+    #         "clusters": [43, 47],
+    #         "rating": 1
+    #     }
+    # }
+    # ratings = Ratings()
+    # ratings.upsert(data)
 
-    # LOGGER.info("Training model...")
-    model = CBFModel()
-    ratings_df = Ratings().get_training_data()
-    model.train(ratings_df=ratings_df)
-    model.load_weights()
+    # # LOGGER.info("Training model...")
+    # model = CBFModel()
+    # model.train()
+    # model.load_weights()
     # print(model.Yhat)
 
     cbf_recommender = CBFRecommender()
-    p_list = cbf_recommender.get_priority_list("67021b10012649250e92b7da")
-    print(p_list.head(30))
+    p_list = cbf_recommender.recommend("67021b10012649250e92b7da", max_exercises=10)
+    print(p_list)
     
     # user_predicted_ratings = p_list["rating"].values
     # current_min, current_max = user_predicted_ratings.min(), user_predicted_ratings.max()
@@ -52,9 +51,6 @@ if __name__ == "__main__":
     # user_predicted_ratings = (user_predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
     # print(user_predicted_ratings)
 
-    # questions = Questions()
-    # raw_questions = questions.fetch_all()
-    # questions_df = questions.preprocess_questions(raw_questions)
     # import pandas as pd
     # with pd.option_context('display.max_rows', None, 'display.max_columns', None):
     #     print(questions_df)
@@ -65,11 +61,11 @@ if __name__ == "__main__":
     # difficulty = Difficulty()
     # difficulty.update()
 
-    # from src.modules.items_map import ItemsMap
-    # items_map = ItemsMap()
-    # items_map.gen_qcmap()
-    # features_vector = items_map.get_features_vector()
-    # print(features_vector.shape)
+    # questions = Questions()
+    # raw_questions = questions.fetch_all()
+    # questions_df = questions.preprocess_questions(raw_questions)
+    # from src.modules.feature_vectors import FeatureVectors
 
-    # cluster_map = items_map.get_cluster_map()
-    # print(cluster_map)
+    # feature_vectors = FeatureVectors()
+    # feature_vectors.gen_feature_vectors_df()
+    # print(feature_vectors.features_vectors)

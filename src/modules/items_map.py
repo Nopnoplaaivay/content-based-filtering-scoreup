@@ -6,6 +6,7 @@ import pandas as pd
 
 from src.db import Questions
 from src.models.cluster_questions_model import ClusterModel
+from src.modules.feature_vectors import FeatureVectors
 from src.utils.encode_utils import EncodeQuestionsUtils
 from src.utils.logger import LOGGER
 
@@ -13,22 +14,27 @@ class ItemsMap:
     def __init__(self):
         self.encoder = EncodeQuestionsUtils()
         self.cluster_model = ClusterModel()
+        self.feature_vectors = FeatureVectors()
 
     def refresh_mapping(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        # Delete existing mapping src/tmp
+        if os.path.exists(f"src/tmp"):
+            os.system(f"rm -rf src/tmp")
+
         self.gen_qcmap(notion_database_id=notion_database_id)
 
-    def get_cluster_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+    def get_feature_vectors_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         try:
-            if os.path.exists(f"src/tmp/mapping/{notion_database_id}_cluster_map.json"):
-                with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "r") as f:
-                    cluster_map = json.load(f)
-                return cluster_map
+            if os.path.exists(f"src/tmp/mapping/{notion_database_id}_feature_vectors_map.json"):
+                with open(f"src/tmp/mapping/{notion_database_id}_feature_vectors_map.json", "r") as f:
+                    feature_vectors_map = json.load(f)
+                return feature_vectors_map
             else:
                 LOGGER.error(f"Cluster map not found for {notion_database_id}")
                 self.gen_qcmap(notion_database_id=notion_database_id)
-                with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "r") as f:
-                    cluster_map = json.load(f)
-                return cluster_map
+                with open(f"src/tmp/mapping/{notion_database_id}_feature_vectors_map.json", "r") as f:
+                    feature_vectors_map = json.load(f)
+                return feature_vectors_map
         except Exception as e:
             LOGGER.error(f"Error fetching cluster map: {e}")
             return None
@@ -74,45 +80,45 @@ class ItemsMap:
         raw_questions_df = questions.preprocess_questions(raw_questions=raw_questions)
         
         # Prepare df
-        question_df, cluster_df = self.cluster_model.gen_cluster_df(raw_questions_df)
+        question_df, feature_vectors_df = self.feature_vectors.gen_feature_vectors_df(raw_questions_df)
 
-        cluster_map = {}
-        for cluster in cluster_df['cluster'].unique():
-            cluster_str = str(cluster)
-            features_vectors = cluster_df[cluster_df['cluster'] == cluster].iloc[:, :-2].values
+        feature_vectors_map = {}
+        for cluster in feature_vectors_df['idx'].unique():
+            feature_vector_str = str(cluster)
+            features_vectors = feature_vectors_df[feature_vectors_df['idx'] == cluster].iloc[:, :-2].values
 
             # get cluster features_vector
             centroid = features_vectors.mean(axis=0)
             cluster_centroid = centroid.tolist()
             print(f"Cluster {cluster} centroid: {cluster_centroid}")
 
-            question_ids = raw_questions_df[raw_questions_df['cluster'] == cluster]['question_id'].tolist()
-            cluster_map[cluster_str] = {
+            question_ids = raw_questions_df[raw_questions_df['idx'] == cluster]['question_id'].tolist()
+            feature_vectors_map[feature_vector_str] = {
                 "features_vector": cluster_centroid,
                 "question_id": question_ids
             }
 
         # Calculate cluster difficulty = average difficulty of questions in cluster
         question_df['difficulty'] = question_df['difficulty'].astype(float)
-        cluster_difficulty = question_df.groupby('cluster')['difficulty'].mean().reset_index()
-        cluster_difficulty.columns = ['cluster', 'cluster_difficulty']
+        question_difficulty = question_df.groupby('idx')['difficulty'].mean().reset_index()
+        question_difficulty.columns = ['idx', 'question_difficulty']
 
-        for cluster in cluster_difficulty['cluster']:
-            cluster_str = str(cluster)
-            if cluster_str in cluster_map:
-                cluster_map[cluster_str]['cluster_difficulty'] = cluster_difficulty[cluster_difficulty['cluster'] == cluster]['cluster_difficulty'].values[0]
+        for cluster in question_difficulty['idx']:
+            feature_vector_str = str(cluster)
+            if feature_vector_str in feature_vectors_map:
+                feature_vectors_map[feature_vector_str]['question_difficulty'] = question_difficulty[question_difficulty['idx'] == cluster]['question_difficulty'].values[0]
 
         # Generate features vector
         features_vector = {}
-        for key, value in cluster_map.items():
+        for key, value in feature_vectors_map.items():
             features_vector[key] = value["features_vector"]
 
-        # Save cluster_map, question_map in json format
+        # Save feature_vectors_map, question_map in json format
         os.makedirs('src/tmp/mapping', exist_ok=True)
-        with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "w") as f:
-            json.dump(cluster_map, f)
+        with open(f"src/tmp/mapping/{notion_database_id}_feature_vectors_map.json", "w") as f:
+            json.dump(feature_vectors_map, f)
 
-        question_map = raw_questions_df.set_index('question_id')['cluster'].to_dict()
+        question_map = raw_questions_df.set_index('question_id')['idx'].to_dict()
         with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "w") as f:
             json.dump(question_map, f)
 

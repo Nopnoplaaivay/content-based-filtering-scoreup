@@ -1,0 +1,514 @@
+question_id,chapter,difficulty,concept,content,idx
+fc084299-5fff-4543-b5f6-5a7971b93da6,chuong-3,0.83,office,Phát biểu nào sau đây là SAI khi nói về PowerPoint?,0
+a6d25890-eecd-488a-8b89-2455786b3b80,chuong-3,0.40,office,"Khi thiết kế bản trình chiếu, nếu muốn tạo một slide mới với bố cục so sánh, bạn sẽ thực hiện thao tác nào?",1
+3d9980e3-3d1c-4932-920e-f94a57340888,chuong-3,0.75,ppt,"Khi làm việc với PowerPoint, để loại bỏ hiệu ứng chuyển slide cho slide hiện tại, bạn cần thực hiện thao tác gì?",2
+21b80886-9511-4cd4-bde3-1cf1878f21a2,chuong-3,0.56,office,"Trong Microsoft PowerPoint, để hiển thị các slide giúp thuận tiện cho việc sắp xếp, bạn sẽ làm như thế nào?",3
+239c4195-884a-49ea-80ea-45e18acbe1d4,chuong-3,0.49,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), để thay đổi bố cục của slide hiện tại, bạn sẽ thực hiện thao tác nào?",4
+14ef74f3-2867-478b-a59f-8ae6bc9bc1d9,chuong-3,0.68,chen-doi-tuong,"Để tạo biểu đồ thể hiện phần trăm của các thành phần so với tổng thể, bạn sẽ chọn loại biểu đồ nào?",5
+58e6e75e-5897-4a53-bec4-3954176b2422,chuong-3,0.62,office,"Trong Excel, để in trang tính hiện tại, sau khi vào File và chọn Print, bạn sẽ click chọn mục nào trong phần Setting?",6
+7f84856b-856b-4afc-9419-10b532139567,chuong-3,0.31,cong-thuc-ham,"Công thức nào dưới đây sẽ trả về giá trị TRUE trong Microsoft Excel (2013, 2016, 2019)?",7
+8184ec54-399c-4336-a303-aa0f7dc958b3,chuong-3,0.99,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), để tạo một slide mới giống hệt slide hiện tại, bạn cần kích chuột phải lên slide đó và chọn tùy chọn nào?",8
+299a269d-11c9-4ff5-ab2a-d541d3b55f29,chuong-3,0.46,cong-thuc-ham,"Trong Microsoft Excel (2013, 2016, 2019), bạn sẽ sử dụng công thức nào để đếm số ô có giá trị lớn hơn 100 trong phạm vi từ E4 đến E9?",9
+ef641947-050a-47c2-9a59-8e5d19b2dfc1,chuong-3,0.08,excel,"Trong Microsoft Excel (2013, 2016, 2019), một trang tính có bao nhiêu dòng và cách đánh số của chúng như thế nào?",10
+9471f9e9-d6fb-48f2-a012-deaa0e1d54d1,chuong-3,0.56,cong-thuc-ham,"Trong Microsoft Excel, tại ô A10 nhập vào công thức =SUM(10, “Hello”). Kết quả trả lại là gì?",11
+c43ebebb-b60a-4cc2-8f08-5d4b684811be,chuong-3,0.70,cong-thuc-ham,Ý nghĩa của hàm COUNTA là gì trong Microsoft Excel?,12
+7d2bb3f5-fdc4-4794-a593-6893cae8a8ae,chuong-3,0.64,ppt,"Khi làm việc với PowerPoint, để thiết lập hiệu ứng chuyển tiếp cho slide hiện tại, bạn thực hiện như thế nào?",13
+af166c39-0271-44a9-8b98-5f43269eef7a,chuong-3,0.48,cong-thuc-ham,"Trong Microsoft Excel, giả sử công thức tại ô F3 là =A5+Sheet3!G$4. Sau khi sao chép công thức này từ ô F3 sang ô F4, công thức tại ô F4 sẽ là gì?",14
+608db822-8f7c-4318-bc66-7e0e5bfa7d3a,chuong-3,0.41,cong-thuc-ham,"Trong Microsoft Excel, hàm COUNT có ý nghĩa gì?",15
+0eec6ffc-b84d-47e7-bc97-27f3230811ea,chuong-3,0.57,excel,"Để chọn nhiều vùng cùng lúc trong Microsoft Excel, bạn cần giữ phím nào trong khi chọn?",16
+2b552291-9c1a-4d60-b083-8ae35430e96d,chuong-3,0.46,excel,"Trong Microsoft Excel (2013, 2016, 2019), để thiết lập độ rộng cột cho các ô đang chọn, bạn có thể thực hiện bằng cách nào?",17
+c2c89313-9ada-43e7-b253-5377f4b690a6,chuong-3,0.47,excel,"Trong Microsoft Excel (2013, 2016, 2019), để chèn một dòng bên trên dòng số 9, bạn cần thực hiện:",18
+16543896-781d-459b-b7c3-ef87432f8b4a,chuong-3,0.56,excel,"Trong bảng tính Excel, khối ô là tập hợp nhiều ô liền kề tạo thành hình chữ nhật. Địa chỉ khối ô được thể hiện như thế nào là đúng?",19
+bf673467-543b-4e77-afa3-9c126b457b09,chuong-3,0.51,excel,"Trong Microsoft Excel (2013, 2016, 2019), để xóa các dòng hoặc cột đang chọn, bạn có thể thực hiện bằng cách nào?",20
+690336f8-0370-4bd8-88ca-a48711f1c782,chuong-3,0.37,cong-thuc-ham,"Trong Microsoft Excel (2013, 2016, 2019), khi lập công thức tại ô A3 của Sheet1 nhưng muốn tham chiếu đến dữ liệu của ô B3 trong Sheet2 và nhân với 1000, thì công thức đúng là gì?",21
+14194e70-4964-495e-ae74-841660e8cfb2,chuong-3,0.54,excel,"Trong Microsoft Excel (2013, 2016, 2019), làm thế nào để chọn các dòng không kề nhau?",22
+81e0ccff-e2e9-447b-aa04-afa195047d22,chuong-3,0.47,excel,"Trong Microsoft Excel (2013, 2016, 2019), làm thế nào để chọn các cột kề nhau?",23
+22ac67d9-3eaa-428a-aad7-39baa82eb2dc,chuong-3,0.72,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi tạo công thức, để chuyển địa chỉ ô hoặc vùng ô sang địa chỉ tuyệt đối, ta có thể nhấn phím nào?",24
+9fa2c513-ad93-4b42-ae9a-87a5d7a07797,chuong-3,0.66,excel,"Trong Microsoft Excel (2013, 2016, 2019), cách nào dưới đây là không đúng khi chọn các dòng kề nhau?",25
+481bb5ad-187a-4b74-a685-34592000614f,chuong-3,0.59,excel,"Trong các dạng địa chỉ sau, địa chỉ nào là địa chỉ tuyệt đối?",26
+e59169af-8cb8-4812-818d-bb021f2b4584,chuong-3,0.65,excel,"Trong Microsoft Excel (2013, 2016, 2019), làm thế nào để tạo một bảng tính mới dựa trên mẫu có sẵn?",27
+58b64ffd-3c48-456b-8e40-c0c8dd2333da,chuong-3,0.42,excel,"Trong Microsoft Excel (2013, 2016, 2019), định dạng địa chỉ ô nào dưới đây là chính xác?",28
+88993555-7692-484b-96f4-3b73787d0e22,chuong-3,0.55,cong-thuc-ham,"Trong Microsoft Excel, tại ô A10 nhập vào công thức =SUM(10, “23”). Kết quả trả lại là gì?",29
+f1d057ae-53a9-4edf-8150-aaaa4f77f002,chuong-3,0.68,excel,"Trong Microsoft Excel (2013, 2016, 2019), thẻ nào trên Ribbon cho phép kiểm tra lỗi chính tả, dịch từ, thêm chú thích vào các ô, và bảo vệ trang tính hoặc bảng tính?",30
+070660d0-c4b5-4120-bcb7-3dc3329ed7de,chuong-3,0.56,excel,"Trong Microsoft Excel (2013, 2016, 2019), vùng Name Box có chức năng gì?",31
+9a41513a-987f-4b36-bdaa-a9f2cb4cbcff,chuong-3,0.55,excel,"Trong Microsoft Excel (2013, 2016, 2019), khẳng định nào dưới đây là SAI?",32
+448ecc53-4427-4763-b51d-88b492c82843,chuong-3,0.81,excel,Đâu không phải là một chức năng thuộc về bảng tính Excel?,33
+de59339f-8a93-4387-8bb2-a63143cc2414,chuong-3,0.75,excel,"Trong Microsoft Excel (2013, 2016, 2019), thao tác nào được thực hiện để nhập dữ liệu vào một ô?",34
+92cc6c84-6aab-474a-9f13-744d8cf909ca,chuong-3,0.75,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), bạn cần chọn chức năng nào để thiết lập khổ giấy A5?",35
+409d90e8-757d-43b3-9931-d0d874be2cfe,chuong-3,0.83,office,"Trong Microsoft Word (2013, 2016, 2019), làm thế nào để lưu tài liệu với một tên khác?",36
+b2596624-6712-4dad-845e-32ad1d321e15,chuong-3,0.80,excel,"Trong Microsoft Excel (2013, 2016, 2019), để thôi cố định các dòng và cột, bạn cần thực hiện cách nào?",37
+38092360-2e2b-4498-9c41-6d852392a581,chuong-3,0.88,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), để thay đổi lề của tài liệu, bạn chọn chức năng nào trong thẻ Page Layout?",38
+e1a4f2d8-f5f8-4984-81db-a59f5d6cc7dc,chuong-3,0.19,excel,"Trong Microsoft Excel (2013, 2016, 2019), một trang tính có bao nhiêu cột và cách đánh số của chúng như thế nào?",39
+53a623f1-c30b-4d02-a1ae-1eccaa9b282f,chuong-3,0.48,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi sao chép công thức, nếu chỉ địa chỉ cột thay đổi còn địa chỉ dòng cố định thì đó là dạng địa chỉ gì?",40
+0c8a8762-55ea-491d-81ca-b2b4c441d613,chuong-3,0.82,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), để đặt văn bản theo chiều giấy ngang, bạn cần chọn chức năng nào?",41
+bcdd31e8-3fe5-4e22-9676-2fbb0e546ad8,chuong-3,0.64,excel,"Trong Microsoft Excel (2013, 2016, 2019), để ẩn một cột, bạn cần thực hiện bằng cách nào?",42
+1a26411c-457d-4a48-93fe-2cdfee25255f,chuong-3,0.57,excel,"Trong Microsoft Excel (2013, 2016, 2019), để chèn một cột bên trái cột D, bạn cần thực hiện:",43
+83d97379-2a6a-43ef-a903-9fc82bc0a1b5,chuong-3,0.89,office,"Trong Microsoft Word (2013, 2016, 2019), để tạo chú thích cho văn bản, bạn cần thực hiện thao tác nào?",44
+f702bd28-6be2-49fd-b2ba-9e7c90b918f3,chuong-3,0.83,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), để tạo chữ nghệ thuật, bạn cần chọn chức năng nào?",45
+a5b312a3-c47f-473a-9266-4e1ac0bfb108,chuong-3,0.64,word,"Trong Microsoft Word 2010, chức năng Watermark có tác dụng gì?",46
+64c3e5f6-8f4d-4531-a90e-66896d5f1923,chuong-3,0.58,office,"Trong Microsoft Word (2013, 2016, 2019), để tạo các đường và hình vẽ trong văn bản, bạn cần thực hiện các bước nào?",47
+be2e4bc9-1f56-4be1-a8ca-0e6428d542d6,chuong-3,0.58,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), để áp dụng kiểu danh sách đơn cấp với các kí hiệu, bạn cần chọn mục nào trong nhóm Paragraph trên thẻ Home?",48
+1545d2db-766b-4f77-a7c7-3499e7a2de9e,chuong-3,0.74,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), làm thế nào để thiết lập khoảng cách giữa đoạn văn bản hiện tại và đoạn văn bản phía trên?",49
+fc2b5b58-57e4-4789-8813-c3442398af94,chuong-3,0.84,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), để thay đổi khoảng cách giữa các dòng thành 1.5 lines cho văn bản, bạn cần thực hiện các bước gì trong thẻ Home?",50
+0a07fd72-4561-4115-991e-e887b9e9e427,chuong-3,0.78,office,"Trong Microsoft Word (2013, 2016, 2019), nút lệnh Switch Windows trong thẻ View có tác dụng gì?",51
+ddc18865-5224-4a07-82c2-4db1423c5d8c,chuong-3,0.61,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), hộp thoại Paragraph cho phép thực hiện điều gì?",52
+52d05011-1f38-43db-901b-cb868c6320d6,chuong-3,0.60,office,"Trong Microsoft Word (2013, 2016, 2019), để hiển thị thanh thước kẻ (Ruler), bạn cần thực hiện thao tác nào?",53
+d6b7854f-cbe3-4266-bb9c-eaa002bb1fb6,chuong-3,0.50,he-dieu-hanh,Đâu không phải là tên một hệ điều hành?,54
+80c41dcf-fe93-4528-a758-c759f00556c5,chuong-3,0.69,office,"Các khái niệm page, sheet, slide đề cập tới các phần mềm là:",55
+e70b8246-ddcb-4f38-85ed-8bb997fc78db,chuong-3,0.63,excel,"Trong Microsoft Excel (2013, 2016, 2019), vùng Name Box có tác dụng gì?",56
+8c1f6be4-d222-4d5f-8253-081b38e3bc75,chuong-3,0.75,he-dieu-hanh,Đâu không phải là một thành phần của cửa sổ Window?,57
+70dea206-1ddb-4582-a100-d11bd66d3f55,chuong-3,0.63,he-dieu-hanh,Chức năng nào không phải là nhiệm vụ chính của hệ điều hành?,58
+c8142059-3640-41b5-bf6a-f1cb21ab01bd,chuong-3,0.47,excel,Vai trò chính của phần mềm bảng tính đối với người sử dụng?,59
+00db2f0f-4168-483a-b178-75cabe2f747e,chuong-3,0.70,dinh-dang-tep,"Trong các phần mở rộng file sau, phần mở rộng nào được tạo ra bởi phần mềm PowerPoint 2007?",60
+f084387b-69f9-4dc8-ba3b-2f91f6232da3,chuong-3,0.40,office,Template đề cập tới,61
+2f9e8176-2c31-4ff8-a4dc-8bca9a8d2460,chuong-3,0.66,he-dieu-hanh,"Để loại bỏ một chương trình không còn sử dụng nữa, người dùng thực hiện:",62
+275b5adb-460a-4c53-97e1-36087d9b986c,chuong-3,0.84,he-dieu-hanh,"Trong các hệ điều hành sau, hệ điều hành nào được công bố gần đây nhất?",63
+a865bfb7-9103-4fd8-ad4c-e49cda20eb89,chuong-3,0.38,he-dieu-hanh,"Trong một số phiên bản hệ điều hành Windows, khả năng tự động nhận biết các thiết bị phần cứng và tự động cài đặt cấu hình của các thiết bị là chức năng:",64
+9bf75e75-7be3-4286-9cd5-73af8f35dc78,chuong-3,0.70,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi sao chép công thức, một địa chỉ mà có cả địa chỉ cột và địa chỉ dòng được thay đổi thì gọi là địa chỉ gì?",65
+ec4f17cc-02ce-4164-a299-806c00faea31,chuong-3,0.57,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi sao chép công thức, một địa chỉ mà chỉ có địa chỉ dòng được thay đổi, còn địa chỉ cột cố định thì gọi là địa chỉ gì?",66
+5f4f805d-b1ec-49ba-8b3a-650dbbe35a22,chuong-3,0.40,office,"Trong Microsoft Excel (2013, 2016, 2019), thẻ nào của hệ thống Ribbon chứa các nút lệnh thiết lập in ấn?",67
+ac9564f8-a7c0-4866-820d-05bfeea7c310,chuong-3,0.34,excel,"Trong Excel, tập hợp các trang tính trong một tệp tin được gọi là gì?",68
+635be2ad-db56-4acb-be03-a3c038a65c6a,chuong-3,0.48,he-dieu-hanh,Hệ điều hành được xếp loại là:,69
+7e320653-cd96-4019-9c92-b0740169c6f3,chuong-3,0.49,word,"Trong Microsoft Word (2013, 2016, 2019), khi soạn thảo văn bản muốn tạo ký tự to, rơi 1 số dòng trong một đoạn ta chọn chức năng nào?",70
+37caa003-da21-4acb-bf3a-0838f3d87a87,chuong-3,0.65,excel,"Trong Microsoft Excel (2013, 2016, 2019), nhấp chọn ô A2, giữ phím Shift và nhấp chọn ô D7 sẽ có tác dụng gì?",71
+da389d9e-7cc2-4fe7-b0b3-c174b000de8b,chuong-3,0.48,he-dieu-hanh,Trong hệ điều hành các tệp được tổ chức lưu trữ dưới dạng?,72
+bb0976d8-2ec1-4e77-8524-4a2cd0437603,chuong-3,0.71,he-dieu-hanh,"Trong các đuôi tệp dưới đây, đuôi nào gắn với tệp có thể chạy trực tiếp trên hệ điều hành WINDOWS?",73
+57b081eb-f572-4f0e-9476-c2e9410f2b40,chuong-3,0.58,he-dieu-hanh,"Các ký tự nào sau đây không được dùng để đặt tên tệp, thư mục trong hệ điều hành Windows?",74
+9927ed1c-0b2b-4858-9f46-29de5db1e012,chuong-3,0.47,he-dieu-hanh,"Trong các tên dưới đây, đâu là tên của một hệ điều hành?",75
+21f96515-99d4-4120-acb6-15ea93ea7d78,chuong-3,0.78,he-dieu-hanh,Chọn phát biểu đúng về vai trò của hệ điều hành?,76
+2843d93e-8bfe-4d6e-a362-c344486ef470,chuong-3,0.40,he-dieu-hanh,Hệ thống các chương trình đảm nhận chức năng làm môi trường trung gian giữa người sử dụng và phần cứng máy tính được gọi là?,77
+d5f5e720-f637-41ff-9085-cb4bc67e4ff9,chuong-3,0.66,cong-thuc-ham,"Trong Microsoft Excel (2013, 2016, 2019), kết quả trả lại của công thức =IF(20>3,130,”Hello”) là gì?",78
+363ada37-4f3a-4d0d-834b-e55f2a8b4e18,chuong-3,0.75,he-dieu-hanh,"Trong Windows, để xóa hoàn toàn các đối tượng đã bị xóa và lưu trong Recycle Bin, bạn cần làm gì?",79
+a26dd6b9-1b64-415d-bf45-4f2565555acf,chuong-3,0.31,office,"Khi tìm kiếm tệp với tên tìm kiếm là baitap?.* thì những tệp nào có thể là kết quả của việc tìm kiếm, biết rằng có các tệp: baitap5.pdf, baitao9.doc, baitap10.doc và baitap8.pdf?",80
+0f5eb2e9-7648-4377-bbf4-68e3d6d1ee0f,chuong-3,0.65,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), để mở Slide Master ta làm thế nào?",81
+f5485df8-0803-448f-a4b5-0d83e3632944,chuong-3,0.81,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), để áp dụng các mẫu Themes có sẵn ta vào thẻ nào?",82
+0d8cca77-e443-448a-8d2c-e6c1c594fe94,chuong-3,0.60,chen-doi-tuong,"Muốn vẽ biểu đồ thể hiện tỷ lệ giữa các thành phần so với toàn thể, ta chọn loại biểu đồ nào?",83
+730be9c8-dab7-45e5-acca-a51e8d0a2d1a,chuong-3,0.53,office,"Trong Microsoft Excel (2013, 2016, 2019), để thêm trường tên tệp vào đầu trang, ta đặt con trỏ chuột tại vùng Header, sau đó trong nhóm Header and Footer elements của thẻ Design, chọn nút lệnh nào?",84
+c7af2e3d-c18b-4d6c-93af-527052db4426,chuong-3,0.68,office,"Trong Microsoft PowerPoint, muốn hiển thị các Slide thuận tiện việc sắp xếp các trang slide ta làm cách nào?",85
+8a07a5c8-793e-45cd-8502-e49c7a85be61,chuong-3,0.61,ppt,"Trong Microsoft PowerPoint, bạn hiểu Transition là gì?",86
+9504252b-ad7e-4648-b0e4-2ccac72a99de,chuong-3,0.54,ppt,"Trong Microsoft PowerPoint, bạn hiểu Animation là gì?",87
+163f3e7c-b78b-4922-b5bb-ce2e8feb15ee,chuong-3,0.42,office,"Để áp dụng việc in dòng tiêu đề tự động trên mọi trang bảng tính, trong thẻ Sheet của hộp thoại Page Setup, ta thiết lập tại mục nào?",88
+d9a34c58-9e15-4a7d-ad2d-3b1507efce83,chuong-3,0.38,cong-thuc-ham,"Trong Microsoft Excel (2013, 2016, 2019), công thức nào sau đây sẽ cho kết quả là giá trị TRUE?",89
+cd4c55c9-4ce4-4d1e-86a8-89acb5b49fff,chuong-3,0.66,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), để chèn ngày tháng vào tất cả các Slide ta làm thế nào?",90
+cfc00746-e8c8-483a-a25b-229dafc6127e,chuong-3,0.88,office,"Trong Microsoft PowerPoint (2013, 2016, 2019), muốn đánh số cho các Slide ta thực hiện như thế nào?",91
+1cea3655-bbc3-4780-8bf5-6a1dc4274433,chuong-3,0.29,excel,"Trong Microsoft Excel (2013, 2016, 2019), một trang tính có tổng số bao nhiêu cột và được đánh số như thế nào?",92
+58353c73-48f1-4170-831a-0be4c58547ec,chuong-3,0.62,excel,Tập hợp các trang tính trong một file Excel được gọi là gì?,93
+c6ddfa83-4cc9-41cc-a5d5-9e6f19163103,chuong-3,0.72,excel,"Trong Microsoft Excel (2013, 2016, 2019), một trang tính có tổng số bao nhiêu dòng và được đánh số như thế nào?",94
+fe54acb2-ac7d-4499-8ff5-9d42b32d1578,chuong-3,0.37,excel,"Trong Microsoft Excel (2013, 2016, 2019), đâu là một khẳng định SAI?",95
+b3b65adf-3b69-4c92-92cc-60e1a6e71c34,chuong-3,0.33,excel,"Trong Microsoft Excel (2013, 2016, 2019), vùng Formula Bar có tác dụng gì?",96
+b2b65d9c-eaeb-4562-903b-ed433328ade1,chuong-2,0.77,so-thuc,Trong chuẩn IEEE 754/85 dạng đơn (single) có độ dài:,97
+f0d03fa2-b027-4325-8bb2-014711d76619,chuong-3,0.81,dinh-dang-tep,"Trong Microsoft Word 2010, để lưu tệp dưới định dạng .rtf, bạn cần làm gì?",98
+dd5438ba-87ca-499c-94e0-003e45a4838a,chuong-3,0.94,excel,"Trong công thức của Excel, thay vì sử dụng địa chỉ của một vùng thì ta có thể sử dụng tên đại diện của vùng đó. Để thực hiện định nghĩa tên cho một vùng ô thì sau khi chọn vùng ô ta chọn lệnh nào sau đây?",99
+7c735f5d-3ebd-4ae5-9aa5-5cb88323846a,chuong-3,0.62,excel,Phát biểu nào sau đây là SAI khi nói về nhập dữ liệu vào bảng tính Excel?,100
+bad3e5b3-1df4-4d18-aba9-3a47168d54ee,chuong-3,0.57,excel,"Trong Microsoft Excel (2013, 2016, 2019), để ẩn một cột, ta thực hiện bằng cách nào?",101
+f8f3406e-221c-4043-a7ff-ded96938bd4e,chuong-3,0.46,he-dieu-hanh,Phát biểu nào về Windows Explorer chưa chính xác?,102
+c1ae82ba-7fc2-4a58-9e3f-7bdc10f40c58,chuong-3,0.64,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi sao chép công thức, một địa chỉ mà chỉ có địa chỉ cột được thay đổi, còn địa chỉ dòng cố định thì gọi là địa chỉ gì?",103
+e935d90d-56c2-4888-bac9-3cd8d8ee477d,chuong-3,0.48,excel,"Trong Microsoft Excel (2013, 2016, 2019), để xóa dữ liệu trong các ô đang chọn thì ta dùng cách nào?",104
+90f1b99f-cf8b-4b12-bac6-6c9c89715af0,chuong-3,0.58,office,"Trong Microsoft Excel (2013, 2016, 2019), thẻ nào của hệ thống Ribbon cho phép chèn công thức, đặt tên vùng (range), công cụ kiểm tra theo dõi công thức, điều khiển việc tính toán của Excel?",105
+aa40b0f1-5c1c-4577-92a2-d52d4099e0f6,chuong-2,0.36,bieu-dien-ki-tu,"Với bộ mã ASCII để mã hóa kí tự, phát biểu nào sau đây là sai?",106
+26323a18-b312-41f7-bdfd-f3813b902e75,chuong-3,0.83,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), muốn điều chỉnh các cột trong bảng có độ rộng bằng nhau, ta chọn chức năng nào?",107
+85655002-4ade-4628-b8be-3e8b9cbf0879,chuong-3,0.69,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), muốn di chuyển con trỏ chuột từ trái qua phải trong bảng ta sử dụng phím nào?",108
+81ffffb9-27b2-4c93-bcdf-fba748baaa9b,chuong-3,0.78,excel,"Trong Microsoft Excel (2013, 2016, 2019), thao tác nhấp chọn ô A2, giữ phím Shift và nhấp tiếp vào ô D7 có tác dụng gì?",109
+8b8092c2-867b-427e-9f33-8b35c14da667,chuong-3,0.57,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), công cụ Format Painter có tác dụng gì?",110
+49cda2c7-fdfb-4742-b714-a4ef69b582eb,chuong-3,0.81,he-dieu-hanh,"Trong Windows Explorer, để sao chép tập tin/thư mục dùng tổ hợp phím nào?",111
+48228154-bca7-4ab2-bdde-af038fb95cb6,chuong-3,0.74,office,"Trong Microsoft Excel 2010, thẻ nào của hệ thống Ribbon cho phép thiết lập các chế độ hiển thị của bảng tính như: phóng to, thu nhỏ, chia màn hình,…?",112
+b8bb7d7a-6bd0-4c4e-8abe-68b3fc9e578c,chuong-3,0.71,excel,"Trong Microsoft Excel (2013, 2016, 2019), khi sao chép công thức, một địa chỉ mà có cả địa chỉ cột và địa chỉ dòng cố định thì gọi là địa chỉ gì?",113
+993a94f0-ab9e-49e3-8918-ff2bceaa3f30,chuong-3,0.61,word,"Trong Microsoft Word (2013, 2016, 2019), chức năng Watermark có tác dụng gì?",114
+1b1af17f-dec9-40f7-9b51-1248e684ec79,chuong-3,0.63,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), muốn căn chỉnh lề trong ô của bảng, trong thẻ Layout ta chọn chức năng nào?",115
+83a79f22-e9b3-4fa5-afa8-2d002fbd91c8,chuong-3,0.62,he-dieu-hanh,"Trong Windows Explorer, để chọn tất cả các tệp và thư mục con trong thư mục đang xét, dùng tổ hợp phím:",116
+07435704-212b-4abe-9b4b-3865dd3b9db6,chuong-3,0.59,office,"Trong Microsoft Word (2013, 2016, 2019), Header và Footer không cho phép chèn đối tượng nào?",117
+ffcbae22-108f-44c2-b5e8-987744d0496d,chuong-3,0.89,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), muốn thay đổi chiều cao của hàng trong bảng, trong thẻ Layout của nhóm thẻ Table Tools ta chọn chức năng nào?",118
+11a41169-5e69-4dc0-bf00-bead5cfcaa06,chuong-3,0.54,office,"Trong Microsoft Word (2013, 2016, 2019), muốn chọn in các trang lẻ của văn bản, ta chọn thẻ File, sau đó chọn chức năng nào?",119
+66f8d7b4-0f73-4f49-92f3-fe213e52e211,chuong-3,0.83,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), muốn thêm một số ký tự đặc biệt, ta chọn chức năng nào?",120
+b91712aa-553c-4612-a272-89088c2caad8,chuong-3,0.95,office,"Trong Microsoft Word (2013, 2016, 2019), để soạn thảo công thức toán học phức tạp ta dùng công cụ nào?",121
+89131720-b3f0-487a-887b-a30dc494d5a7,chuong-3,0.87,chen-doi-tuong,"Trong Microsoft Word (2013, 2016, 2019), làm việc với bảng, muốn chia một ô thành nhiều ô, trong trong thẻ Layout của nhóm thẻ Table Tools ta chọn nút lệnh nào?",122
+2760b4ee-cd1c-4259-9709-0aa62f40bd02,chuong-3,0.71,office,"Trong Microsoft Word (2013, 2016, 2019), trong thẻ Go to của hộp hội thoại Find and Replace không cho phép tìm kiếm mục nào?",123
+00ea90d9-762c-453d-97f8-231f9aaeb38d,chuong-3,0.30,office,"Trong Microsoft Word (2013, 2016, 2019), muốn tạo phong cách (style) cho văn bản, ta chọn chức năng styles trong thẻ nào?",124
+5992556d-a6ca-4db7-80d9-2ca15c293cec,chuong-3,0.56,dinh-dang-van-ban,"Trong Microsoft Word (2013, 2016, 2019), muốn giảm thụt lề ta chọn chức năng nào?",125
+adb55854-bb9b-4d56-9fb5-86976184e931,chuong-2,0.63,bo-nho,"Trong các lí do sau, lí do nào giải thích việc dung lượng bộ nhớ ngoài có thể lớn hơn bộ nhớ trong rất nhiều?",126
+10770e46-cea6-45b5-9cb4-3d3ec94f6867,chuong-3,0.48,he-dieu-hanh,"Trong hệ điều hành Windows, các đối tượng đã bị xóa được lưu trong Recycle Bin, muốn xóa hẳn các đối tượng thì:",127
+e1b152fc-28fb-4600-b1c5-a047157307b6,chuong-3,0.55,office,"Trong Microsoft Word (2013, 2016, 2019) nút lệnh Switch Windows trong thẻ View có tác dụng gì?",128
+df4fe66f-3a78-4016-939c-1c472eaae7cf,chuong-3,0.59,office,"Trong Microsoft Word (2013, 2016, 2019), tổ hợp phím nào cho phép đưa con trỏ về đầu văn bản?",129
+2c751f40-9532-4909-b563-9c381bea29be,chuong-3,0.68,office,"Trong Microsoft Office, thanh Quick Access Toolbar dùng để làm gì?",130
+bf2a06cb-e344-42fb-af66-3de467521bca,chuong-3,0.38,he-dieu-hanh,Thao tác nào sau đây được dùng để chọn nhiều đối tượng không liên tiếp nhau trong hệ điều hành Windows?,131
+77474b17-33b9-47dd-8ab9-8e73c46f8921,chuong-3,0.78,he-dieu-hanh,Chức năng nào không phải là chức năng của hệ điều hành?,132
+fe7baa5e-b7ba-4d17-8c89-73cb728f419a,chuong-3,0.49,office,"Trong Microsoft Word (2013, 2016, 2019) muốn tạo một văn bản trống mới ta thực hiện các bước nào sau đây?",133
+f0a9412c-0d64-48d5-828f-da46fcc4b880,chuong-3,0.72,dinh-dang-tep,"Trong ứng dụng Microsoft Word 2010, để chuyển đổi định dạng tệp sang kiểu .rtf ta thực hiện:",134
+063c89fc-c74f-4635-8d1d-8a8bf0f50ae5,chuong-3,0.82,dinh-dang-tep,"Trong Microsoft Word 2007 trở đi, file có phần mở rộng mặc định là gì?",135
+b8af18ce-ca93-4591-99c8-19fa518c74b4,chuong-2,0.53,so-thuc,"Đối với chuẩn IEEE 754/85 về biểu diễn số thực, phát biểu nào sau đây là sai?",136
+e9687055-4571-464a-bafa-f19889dd4606,chuong-3,0.82,office,"Trong Microsoft Excel (2013, 2016, 2019), để tạo bảng tính mới theo mẫu cho trước, ta thực hiện bằng cách nào?",137
+c555a610-e71d-4121-8b09-6415958af5d8,chuong-2,0.53,so-thuc,Trong chuẩn IEEE 754/85 dạng kép (double) có độ dài:,138
+88558be4-24b4-4d72-96be-96253c1f5b17,chuong-2,0.46,bo-nho,Phát biểu nào sau đây là SAI?,139
+539da41d-f192-48af-8947-f7623bb8a743,chuong-2,0.65,so-thuc,Đối với dạng kép mở rộng chuẩn IEEE 754/85 dành số bit cho các trường S + E + M lần lượt là:,140
+13133bec-c5e0-4727-8340-8fec407d2ff6,chuong-2,0.59,so-thuc,Đối với dạng kép chuẩn IEEE 754/85 dành số bit cho các trường S + E + M lần lượt là:,141
+6a5627dc-6309-4b45-8f2c-c76afb314dbd,chuong-2,0.55,so-thuc,Đối với dạng đơn chuẩn IEEE 754/85 dành số bit cho các trường S + E + M lần lượt là:,142
+cbe3d8ee-8b18-4860-b940-2731d090e7ed,chuong-2,0.60,so-thuc,Cho biểu diễn dưới dạng IEEE 754/85 như sau: C2 82 80 00 H. Giá trị thập phân của nói là?,143
+becbbc5e-b091-404b-bd34-d69e93ef8171,chuong-2,0.29,bieu-dien-ki-tu,Với bộ mã ASCII phát biểu nào sau đây sai?,144
+28338849-7be3-41d5-bcaa-3998f87bab50,chuong-2,0.79,bieu-dien-ki-tu,"Với bộ mã Unicode để mã hóa kí tự, phát biểu nào sau đây sai?",145
+5a5e83a7-e2e9-462d-9235-560d01a13199,chuong-3,0.48,excel,"Trong Microsoft Excel (2013, 2016, 2019), để thiết lập độ cao dòng cho các ô đang chọn ta thực hiện bằng cách nào?",146
+1b26e8c6-ca1f-4f1f-abec-1fb6a4fc53a1,chuong-2,0.81,so-thuc,Biểu diễn số thực X=9.6875 dưới dạng dấu chấm động theo chuẩn IEEE 754 với 32 bit thì phần mã lệch (e) có giá trị là bao nhiêu?,147
+59af3a6e-0062-45f0-b6de-012afa824940,chuong-3,0.31,excel,"Trong công thức Excel, thay vì dùng địa chỉ ô, bạn có thể sử dụng tên của vùng ô. Để định nghĩa tên cho một vùng ô sau khi đã chọn, bạn thực hiện thao tác nào?",148
+cf90c087-ce15-4c92-9950-1dcebfe7206c,chuong-2,0.57,so-thuc,"Cho số thực 33/128, giá trị của nó ở hệ nhị phân là?",149
+b25525f4-5928-4720-9b5f-d06c546dd7a8,chuong-2,0.68,so-thuc,Cho số thực 51/32. Giá trị của nó ở hệ nhị phân là?,150
+46c764a1-6361-4ec7-ad65-f0c756cad56c,chuong-2,0.54,he-thong-vao-ra,Khẳng định nào sau đây là đúng khi nói về màn hình cảm ứng,151
+4ed7aa93-05ea-48f8-8937-84c9b4b485c7,chuong-2,0.32,bo-nho,Tệp văn bản định dạng lưu trữ ở Bộ nhớ nào?,152
+47412424-dcd4-4132-94a9-1077b23ddb28,chuong-2,0.41,bieu-dien-ki-tu,Việt Nam ban hành sử dụng UTF-8 từ năm nào?,153
+83ce6486-e1d4-4156-b2d9-ecfbf981e30e,chuong-2,0.60,bieu-dien-ki-tu,Tại sao cần có bộ mã Unicode?,154
+4421f222-bcd8-4190-8c9b-ad5491df9861,chuong-2,0.71,lien-ket-he-thong,Bus địa chỉ không vận chuyển thông tin nào sau đây?,155
+801232f9-5b9c-4ca2-b459-95df69330276,chuong-2,0.32,nguyen-tac-chung-bieu-dien-du-lieu,Tìm phát biểu chính xác nhất khi nói về biểu diễn thông tin,156
+fbf73a33-1c07-49d8-af11-30851cf71506,chuong-2,0.62,lien-ket-he-thong,"Một máy tính có độ rộng Bus địa chỉ (Address Bus) là 32 bit, độ rộng của Bus dữ liệu là 24 bit. Hỏi bộ xử lí trong một lần truy cập bộ nhớ có thể trao đổi tối đa bao nhiêu byte?",157
+632e4278-a087-4d64-823f-93d4cf60a036,chuong-2,0.65,lien-ket-he-thong,Trong máy tính bộ phận nào đảm nhận việc vận chuyển thông tin giữa các thành phần bên trong máy tính?,158
+915a4ac0-8556-4253-8b10-13a137faddf7,chuong-2,0.71,lien-ket-he-thong,"Một máy tính sử dụng bộ vi xử lí có độ rộng của đường Bus địa chỉ (Address Bus) là 32 bit. Hỏi với máy tính này, dung lượng tối đa của bộ nhớ chính là
+bao nhiêu biết mỗi ô nhớ có kích thước 1Byte",159
+07a0a34e-209e-423b-9f58-02535300f3d5,chuong-2,0.75,he-thong-vao-ra,Trong các thiết bị sau thiết bị nào là thiết bị ra?,160
+99225dee-99f8-4b63-9809-880202059666,chuong-2,0.80,he-thong-vao-ra,Ổ đĩa cứng được xếp loại là:,161
+6bf14952-943f-4c29-8b78-d5f7796b69ca,chuong-2,0.44,he-thong-vao-ra,Phát biểu nào sau đây sai về hệ thống vào ra?,162
+d9fa5ddd-c7be-42e8-a684-a720315dbd31,chuong-2,0.44,bo-nho,Lựa chọn nào dưới đây chỉ ra thứ tự tăng tốc độ trao đổi dữ liệu của các loại bộ nhớ?,163
+4b4b1f2e-c767-4cb9-a855-b02bc8500fd7,chuong-3,0.57,he-dieu-hanh,Đâu KHÔNG phải là một hệ điều hành?,164
+4df93710-64c6-4c2e-951d-d01498953be6,chuong-2,0.42,bo-nho,"Trong các nhóm thiết bị dưới đây, nhóm nào chỉ chứa các thiết bị thuộc bộ nhớ ngoài?",165
+3b3f0a5e-dabb-43f7-9fac-6f2beb0db014,chuong-2,0.53,so-nguyen,Cách biểu diễn số âm trong máy tính là?,166
+04551920-1df6-4025-85b5-267bbe434706,chuong-2,0.54,bo-nho,Chỉ ra lựa chọn tương ứng với thành phần thuộc bộ nhớ ngoài?,167
+96c1933e-7c41-45f2-8fd9-2f7addbcb529,chuong-2,0.61,bo-nho,Lựa chọn nào sau đây chỉ chứa các thành phần là bộ nhớ trong?,168
+e1b774ab-b67e-448f-a82b-887f96d86242,chuong-2,0.64,so-thuc,"Cho biểu diễn dưới dạng IEEE 754/85 của số thực -53,125 là:",169
+bf601663-934f-40fd-bfb1-708549a29be2,chuong-3,0.85,he-dieu-hanh,"Trong hệ điều hành Windows, phím tắt dùng để xóa file là?",170
+a463cb52-f5e0-490c-b030-19754f4a24e6,chuong-2,0.41,bo-nho,Chức năng chính của RAM?,171
+eb96e85c-54c2-4233-a3cc-8b48d9f8cb3f,chuong-2,0.57,bo-nho,Bộ nhớ đệm nhanh Cache dùng để làm gì?,172
+8ee5cdb5-9711-4404-8d85-8104ef7f7f3a,chuong-3,0.70,excel,Phát biểu nào dưới đây sai về phần mềm bảng tính Excel?,173
+b61086f3-707c-4e8c-945a-ed083728db10,chuong-2,0.45,bo-nho,Phát biểu nào sau đây đúng về Bộ nhớ chính?,174
+a554e082-dffe-4833-b3b4-581b92dae348,chuong-3,0.67,cong-thuc-ham,"Trong phần mềm Excel, hàm AVERAGE là hàm dùng để tìm?",175
+8d9a33f7-e621-4548-96f4-1dbee108a6bd,chuong-2,0.45,bo-xu-li,Phát biểu nào sau đây là đúng về CPU?,176
+c70b2cf7-d0b7-4dfc-9cba-b2ed17c1ea6a,chuong-2,0.38,bo-xu-li,Chức năng chính của tập thanh ghi là?,177
+84969a7d-68cb-4ad9-a2f3-f4e184f79aee,chuong-3,0.42,he-dieu-hanh,"Trong hệ điều hành Windows, tổ hợp phím nào có thể đóng một ứng dụng bất kỳ?",178
+e87a31e1-f8d7-43e8-bd4f-5f853d714864,chuong-2,0.70,bo-xu-li,Phát biểu nào sau đây là sai về CPU?,179
+5fdfe3c8-0fc0-45c9-ac2c-d3f62e788099,chuong-2,0.71,bo-xu-li,Các thành phần của CPU gồm?,180
+827b4cd5-b842-49b5-a372-6a36100a4e9f,chuong-2,0.50,he-thong-may-tinh,"Các thao tác xử lí máy tính gồm (1) Nhận lệnh, (2) Nhận dữ liệu nếu cần,
+(3) Giải mã lệnh, (4) Thực hiện lệnh. Trình tự thực hiện hợp lí là?",181
+d1afee3d-30ad-4c64-b3b0-6937e5d17f50,chuong-2,0.60,he-thong-may-tinh,Các thành phần cơ bản của một hệ thống máy tính gồm có,182
+eaf60cba-8e3b-48e1-874e-aef938494d78,chuong-2,0.65,he-thong-may-tinh,Chức năng quan trọng nhất của máy tính là gì?,183
+fb7cca58-79ef-483b-9bdd-77131cadf7d2,chuong-2,0.63,bo-xu-li,CPU lưu mã lệnh đang thực hiện ở đâu?,184
+721ccbb5-2ff0-4944-b4e0-12f931a95879,chuong-2,0.58,bieu-dien-ki-tu,Một hệ thống mã sử dụng 2 byte để mã hóa các kí tự. Số lượng các kí tự có thể biểu diễn là:,185
+383f0ab4-a63e-4610-a362-0d9a88659ae4,chuong-2,0.44,bieu-dien-ki-tu,Muốn mã hóa một bảng mã gồm 100 kí tự phải sử dụng tối thiểu bao nhiêu bit nhị phân cho mỗi từ?,186
+5bc20cef-7b77-497d-8570-5cb1fda03678,chuong-2,0.74,bieu-dien-ki-tu,Phát biểu nào sau đây đúng về bộ mã ASCII?,187
+5e2f2fd0-4f6a-49c8-ab6b-2e8744d40c7b,chuong-2,0.58,bieu-dien-ki-tu,Chọn câu đúng nhất trong các câu sau,188
+bdfdee14-6a6e-4332-a92c-0792af05bf91,chuong-2,0.71,he-dem-co-so-r,Số thập phân 127.625 trong hệ bát phân được biểu diễn là?,189
+773a9356-ec60-47ef-a785-8caa928ca473,chuong-2,0.66,so-thuc,"Trong chuẩn IEEE 754/85, NaN là một giá trị đặc biệt không biểu diễn cho một số. Phát biểu nào sau đây đúng về giá trị NaN?",190
+4177a1b9-9b5c-45a1-8d54-93b75eff6379,chuong-2,0.27,so-thuc,"Xác định giá trị thập phân của số thực X có dạng biểu diễn theo chuẩn IEEE 754 với 32 bit như sau:
+0011 1111 1000 0000 0000 0000 0000",191
+b72ca8ca-d0c4-4408-b73a-39403d21bcae,chuong-2,0.45,so-thuc,Trong chuẩn IEEE 754/85 thuật ngữ độ chính xác kép đề cập tới?,192
+466642cc-02f1-4e40-ac46-2d800e9d383d,chuong-2,0.25,so-thuc,Cho biểu diễn dưới dạng IEEE 754/85 như sau: 42 22 80 00 H. Giá trị thập phân của nó là?,193
+97bd8ed5-ea25-478e-bf84-8bb6ce9757c1,chuong-2,0.38,he-dem-co-so-r,Số nhị phân 11110001.1101 có biểu diễn trong hệ cơ số 8 là?,194
+c0c9a682-335a-4dec-b1b4-662a6d44b768,chuong-2,0.75,bo-xu-li,Kết quả của biểu thức 10010110 OR 01101001 là bao nhiêu?,195
+d16bcf3b-f979-4f62-b950-1e45f3ed67f0,chuong-2,0.93,he-dem-co-so-r,Hãy chọn biểu diễn đúng của số 67 ở hệ thập phân trong các hệ thống tương ứng sau?,196
+a266ae07-e69b-43c1-ab14-b9c16440f052,chuong-2,0.51,he-dem-co-so-r,Đẳng thức 141 –67 = 52 đúng trong hệ cơ số nào?,197
+f1360313-4d8b-44a4-b8bf-39a4067b12f2,chuong-2,0.61,he-dem-co-so-r,Một số nguyên biểu diễn ở hệ 16 là 1AC hỏi giá trị ở hệ 10 là bao nhiêu?,198
+63e73bf2-6581-43f4-a304-65a0ec099cb7,chuong-2,0.67,he-dem-co-so-r,Số nhị phân 1100110.101 trong hệ thập phân có giá trị bằng bao nhiêu?,199
+259ae7fe-1787-44d9-9553-c382b01db3fe,chuong-2,0.20,so-nguyen,"Cho hai giá trị A = -43, B = -95 được biểu diễn dưới dạng số nguyên có dấu 8 bit trong máy tính. Kết quả của phép toán A+B mà máy tính thực hiện được bao nhiêu?",200
+7b9288b9-ed43-49f2-a3bb-03e27ef1fff7,chuong-2,0.37,so-nguyen,"Cho hai giá trị A = +95, B=-43 được biểu diễn dưới dạng số nguyên có dấu 8 bit trong máy tính. Kết quả của  phép toán A-B mà máy tính thực hiện được bao nhiêu?",201
+a421e3ee-f53f-4b1a-828e-aa6aea109baf,chuong-2,0.53,so-nguyen,"Cho hai giá trị A=195, B= 143 biểu diễn dưới dạng số nguyên không dấu 8 bit trong máy tính. Kết quả của phép toán A+B là bao nhiêu?",202
+41c9e317-fbb5-4c45-90f9-86115b06d97c,chuong-2,0.53,he-dem-co-so-r,Đẳng thức 131 - 45 =53 đúng trong hệ cơ số nào?,203
+e169ff54-eedd-42a3-800c-e7dca9f6ae4f,chuong-2,0.45,he-dem-co-so-r,Số 5678 có thể biểu diễn một giá trị trong hệ đếm cơ số nào?,204
+f5aa2ae2-758b-4f7a-beb2-95efaf54774b,chuong-2,0.60,so-nguyen,"Khi thực hiện trừ hai số nguyên có dấu trong máy tính, trường hợp nào cần phải kiểm tra hiện tượng tràn số học?",205
+5bcc1e29-c583-4078-975e-04733d900ebd,chuong-2,0.29,he-thong-vao-ra,Trong các thiết bị sau thiết bị nào là thiết bị vào?,206
+4e7e04fe-9540-442e-9219-5b19cb8a4601,chuong-2,0.50,so-nguyen,"Khi cộng hai số nguyên có dấu trong máy tính, trường hợp nào chắc chắn không tràn?",207
+ed2ab5e5-9c10-49aa-9372-6a94eec0f3f7,chuong-2,0.49,so-nguyen,Tìm câu trả lời thích hợp nhất cho câu hỏi: trong máy tính chúng ta biểu diễn số nguyên có dấu bằng mã bù 2 bởi vì ưu điểm của phương pháp này là?,208
+257e6d1f-f73c-486e-a82c-175fc0b33f01,chuong-2,0.45,so-nguyen,"Cho 4 số nguyên 16 bit có dấu mã Hexa là 5931, AC43, B571, E755. Số lớn nhất là?",209
+448a4d3d-f085-4c33-b9dc-6603654530f7,chuong-2,0.46,so-nguyen,Một số nguyên có dấu được biểu diễn dưới dạng số nhị phân 8 bit là 11010101. Giá trị của số đó trong hệ thập phân là?,210
+9a682c63-88ba-4cd2-95c6-5a1ecaeb6176,chuong-2,0.49,so-nguyen,"Cho các số nguyên không dấu: X=6A(16), Y= 153(8), Z=105(10). Thứ tự sắp xếp giảm dần là",211
+250e29ed-18e0-4fed-b662-625eb1c0a3f2,chuong-2,0.46,bo-xu-li,Nhận lệnh của chương trình từ bộ nhớ trong đưa vào CPU là nhiệm vụ của khối nào,212
+2ee2fc4e-39f0-48d4-b380-a9908aac2acc,chuong-2,0.60,bieu-dien-ki-tu,"Trong các biểu thức so sánh dưới đây, biểu thức nào đúng, biết bảng mã được sử dụng là bảng mã ASCII",213
+ac059490-7ba0-4076-bbda-c0c10900e128,chuong-2,0.59,he-dem-co-so-r,Số nhị phân 1101.11 trong hệ thập phân có giá trị bằng bao nhiêu?,214
+885df2e5-eaa6-43f8-a5bb-8d9d28b8589c,chuong-2,0.55,so-nguyen,Cho biết kết quả của biểu thức khi biểu thức khi biểu diễn ở dạng số nguyên có dấu 8 bit của NOT 10610?,215
+01bf5ac1-d0d3-43b8-9e9c-32bc67e0d60f,chuong-2,0.48,so-nguyen,Sử dụng 8 bit nhị phân để biểu diễn số nguyên có dấu. Hỏi giá trị số nguyên lớn nhất có thể là bao nhiêu?,216
+2c4af775-ee26-4dfd-b4bf-e9fcf3a95144,chuong-2,0.50,so-nguyen,Sử dụng 8 bit nhị phân để biểu diễn số nguyên không dấu. Hỏi giá trị số nguyên lớn nhất có thể là bao nhiêu?,217
+3ee160b3-1dd8-43c6-b6a3-45a4bcb377bb,chuong-2,0.75,don-vi-thong-tin,"Trong các giá trị thể hiện kích thước file như sau, giá trị nào nhỏ nhất?",218
+00da7521-7647-4e8f-8617-148399364515,chuong-2,0.40,don-vi-thong-tin,"Trong các giá trị thể hiện kích thước file như sau, giá trị nào lớn nhất?",219
+e0702b8b-d2f9-4728-8293-60bbccd5f8d0,chuong-2,0.72,don-vi-thong-tin,Một Gigabyte bằng?,220
+280eb986-7a7d-44f9-8bfe-1ef3736711cb,chuong-2,0.49,don-vi-thong-tin,Bit là gì?,221
+67e5df4d-6f17-4af1-8131-c608646c4283,chuong-2,0.76,don-vi-thong-tin,Cần bao nhiêu khối nhớ 8KB để có được dung lượng 1MB,222
+0ade7a16-bfde-4676-ad9f-cbfa0dc65fd5,chuong-2,0.46,he-dem-co-so-r,Một số nhị phân 36 bit nếu biểu diễn trong hệ cơ số 16 sẽ có tối đa là bao nhiêu chữ số?,223
+a5c7604b-3298-4f8c-96f4-2182690da645,chuong-2,0.67,he-dem-co-so-r,Một số nhị phân 32 bit nếu biểu diễn trong hệ cơ số 8 sẽ có tối đa là bao nhiêu chữ số?,224
+8c2ac09e-de3f-4019-a346-2adfe9b54798,chuong-2,0.69,he-dem-co-so-r,Số thập phân 127.625 trong hệ thập lục phân được biểu diễn là?,225
+f4c95a51-79d1-44e8-a202-80c1bac34403,chuong-2,0.21,bo-xu-li,Thành phần nào trong CPU đảm nhận việc thực hiện các phép xử lí dữ liệu?,226
+feb3eed9-f48c-42ea-b1bc-6a699e80bc6a,chuong-2,0.35,so-nguyen,Số nguyên -47 được biểu diễn dưới dạng số nhị phân 8 bit là?,227
+8c41f795-871e-46ad-9322-5b7700bbdc7e,chuong-2,0.34,bieu-dien-ki-tu,Bảng mã kí tự Unicode là gì?,228
+347f4e2a-ad1a-4d82-b94b-fce17d0f52d4,chuong-2,0.79,he-dem-co-so-r,"Để biểu diễn cùng một giá trị, trong các hệ đếm sau, hệ đếm nào sử dụng nhiều chữ số nhất?",229
+8170dba6-add2-4bce-a03c-afc04cf2f748,chuong-2,0.57,he-dem-co-so-r,Số thập phân 19.75 trong hệ nhị phân được biểu diễn là?,230
+6ddc67a4-b1f0-409d-8fcd-9189e6594881,chuong-3,0.43,cong-thuc-ham,"Trong Microsoft Excel, chọn kết quả đúng nhất: =LEFT(“Thanh pho Da Nang”, 7) sẽ trả về:",231
+1681a7a9-f3ec-4124-a8f2-3a2b07186e1e,chuong-3,0.50,he-dieu-hanh,Làm cách nào để xem thuộc tính của một thư mục?,232
+bf03eb46-9a76-4234-a6fa-aef30d1825a6,chuong-3,0.82,office,"Trong Microsoft Word (2013, 2016, 2019), muốn tạo liên kết trong văn bản ta chọn chức năng nào?",233
+e7899ec5-4974-4921-ad3f-a52e422c7aef,chuong-2,0.61,he-dem-co-so-r,Số thập lục phân A74 có biểu diễn trong hệ cơ số 8 là?,234
+411066fb-505e-4721-af1c-980a20e59482,chuong-2,0.67,he-dem-co-so-r,Số bát phân 765 có biểu diễn trong hệ đếm cơ số 16 là?,235
+4f28fc32-d769-4311-acfc-30cbdf9cd7ab,chuong-2,0.66,he-dem-co-so-r,Số nhị phân 110011.01 có biểu diễn trong hệ đếm cơ số 16 là?,236
+6ebdeac8-9b69-4a7a-8c29-15de859de2d9,chuong-2,0.44,bieu-dien-ki-tu,Phát biểu nào sau đây SAI về bộ mã ASCII?,237
+2766aad8-afc0-41f1-8115-c7e0674cc946,chuong-2,0.56,he-dem-co-so-r,Số nhị phân 11001.01001 có biểu diễn trong hệ cơ số 8 là?,238
+39422fe4-5874-4af2-98cd-c9a3cfbd9a6d,chuong-2,0.47,so-thuc,Theo chuẩn IEEE 754/85 với cách biểu diễn số thực độ chính xác kép dùng 64 bit thì số bit dùng để biểu diễn phần mã lệch (e) sẽ là:,239
+ba3e1b80-757b-4526-b91b-3e71fdb70ea2,chuong-2,0.47,so-thuc,Theo chuẩn IEEE 754/85 với cách biểu diễn số thực độ chính xác đơn dùng 32 bit thì số bit dùng để biểu diễn phần mã lệch (e) sẽ là:,240
+a896384d-80fd-42c0-93b2-40d1bf7666d7,chuong-2,0.78,he-dem-co-so-r,Một số nguyên biểu diễn ở hệ 8 là 465 hỏi giá trị ở hệ 10 là bao nhiêu?,241
+9b1ef299-9b01-4cf9-8e31-0904a44fa6b5,chuong-2,0.92,he-dem-co-so-r,Số thập lục phân FC2 có biểu diễn trong hệ cơ số 8 là?,242
+1de144f0-43a2-41d5-b771-6acae0f790f0,chuong-2,0.62,he-dem-co-so-r,Số nhị phân 11110001.1101 có biểu diễn trong hệ cơ số 16 là?,243
+ebbd60cd-8ce0-404c-8d54-a62e3ff1e037,chuong-2,0.62,so-nguyen,"Xét n=4bit, A=0110 thì số bù 2 của A là",244
+2b3633d1-407f-4170-a1d7-d1458d09196a,chuong-2,0.70,so-nguyen,Xác định giá trị của số nguyên có dấu 8 bit:11010010,245
+95e2950d-1298-472c-a39d-e08e7bf32fe1,chuong-2,0.66,bo-xu-li,Kết quả của biểu thức 10010110 XOR 01101001 là bao nhiêu?,246
+60d17ecc-7981-4b26-b442-767c893ca446,chuong-2,0.45,he-dem-co-so-r,Số nhị phân 1010101.011 trong hệ thập phân có giá trị bằng bao nhiêu?,247
+6ede5e79-3274-4c2a-b3a5-622aa54e4f49,chuong-2,0.50,so-nguyen,"Cho hai giá trị A=+95, B=+43 được biểu diễn dưới dạng số nguyên có dấu 8 bit trong máy tính. Kết quả của  phép toán A+B mà máy tính thực hiện được
+bao nhiêu?",248
+e58c3bb4-1e0f-4cee-8310-84e9430207fe,chuong-2,0.61,he-dem-co-so-r,Một số nguyên biểu diễn ở hệ 8 là 2031 hỏi giá trị ở hệ 10 là bao nhiêu?,249
+159637ca-e334-4c9b-a4bc-0feb6360ae9e,chuong-2,0.53,so-nguyen,Khi thực hiện phép chia hai số nguyên có dấu trong máy tính. Sau khi chuyển số bị chia và số chia thành dương thực hiện phép chia. Trường hợp nào phải đảo lại dấu của cả thương và số dư?,250
+71787b49-ece2-48c0-a6f1-437c34618252,chuong-2,0.74,bo-xu-li,Kết quả của biểu thức 10010110 AND 01101001 là bao nhiêu?,251
+d03f6c9e-da6d-4fdb-8dd8-b9bb242a053b,chuong-2,0.79,he-dem-co-so-r,Tính giá trị biểu thức sau trong hệ nhị phân 100011 / 101=?,252
+15694eef-3de7-46de-a486-e3bcaa98d252,chuong-2,0.55,don-vi-thong-tin,BIT là viết tắt của cụm từ nào?,253
+f1061096-3233-4b60-a995-cf881ff00e88,chuong-2,0.42,so-nguyen,Phát biểu nào sau đây là đúng khi thực hiện phép nhân 2 số nguyên có dấu trong máy tính?,254
+c13db087-4500-4afd-b99c-f9e7a8ec2db1,chuong-2,0.84,so-nguyen,Với n=8bit thì giải giá trị nằm tron khoảng nào,255
+3527a9d0-4f68-4220-8e7f-5981330cb08b,chuong-2,0.71,so-nguyen,Dùng 11 bit để biểu diễn số nguyên có dấu thì dải biểu diễn sẽ là:,256
+1cde133e-fc75-4e33-bd9b-d5a4a416f0a0,chuong-2,0.85,bo-xu-li,CPU bao gồm,257
+bf179344-4ff6-413b-94d1-c85c5c3cadf0,chuong-2,0.59,bo-xu-li,"Giải mã các lệnh, tạo ra các tín hiệu điều khiển công việc là nhiệm vụ cảu khối nào",258
+eb0b701d-5a51-465d-8b7b-7fb9fe7c8b50,chuong-2,0.32,bo-nho,Bộ nhớ chính được làm bởi,259
+056e2c8f-c6cd-447c-8394-7f8c4e15decf,chuong-2,0.49,bo-nho,Bộ nhớ Cache sử dụng,260
+0a09b85b-dcc8-48e6-be9d-d5d4099621f4,chuong-2,0.55,bo-nho,Thông tin trong ROM có bị mất đi khi máy tính ngừng hoạt động hay không ,261
+5bacd4c7-0234-499d-88d4-c1533b9daa0b,chuong-2,0.60,bo-nho,Thông tin trong RAM có bị mất đi khi máy tính ngừng hoạt động hay không ,262
+40b4094e-321e-4d7c-a0d0-894d29d467c8,chuong-2,0.67,he-thong-may-tinh,Các chức năng của hệ thống máy tính,263
+4de947ea-dff7-4cdd-bb33-db6992c27e78,chuong-2,0.46,so-nguyen,Với n=16bit thì dải giá trị dương nằm trong khoảng nào,264
+16e9cf5a-6aae-4b3c-87ae-4fdadb69f2c4,chuong-2,0.42,he-dem-co-so-r,"Để biểu diễn cùng một giá trị, trong các hệ đếm sau, hệ đếm nào sử dụng ít chữ số nhất?",265
+a3017571-7cb1-4bb7-b5e4-a70574cfc20c,chuong-2,0.47,bieu-dien-ki-tu,Bộ mã ASCII dùng các loại kí tự,266
+b50d8dc6-a158-4701-bb9f-6f6bed0c5f4c,chuong-2,0.67,bieu-dien-ki-tu,Bộ mã Unicode dùng bao nhiêu bit để mã hoá cho 1 kí tự,267
+7e83e62a-785c-44bc-a1bc-8aacab13b026,chuong-2,0.70,bo-nho,Bộ nhớ ngoài có,268
+47c4f163-14fe-428f-8b47-96526136ca04,chuong-2,0.52,bieu-dien-ki-tu,Nguyên tắc chung của biểu diễn kí tự,269
+7295ace0-abfa-459f-b0cd-65fd185dd58d,chuong-2,0.61,bieu-dien-ki-tu,Bộ mã ASCII dùng bao nhiêu bit để mã hoá cho 1 kí tự,270
+1bc53afe-081f-4d69-8a43-9670b2e033ca,chuong-2,0.46,so-thuc,Biểu diễn số thực -27.0625 về dạng số dấu chấm động theo chuẩn IEE 754 dạng 32 bit,271
+52b6f134-f825-4fce-901f-ba30eb59112d,chuong-2,0.63,bo-xu-li,Tăng tốc độ trao đổi thông tin trong máy tính là chức năng của khối nào?,272
+9df51d24-4ee0-4317-a11c-45f9b4cae3d4,chuong-2,0.52,so-thuc,Xác định giá trị thập phân của số thực X được biểu diễn dưới dạng nhị phân theo chuẩn IEEE 754 dạng 32 bit như sau:0011 1111 1000 0000 0000 0000 0000 0000,273
+92e54122-fa5a-4c08-b65f-c7213d116155,chuong-2,0.74,so-thuc,Biểu diễn số thực 0.75 về dạng số dấu chấm động theo chuẩn IEE 754 dạng 32 bit,274
+9d9e4d9f-9c40-47b9-9f18-a0720eec6199,chuong-2,0.61,so-thuc,Biểu diễn số thực 9.6875 về dạng số dấu chấm động theo chuẩn IEE 754 dạng 32 bit,275
+ca0cc53f-dd37-4ed3-a348-5b2270fba4a9,chuong-2,0.55,so-thuc,Chuẩn IEEE 754/85 có dạng cơ bản là,276
+8647e6ee-7761-442e-93c5-e8c9929bb8f7,chuong-2,0.46,so-thuc,Số thực biểu diễn gồm 3 phần là,277
+8223f3a4-fa98-4c20-97d8-a840ad50ea08,chuong-2,0.70,so-thuc,Xác định giá trị thập phân của số thực X được biểu diễn dưới dạng nhị phân theo chuẩn IEEE 754 dạng 32 bit như sau:1100 0001 0101 0110 0000 0000 0000 0000,278
+51c9fe77-49e5-4db4-a641-bb515f3e9034,chuong-2,0.83,so-nguyen,"Xét n=4bit, A=0110 thì số bù 1 của A là",279
+b54e316c-4641-4c3f-8bbe-643065dcf153,chuong-2,0.56,so-thuc,Để biểu diễn số thực trong máy tính ta dùng,280
+b2056962-d268-47cb-b781-5afde51ce2ae,chuong-2,0.51,so-nguyen,Với n=16bit thì dải giá trị nằm trong khoảng nào,281
+a2640219-3ca7-4fb5-9e4e-0adf48880d07,chuong-2,0.39,so-nguyen,Với n=8bit thì dải giá trị dương nằm trong khoảng nào,282
+5b10b897-0ad7-436c-8cbf-f4f8a67234d4,chuong-2,0.67,he-dem-co-so-r,Các hệ thống số khác nhau sẽ khác nhau ở?,283
+10a7e3c5-b993-4afc-bff8-c64e78d147ec,chuong-2,0.37,he-thong-may-tinh,Hệ thống máy tính gồm mấy phần,284
+eff4c4a5-5c47-4cb1-a0cc-c33ecccdc76f,chuong-2,0.67,he-dem-co-so-r,Số thập phân 127.625 trong hệ nhị phân được biểu diễn là?,285
+b9dcf8ed-ab64-4ac8-99ca-d79bdd2cfcc0,chuong-2,0.39,he-dem-co-so-r,Hệ đếm cơ sở b (b>=2 và nguyên dương) sử dụng bao nhiêu chữ số?,286
+9ee22d37-399e-4186-b902-40244d33f959,chuong-2,0.64,he-dem-co-so-r,Một số nguyên biểu diễn ở hệ 16 là 3F5 hỏi giá trị ở hệ 10 là bao nhiêu?,287
+20f60527-65f0-4cdc-9f4a-7e1da407d6e0,chuong-2,0.62,he-dem-co-so-r,Tại sao lại sử dụng hệ đếm Hexa trong tin học?,288
+080bcbdb-032b-42b4-99c6-317c1c4e0898,chuong-2,0.74,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:110101101 or 011010101,289
+caab43b1-f3be-42c6-9958-c4b4e2e303a5,chuong-2,0.44,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:110101101 and 011010101,290
+14775827-8458-41c4-aa43-b104ddeca329,chuong-2,1.00,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:11011011 - 1011011,291
+dd65b784-7511-45a1-aa7e-415d2393d268,chuong-2,0.62,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:1011110 + 1111111,292
+d18c57eb-2f28-4334-8239-4a80afe58d3a,chuong-2,0.67,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:1101101 + 1001011,293
+41d6911d-ab5f-444b-bf41-4af253c638c3,chuong-2,0.84,he-dem-co-so-r,1 kilobyte bằng bao nhiêu byte,294
+f54ed570-cab9-48cb-8cae-98dc11efa5a8,chuong-2,0.64,don-vi-thong-tin,Đơn vị nhỏ nhất biểu diễn thông tin là,295
+3e963277-242a-4432-9a84-10119e08fc53,chuong-2,0.71,don-vi-thong-tin,"Mảng,tập hợp, xâu, bản ghi thuộc dạng dữ liệu nào sau đây",296
+d6fb1223-c441-471f-9dc6-0d8d44bcf15e,chuong-2,0.69,nguyen-tac-chung-bieu-dien-du-lieu,"Số nguyên, số thực, kí tự thuôc kiểu dữ liệu nào sau đây",297
+73e0a44f-fdcd-4923-95c0-1147851b0324,chuong-2,0.53,nguyen-tac-chung-bieu-dien-du-lieu,Dữ liệu được chia làm 2 loại là,298
+045d7fbb-0f58-4d31-9c95-3ec68f1b61d2,chuong-2,0.68,nguyen-tac-chung-bieu-dien-du-lieu,Dữ liệu dạng số được mã hoá theo cách nào sau đây,299
+a657e3f1-b814-4483-96d3-bf070732258d,chuong-2,0.72,nguyen-tac-chung-bieu-dien-du-lieu,Để đưa dữ liệu vào máy thì dữ liệu cần phải ở dạng nào,300
+b4ce5001-3703-4528-ac69-ffa56aaf78dd,chuong-2,0.56,nguyen-tac-chung-bieu-dien-du-lieu,Chuyển số 11001011010.1011 từ hệ nhị phân sang hệ bát phân,301
+748a035b-edfd-4593-a1f0-70533f6a2733,chuong-2,0.92,so-nguyen,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:110101101 xor 011010101,302
+8fe9a3b0-106f-4ac7-b04a-199638bb7497,chuong-2,0.66,he-dem-co-so-r,Thực hiện phép tính sau rồi đổi kết quả ra hệ thập phân:110110 x 100,303
+953f7b5e-6ad9-4f1f-8503-a5849cda26aa,chuong-2,0.46,he-dem-co-so-r,Chuyển số 43BE từ hệ thập lục phân sang hệ bát phân,304
+6b68cccf-6d9c-4ec8-bbfe-b77d9063499a,chuong-2,0.71,he-dem-co-so-r,Chuyển số 43BE từ hệ thập lục phân sang hệ thập phân,305
+e2116fc6-600a-41ad-9061-17f372772433,chuong-2,0.78,he-dem-co-so-r,Chuyển số 0011101101011101.01101010 từ hệ nhị phân sang hệ thập lục phân,306
+1ed4a9db-2f0c-4fd8-a848-dcec05c32749,chuong-2,0.79,he-dem-co-so-r,Chuyển số 3428 từ hệ thập phân sang hệ thập lục phân,307
+99b0c7dd-8625-4104-ba0b-43cb82499e7f,chuong-2,0.82,he-dem-co-so-r,Chuyển số 1101011 từ hệ nhị phân sang hệ thập lục phân,308
+eb20899f-13cb-4429-81dd-a4a56af5c88a,chuong-2,0.93,he-dem-co-so-r,Chuyển số 1764 từ hệ thập phân sang hệ thập lục phân,309
+f28d5e19-d743-4c90-9dd8-8567e37dd5a9,chuong-2,0.57,he-dem-co-so-r,Chuyển số 56 từ hệ bát phân sang hệ nhị phân,310
+77edb6ba-9dd9-40b3-a942-c25b81ba2a67,chuong-2,0.73,he-dem-co-so-r,Chuyển số 56 từ hệ thập phân sang hệ bát phân,311
+943fd385-9edc-4d70-9840-aace650b375b,chuong-2,0.52,he-dem-co-so-r,Chuyển số 167 từ hệ bát phân sang hệ nhị phân,312
+88fbb386-dbe8-4b44-83a1-44bf25b0edc3,chuong-2,0.95,he-dem-co-so-r,Chuyển số 167 từ hệ thập phân sang hệ bát phân,313
+72805390-821a-4873-a17a-a0b06307c779,chuong-2,0.72,he-dem-co-so-r,Chuyển số 167 từ hệ thập phân sang hệ nhị phân,314
+30cd83bc-4aca-49cc-933a-474b3bca4a21,chuong-2,0.58,nguyen-tac-chung-bieu-dien-du-lieu,Dữ liệu dạng kí tự được mã hoá theo cách nào sau đây,315
+b1cddc5d-6a3a-49c6-b593-020f94b2befd,chuong-2,0.64,he-dem-co-so-r,Chuyển số 56 từ hệ thập phân sang hệ nhị phân,316
+fcdffec7-6fdf-45a8-a155-63dfa2168649,chuong-2,0.67,he-dem-co-so-r,Chuyển số 10110110 từ hệ nhị phân sang hệ thập phân,317
+40848b3a-015a-4c64-8e9d-5cd218726386,chuong-2,0.69,he-dem-co-so-r,Chuyển số 101101 từ hệ nhị phân sang hệ thập phân,318
+186cfc30-4a44-4499-a660-9ac5df383f14,chuong-2,0.76,he-dem-co-so-r,Trọng số là gì,319
+5e334e6c-aec7-4470-9a83-5be4bb26dc63,chuong-2,0.43,nguyen-tac-chung-bieu-dien-du-lieu,"Dữ liệu dạng âm thanh, hình ảnh được mã hoá theo cách nào sau đây",320
+529ac53a-88f7-47f8-b24f-37ea2205218f,chuong-2,0.27,he-dem-co-so-r,Hệ đếm là gì,321
+5d4785b2-7391-4ed7-96b9-31e66f529ed3,chuong-2,0.71,he-dem-co-so-r,Hệ đếm cơ số 10 sử dụng bao nhiêu chữ số,322
+2c8b7305-aa16-4fc9-a2cb-2b0f46910517,chuong-2,0.73,nguyen-tac-chung-bieu-dien-du-lieu,Quy tắc tính giá trị của hệ đếm có số 10,323
+ea548305-a5f2-4ff5-bf08-5d07fe556800,chuong-1,0.48,giai-quyet-bai-toan-tren-mtdt,Phương pháp giải quyết bài toán gồm,324
+b96b0f67-56ba-49b6-a619-69c7f770ef3e,chuong-1,0.24,giai-quyet-bai-toan-tren-mtdt,Khối thoi là khối,325
+43d9a5e4-ffb4-4224-8110-648902976486,chuong-1,0.35,giai-quyet-bai-toan-tren-mtdt,Khối chữ nhật là khối,326
+eea587d1-9998-43b9-b1a8-e47a7b22c3cb,chuong-1,0.50,giai-quyet-bai-toan-tren-mtdt,Khối elip là khối,327
+0bbf0a0b-e6c8-45e9-a242-0d250a6e086d,chuong-1,0.38,giai-quyet-bai-toan-tren-mtdt,Cách biểu diễn nào rõ chức năng khác nhau của các câu lệnh cũng như đem lại cái nhìn dễ hiểu nhất cho người sử dụng,328
+86b4b5d1-110e-4b57-990a-1f4a608ea141,chuong-1,0.40,may-tinh-dien-tu,Thế hệ 2 máy tính có tốc độ tính khoảng bao nhiêu trên giây,329
+ce207116-5777-4e8b-a86d-11fd6483a4d4,chuong-1,0.33,giai-quyet-bai-toan-tren-mtdt,Tính chất của thuật toán bao gồm,330
+96a75562-c998-48d9-817a-c34488112a4f,chuong-1,0.40,giai-quyet-bai-toan-tren-mtdt,Thuật toán là gì,331
+c5550807-c335-4094-8195-11fd9737dd9a,chuong-2,0.58,nguyen-tac-chung-bieu-dien-du-lieu,Quy tắc tính giá trị của hệ đếm cơ số 10,332
+0cfd0f1b-9317-478d-8e30-1d0bdca2453f,chuong-1,0.40,giai-quyet-bai-toan-tren-mtdt,Quy trình giải bài toán theo cách tiếp cận phần mềm gồm các bước,333
+3b545f7e-0fb9-4750-bc63-68859a1c3730,chuong-1,0.21,mang-may-tinh,Mô hình IOS gồm bao nhiêu tầng,334
+8c10f19a-bfbf-4d34-b85f-52cdd59a6c04,chuong-1,0.36,giai-quyet-bai-toan-tren-mtdt,Tính chất của thuật toán bao gồm,335
+a8137789-6f8b-4fb6-86fe-08139c362b6e,chuong-1,0.31,mang-may-tinh,Đường truyền vật lí có thể là,336
+003f6222-929d-44d5-8832-ec4e4733ca16,chuong-1,0.25,may-tinh-dien-tu,Thế hệ 3 máy tính có tốc độ tính khoảng bao nhiêu trên giây,337
+a1eab13c-6630-4172-8ff5-ccf3802682c6,chuong-1,0.17,may-tinh-dien-tu,Thế hệ 4 máy tính có tốc độ tính khoảng bao nhiêu trên giây,338
+39c9470f-2f16-4a1c-829f-880a14379b6a,chuong-1,0.22,giai-quyet-bai-toan-tren-mtdt,"1:xác định bài toán, 2:Lựa chọn phương pháp, 3:xây dựng giải thuật, 4:xây dựng chương trình, 5:thực hiện chương trình, 6:Hiệu chỉnh chương trình. Hãy sắp xếp theo thứ tự đúng của quy trình giải quyết bài toán bằng máy tính",339
+db18c9e3-be86-44fc-b6cd-27a1ff0699b1,chuong-1,0.29,mang-may-tinh,Các thiết bị mạng bao gồm,340
+97f74f8d-aaa9-4ce0-89ea-788981c8d597,chuong-1,0.38,mang-may-tinh,Mạng đô thị thuộc loại mạng,341
+c448493b-1a75-48ed-b273-dd0f264fdd01,chuong-1,0.39,mang-may-tinh,Việt Nam kết nối internet năm bao nhiêu,342
+7e80b434-2cdf-4a4c-b8bb-e0a9a97c909e,chuong-1,0.25,giai-quyet-bai-toan-tren-mtdt,Quy trình giải quyết bài toán bằng máy tính gồm những giai đoạn nào,343
+3c22d010-60c4-4c84-ba34-6eb342aa451d,chuong-1,0.50,giai-quyet-bai-toan-tren-mtdt,Tính chất của thuật toán bao gồm,344
+5f57b593-2990-4fb4-814b-369f6cfb0a42,chuong-1,0.40,giai-quyet-bai-toan-tren-mtdt,Các cách biểu diễn thuật toán,345
+76cee16c-cffb-4dce-a2b2-94a0ae2f87c3,chuong-1,0.22,mang-may-tinh,Mạng tổng cục thuế thuộc loại mạng,346
+33452c11-12cb-44ba-8f62-dcdb804f12fe,chuong-1,0.22,mang-may-tinh,Giao thức là gì,347
+844b8bde-564b-422c-9e86-c49a64834411,chuong-1,0.41,mang-may-tinh,Phân loại mạng theo cách thức kết nối mạng bao gồm,348
+de639fc2-f4b5-4843-a95b-b6e3d5da4e66,chuong-1,0.53,mang-may-tinh,Khái niệm về internet,349
+9210c176-0408-4259-afc3-02708283845d,chuong-1,0.32,may-tinh-dien-tu,Thế hệ 1 máy tính có tốc độ tính khoảng bao nhiêu trên giây,350
+4b5b03ec-aa4c-4e46-9648-87e79e84b397,chuong-1,0.42,giai-quyet-bai-toan-tren-mtdt,Khối bình hành là khối,351
+79f1fc83-d117-44dc-ab1c-6c1d7c02304b,chuong-1,0.24,mang-may-tinh,Mạng internet thuộc loại mạng,352
+a2371501-76ce-4e6c-a83a-71747a84995e,chuong-1,0.20,mang-may-tinh,Khái niệm internet xuất hiện năm bao nhiêu,353
+4e567cd5-c017-48e1-9e9d-6f3350a90db3,chuong-1,0.50,mang-may-tinh,Mạng tại trường học thuộc loại mạng,354
+e645cf2b-f67a-460b-b60e-d91157886aff,chuong-1,0.25,mang-may-tinh,Phân loại mạng máy tính theo mối quan hệ giữa các máy gồm,355
+8777e82a-6657-4bd2-af31-56f0277d134d,chuong-1,0.31,mang-may-tinh,Phân loại máy tính theo quy mô địa lí được sắp xếp theo sự tăng dần quy mô là,356
+3b6fd0b3-414b-464e-83f1-404d78be26c9,chuong-1,0.26,mang-may-tinh,Mạng máy tính bắt đầu xuất hiện vào thời gian nào,357
+bc730322-78a1-40ca-a4c2-397545a346c3,chuong-1,0.24,phan-cung-phan-mem,Giao diện người dùng gồm có,358
+2982d21f-18d1-4298-aa7d-9f5ab09b064f,chuong-1,0.20,phan-cung-phan-mem,Máy tính chỉ tương tác với bạn khi đã cài,359
+ec39f0c1-43e9-4594-af9c-f6bd1001513b,chuong-1,0.39,may-tinh-dien-tu,Thế hệ 3 có sự ra đời của,360
+19c527bf-01d9-46d2-86c8-1ab115a070d3,chuong-1,0.46,mang-may-tinh,Mạng máy tính là,361
+2933d601-19c5-41b2-9a30-c88ce7969bd4,chuong-1,0.10,phan-cung-phan-mem,Chức năng của hệ điều hành bao gồm,362
+fefea535-a4fd-4345-9fe1-f1ff0c7b9d63,chuong-1,0.36,phan-cung-phan-mem,Phần mềm ứng dụng là,363
+099d1acf-9cd7-4766-9610-0744c4d7e042,chuong-1,0.40,cong-nghe-thong-tin,Truyền thông là,364
+8014b0ab-61ef-4226-9fc0-b2333fe96dc0,chuong-1,0.42,phan-cung-phan-mem,Phân loại phần mềm dựa trên quan điểm người sử dụng gồm,365
+f3512cef-3b1e-4933-be3d-7fc392628132,chuong-1,0.32,cong-nghe-thong-tin,Các lĩnh vực nghiên cứu của tin học,366
+1ec74d39-ae78-4e6f-b162-371524914805,chuong-1,0.38,cong-nghe-thong-tin,"Nghiên cứu thiết kế, triển khai phần mềm, tìm ra cách thức mới sử dụng máy tính, phát triển cách thức giải quyết vấn đề của máy tính một cách hiệu quả là hoạt động của lĩnh cực nghiên cứu nào của tin học",367
+0e828da6-faf2-4b31-8776-96b937b6eb28,chuong-1,0.30,cong-nghe-thong-tin,Tin học hoá được hiểu là,368
+b1a597c0-5893-4bfc-8d4a-a892a2539c3c,chuong-1,0.17,cong-nghe-thong-tin,Tin học nhằm phục vụ nhu cầu,369
+5e58f0f4-80cb-4911-b1b7-87900235970a,chuong-1,0.38,may-tinh-dien-tu,Máy tính nhúng,370
+1d9b602c-387d-42a2-a4be-f9c8bb96fd7e,chuong-1,0.21,may-tinh-dien-tu,Phân loại máy tính điện tử theo khả năng sử dụng chung gồm,371
+0304f6be-0591-419e-a6cb-c10db2c1cbeb,chuong-1,0.36,cong-nghe-thong-tin,Tin học là môn khoa học nghiên cứu về,372
+c390672d-fe37-419a-b76c-5512f48fc970,chuong-1,0.44,may-tinh-dien-tu,"Máy tính nào phù hợp với nhiều đối tượng sử dụng, sử dụng nhiều trong công nghiệp và giải trí",373
+4c25de1f-a2b6-494d-825d-a2394fb59ded,chuong-1,0.29,may-tinh-dien-tu,Máy tính cá nhân và máy tính sách tay bắt đầu phổ biến vào thế hệ thứ mấy,374
+6a06aaec-ea46-4108-bf3f-4d9dad5d7958,chuong-1,0.25,phan-cung-phan-mem,Công nghệ tích hợp (IC),375
+d7999302-2eca-41af-98d9-59e9eb547842,chuong-1,0.23,may-tinh-dien-tu,Máy IBM - 360 hay EC được sản xuất ra trong thế hệ thứ mấy,376
+db413119-fd00-4a1f-b4f9-a4d9eb39813f,chuong-1,0.49,may-tinh-dien-tu,Xu hướng ngày nay trong việc lựa chọn máy tính,377
+890898fc-e9d5-44be-9d08-b064c69525f8,chuong-2,0.39,bieu-dien-ki-tu,Tiếng việt trong Unicode có thể có các dạng nào,378
+095bdf36-2545-4ae1-adf9-5f7d1bf23ec2,chuong-1,0.22,may-tinh-dien-tu,Máy tính đầu tiên sử dụng bóng bán dẫn gồm có bao nhiêu transistors,379
+724d1b3c-6b23-441b-b9bc-bbd0ee010643,chuong-1,0.27,phan-cung-phan-mem,Phần mềm hệ thống là,380
+4110e3d9-a979-449a-b50c-423c633caf5d,chuong-1,0.31,may-tinh-dien-tu,Máy tính có hệ điều hành đơn giản trong thế hệ thứ mấy,381
+4c72bb94-7b5a-475a-9193-32c0d6a1d09d,chuong-1,0.60,may-tinh-dien-tu,Thế hệ thứ 5 có sự ra đời của,382
+be3c8873-ba33-41b1-aa18-f1f0e151630a,chuong-1,0.49,may-tinh-dien-tu,Thế hệ 4 có sự ra đời của,383
+5601ee39-73da-44d7-a31d-82c3d84c254c,chuong-1,0.35,mang-may-tinh,Mục đích của mạng máy tính,384
+e9224a33-c282-458d-bfc9-8eb3379f21a8,chuong-2,0.51,nguyen-tac-chung-bieu-dien-du-lieu,Hình ảnh được biểu diễn theo những nguyên tắc nào,385
+d3f1f321-bab2-4a85-b955-17de41fa0ee9,chuong-1,0.37,may-tinh-dien-tu,Thế hệ 2 có sự ra đời của,386
+90823c64-ab44-474c-986d-85a8fbd39542,chuong-1,0.31,may-tinh-dien-tu,Máy tính điện tử,387
+34fd3b00-0870-48e4-93b5-4928cdc3377d,chuong-1,0.46,may-tinh-dien-tu,Thế hệ 1 có sự ra đời của,388
+4d6363a0-63fb-4e4f-b6f8-0e3d95e99065,chuong-1,0.21,thong-tin-xu-ly-thong-tin,Phân loại hệ thống thông tin theo mục đích phục vụ gồm mấy loại,389
+ac5ca95b-a01e-4a6d-b2ff-be83c1baaa7b,chuong-1,0.28,thong-tin-xu-ly-thong-tin,Hệ thống thông tin là gì,390
+d0fe8054-29bc-45c0-8d60-3f42eb01ae9a,chuong-1,0.52,thong-tin-xu-ly-thong-tin,Quy trình xử lí thông tin bao gồm các hoath động,391
+8ab15069-d04c-4bb3-b974-aa771e60efa7,chuong-1,0.30,thong-tin-xu-ly-thong-tin,"Vấn đề lưu trữ dữ liệu, thông tin phục vụ mục đích",392
+3c5f1c2a-811c-43cc-b3f1-a12b9e566470,chuong-1,0.33,thong-tin-xu-ly-thong-tin,Dữ liệu,393
+3c9fa869-dab9-4138-a54e-e139cc753e5b,chuong-1,0.54,thong-tin-xu-ly-thong-tin,Các phương pháp nhập dữ liệu phù hợp,394
+30f19582-de74-4ad6-933b-db9881ce7d27,chuong-1,0.31,thong-tin-xu-ly-thong-tin,Data là gì,395
+0e65953d-a745-45c8-9b70-bc88333a5ca5,chuong-1,0.43,thong-tin-xu-ly-thong-tin,"Khi tham gia giao thông, thấy tín hiệu đèn giao thông màu đỏ thì",396
+1f8f452c-d363-42f5-aac9-911c66770d66,chuong-1,0.40,thong-tin-xu-ly-thong-tin,Vật mang tin là gì,397
+bccfbb42-5d5d-4f64-87b2-5c7eb1a9748c,chuong-1,0.51,thong-tin-xu-ly-thong-tin,Thông tin là gì,398
+387da1b8-1c0a-4d11-8483-d2a72a52149c,chuong-1,0.54,thong-tin-xu-ly-thong-tin,Các đặc trưng của thông tin có giá trị,399
+3c6fda50-15b8-4943-94a9-afba7a54286f,chuong-1,0.51,thong-tin-xu-ly-thong-tin,Hãy xem một quyển sách,400
+31caf38c-075a-4efd-9e28-e3c618ba91d4,chuong-1,0.37,thong-tin-xu-ly-thong-tin,Thông tin có lợi ích như thế nào trong đời sống hàng ngày,401
+11611c3a-2972-4fe0-b2f9-286a856a3b27,chuong-1,0.15,thong-tin-xu-ly-thong-tin,Các thao tác xử lí dữ liệu,402
+1ffe55da-9813-4f2d-9ded-5605e0995463,chuong-1,0.37,may-tinh-dien-tu,Máy tính có các hệ điều hành đa chương trình trong thế hệ thứ mấy,403
+ffba9bbf-c51e-43f6-a0fe-cf0c79e6c1c9,chuong-1,0.34,may-tinh-dien-tu,Lịch sử phát triển máy tính điện tử bao gồm bao nhiêu thế hệ,404
+a6f20cec-1ff9-4898-b912-6a8a025f3734,chuong-1,0.51,may-tinh-dien-tu,Máy tính điện tử đầu tiên với công nghệ bóng chân không trong 1 giây thực hiện được bao nhiêu phép toán,405
+2125beac-69f0-4efd-ba8d-04ceecd15aed,chuong-1,0.34,cong-nghe-thong-tin,Nghiên cứu về thiết kế và chế tạo máy tính và các hệ thống dựa trên máy tính là hoạt động thuộc lĩnh vực nào của tin học,406
+ddcfd687-7283-4a3b-8794-54b95bb71804,chuong-1,0.46,mang-may-tinh,Mạng tại quán game thuộc loại mạng,407
+1164b65d-1cba-8192-afd9-f733bcd26a87,chuong-4,0.33,cac-phan-tu-co-ban,Thông tin nào quyết định kích thước vùng nhớ được cấp phát cho các biến trong Python?,408
+1164b65d-1cba-8129-8e10-e18263b63bf8,chuong-4,0.64,ham-nhap-xuat-du-lieu,Kí hiệu nào điều khiển việc xuống dòng khi in trong Python?,409
+1164b65d-1cba-81ed-8d58-d4e6e45e1d5e,chuong-4,0.55,cac-phan-tu-co-ban,Cho khai báo sau. Kết quả của biểu thức A= a*b +c sẽ có kiểu dữ liệu gì ?,410
+1164b65d-1cba-8138-a7ec-fd9fa5e4d30b,chuong-4,0.33,ham-nhap-xuat-du-lieu,Ngôn ngữ lập trình Python được Guido van Rossum giới thiệu lần đầu vào năm nào?,411
+1164b65d-1cba-8165-a948-c9ad0317e05f,chuong-4,0.55,cac-phan-tu-co-ban,Phạm vi biểu diễn của kiểu số nguyên (int) trong Python là:,412
+1164b65d-1cba-8137-8639-d9e13f0ba374,chuong-4,0.55,ham-nhap-xuat-du-lieu,Hàm nào cho phép nhập một chuỗi ký tự có chứa cả dấu cách trong Python?,413
+1164b65d-1cba-819e-88b2-e5d0172e5f4e,chuong-4,0.55,gioi-thieu-python,Chọn câu trả lời phù hợp nhất. Ngôn ngữ lập trình trong Python là:,414
+1164b65d-1cba-81b1-8334-eaea9bb5623f,chuong-4,0.33,cac-phan-tu-co-ban,Phạm vi giá trị của kiểu str (chuỗi) trong Python là:,415
+1164b65d-1cba-8106-a476-f834de0c0031,chuong-4,0.62,cac-phan-tu-co-ban,Cho khai báo sau. Lệnh nào sau đây sai trong Python?,416
+1164b65d-1cba-8190-a472-d25006d63230,chuong-4,0.33,cac-phan-tu-co-ban,Khai báo nào sau đây là sai trong Python?,417
+1164b65d-1cba-818f-96f9-c3211295e4a7,chuong-4,0.55,cac-phan-tu-co-ban,Đâu là kiểu dữ liệu dẫn xuất trong Python?,418
+1164b65d-1cba-81c9-9711-c890a7ae382f,chuong-4,0.64,cac-phan-tu-co-ban,"Trong các kiểu dữ liệu sau, đâu là kiểu có phạm vi biểu diễn lớn nhất trong Python?",419
+1164b65d-1cba-8158-be83-faea548fef53,chuong-4,0.55,toan-tu-bieu-thuc,Đoạn chương trình sau in ra kết quả là:,420
+1164b65d-1cba-815a-a54d-d14500569ffe,chuong-4,0.55,ham-nhap-xuat-du-lieu,"Đầu ra của đoạn chương trình sau là gì ?
+",421
+1164b65d-1cba-81ec-85fa-da3ec3cd4353,chuong-4,0.55,cac-phan-tu-co-ban,Đâu là một khai báo mảng 2 chiều đúng trong C ?,422
+1164b65d-1cba-8165-9072-eaddf41784c2,chuong-4,0.33,cac-phan-tu-co-ban, Lựa chọn nào dưới đây chỉ ra thứ tự tăng của miền giá trị các kiểu dữ liệu trong Python?,423
+1164b65d-1cba-8121-9b25-e6630e29d436,chuong-4,0.55,toan-tu-bieu-thuc,Đâu là ký hiệu của toán tử logic “and” trong Python?,424
+1164b65d-1cba-81a1-916a-c908a750fa9b,chuong-4,0.55,cau-truc-lap-trinh,Cho biết kết quả của chương trình sau:,425
+1164b65d-1cba-81af-af19-e12c13dbdf68,chuong-4,0.64,cau-truc-lap-trinh,Cho biết kết quả của chương trình sau:,426
+1164b65d-1cba-8112-bc88-d26e19b20529,chuong-4,0.55,toan-tu-bieu-thuc,Toán tử nào sau đây dùng để so sánh hai biến trong Python?,427
+1164b65d-1cba-8194-8514-d3c623fe41a6,chuong-4,0.55,cac-phan-tu-co-ban,Chọn cách khai báo biến đúng?,428
+1164b65d-1cba-8169-9db1-ec0265119acd,chuong-4,0.55,toan-tu-bieu-thuc,Cho biết kết quả của biểu thức : (5//3 + 1) % 4,429
+1164b65d-1cba-816c-9e56-e9508fc3c802,chuong-4,0.33,cau-truc-lap-trinh,Cho biết kết quả của chương trình sau:,430
+1164b65d-1cba-8114-9c8f-c963500865a6,chuong-4,0.55,ham-nhap-xuat-du-lieu,Hàm input() nằm trong thư viện nào trong Python?,431
+1164b65d-1cba-819a-bee6-f82f20011087,chuong-4,0.55,cac-phan-tu-co-ban,Hằng là đại lượng:,432
+1164b65d-1cba-81db-ace2-ef6180ad34bf,chuong-4,0.33,toan-tu-bieu-thuc,Kết quả của đoạn chương trình sau là:,433
+1164b65d-1cba-8171-b8de-eab610c77370,chuong-4,0.33,cac-phan-tu-co-ban,Từ khóa nào trong Python được sử dụng để khai báo hằng số?,434
+1164b65d-1cba-81ce-95a8-ea8f6a038b9d,chuong-4,0.64,cau-truc-lap-trinh,Dấu nào dùng để kết thúc phần lớn các câu lệnh trong Python?,435
+1164b65d-1cba-81aa-a820-d55c9240a823,chuong-4,0.55,cau-truc-lap-trinh,Giá trị của x được hiển thị trên màn hình là:,436
+1164b65d-1cba-8154-aaa4-ff41091b7ce7,chuong-4,0.55,ham-nhap-xuat-du-lieu,Hàm print() trong Python nằm trong thư viện nào?,437
+1164b65d-1cba-8186-9ac9-f2f3cd2092de,chuong-4,0.77,cac-phan-tu-co-ban,Chọn khai báo đúng cho mảng A gồm 20 số nguyên trong Python?,438
+1164b65d-1cba-81c7-a1ba-e5069c252639,chuong-4,0.55,cau-truc-lap-trinh,Hãy cho biết giá trị của S sau khi thực hiện đoạn chương trình sau:,439
+1164b65d-1cba-8145-bacc-f040120a2047,chuong-4,0.55,cau-truc-lap-trinh,"Để thực hiện vòng lặp với N lần trong Python, cách viết nào sau đây là đúng?",440
+1164b65d-1cba-810d-b2bc-e24e5aa4c0f0,chuong-4,0.55,cac-phan-tu-co-ban,Đâu là khai báo hợp lệ trong Python?,441
+1164b65d-1cba-816f-88bf-df5862efadea,chuong-4,0.55,toan-tu-bieu-thuc,Đâu không phải toán tử logic hay quan hệ ?,442
+1164b65d-1cba-81e3-8647-c162f905cb9f,chuong-4,0.77,cac-phan-tu-co-ban,Cách khai báo nào sau đây là đúng ?,443
+1164b65d-1cba-81c7-ab76-d286f702c3fe,chuong-4,0.55,cac-phan-tu-co-ban,Chọn cách khai báo đúng ?,444
+1164b65d-1cba-81e8-8825-c5f1b0bee98e,chuong-4,0.77,ham-nhap-xuat-du-lieu,Đâu là output của đoạn chương trình sau:,445
+1164b65d-1cba-8114-a3bc-e3f044f7363a,chuong-4,0.55,toan-tu-bieu-thuc,Kết quả hiển thị của đoạn chương trình Python sau là gì?,446
+1164b65d-1cba-81a8-a45f-f9d6d0bf8115,chuong-4,0.55,cau-truc-lap-trinh,Cho đoạn chương trình sau. Kết quả thu được của đoạn chương trình là:,447
+1164b65d-1cba-81ed-be7e-dbcb3b69dc5b,chuong-4,0.55,cau-truc-lap-trinh,Kết quả của đoạn chương trình dưới đây là:,448
+1164b65d-1cba-81e4-a977-db35aaa96f5b,chuong-4,0.64,cac-phan-tu-co-ban,Khai báo nào sau đây là đúng?,449
+1164b65d-1cba-8140-a59c-c5b923f6c20b,chuong-4,0.64,toan-tu-bieu-thuc,Kết quả nhận được khi thực hiện đoạn chương trình sau là:,450
+1164b65d-1cba-813a-b210-d433e833f81f,chuong-4,0.33,cau-truc-lap-trinh,Cho chương trình sau. Kết quả nhận được trên màn hình là:,451
+1164b65d-1cba-81dd-8591-c3539af5963b,chuong-4,0.55,cau-truc-lap-trinh,Cho đoạn chương trình sau. Đoạn chương trình trên hiển thị kết quả là:,452
+1164b65d-1cba-8146-96dd-e589abbeca79,chuong-4,0.55,cau-truc-lap-trinh,Cặp dấu dùng để mở đầu và kết thúc một khối lệnh trong Python là:,453
+1164b65d-1cba-81ac-b02e-fc1fc4b56ad1,chuong-4,0.55,cau-truc-lap-trinh,Kết quả nhận được sau khi thực hiện đoạn chương trình sau là:,454
+1164b65d-1cba-818c-84ce-f2c4d856093f,chuong-4,0.64,cau-truc-lap-trinh,Cấu trúc chung của một chương trình Python bao gồm các phần nào sau đây?,455
+1164b65d-1cba-81d0-8a6a-fdf384312e74,chuong-4,0.64,cau-truc-lap-trinh,Đâu là cách viết chú thích đúng trong Python?,456
+1164b65d-1cba-818c-ae67-fcf9787f6c50,chuong-4,0.55,cau-truc-lap-trinh,Cho biết kết quả của đoạn chương trình sau:,457
+1164b65d-1cba-813b-b29e-d62fc670c3f3,chuong-4,0.55,cau-truc-lap-trinh,Cho đoạn chương trình sau. Kết quả của n sau khi thực hiện đoạn chương trình trên là:,458
+1164b65d-1cba-81dc-a72f-d63826c94b9e,chuong-4,0.62,cac-phan-tu-co-ban,Khai báo một mảng trong Python có thể được thực hiện như thế nào?,459
+1164b65d-1cba-81f9-8d6f-d15ca283b5a7,chuong-4,0.33,ham-nhap-xuat-du-lieu,Định dạng nào sau đâu có thể sử dụng để in số nguyên không dấu ?,460
+1164b65d-1cba-8116-8134-ea7c5e411756,chuong-4,0.55,cau-truc-lap-trinh,Cho đoạn chương trình sau. Kết quả của đoạn chương trình trên là:,461
+1164b65d-1cba-8178-8792-d9d5aaf94dce,chuong-4,0.64,cau-truc-lap-trinh,Cho đoạn chương trình sau. Kết quả của đoạn chương trình trên là:,462
+1164b65d-1cba-8174-b427-ebad61e45660,chuong-4,0.33,cau-truc-lap-trinh,Kết quả của đoạn chương trình trên là:,463
+1164b65d-1cba-8137-b99a-dbccf9e01c1f,chuong-4,0.55,toan-tu-bieu-thuc,Cho biểu thức A = not (0 and 1 or 1 and 0). Giá trị logic của A là:,464
+1164b65d-1cba-81ad-81d8-e8aee8c5b5ac,chuong-4,0.55,toan-tu-bieu-thuc,Toán tử ++i được hiểu là:,465
+1164b65d-1cba-8161-948f-f24cd47f1d6a,chuong-4,0.55,toan-tu-bieu-thuc,Kết quả của chương trình sau là gì?,466
+1164b65d-1cba-8125-b194-e71073336c91,chuong-4,0.64,toan-tu-bieu-thuc,Phép toán % có ý nghĩa gì ?,467
+1164b65d-1cba-81e3-b9c0-ca562f5e142c,chuong-4,0.55,ham-nhap-xuat-du-lieu,Hàm nào dưới đây để in một kí tự ra màn hình mà không cần mã định dạng?,468
+1164b65d-1cba-81eb-9c82-e5dd5779ea97,chuong-4,0.33,ham-nhap-xuat-du-lieu,Kết quả in ra màn hình của chương trình sau: ,469
+1164b65d-1cba-8184-a259-d31f8de00cfc,chuong-4,0.33,cau-truc-lap-trinh,Kết quả của chương trình sau là:,470
+1164b65d-1cba-81ed-a29c-cb0f58c8911e,chuong-4,0.77,ham-nhap-xuat-du-lieu,Tìm lỗi sai trong chương trình sau (in ra kết quả là tổng của 123 và 456),471
+1164b65d-1cba-819a-9312-ff4d707012f3,chuong-4,0.55,cac-phan-tu-co-ban,Lệnh khai báo biến nào sau đây trong Python là không đúng?,472
+1164b65d-1cba-819b-a87b-c17c02301607,chuong-4,0.55,toan-tu-bieu-thuc,Cho biểu thức: (-3 + 4 % 5 // 2). Kết quả in ra giá trị của biểu thức là:,473
+1164b65d-1cba-815f-8861-e9dad731f66b,chuong-4,0.55,cac-phan-tu-co-ban,Cú pháp nào sau đây là đúng trong Python?,474
+1164b65d-1cba-8193-b6a1-dcf12bb5d75e,chuong-4,0.33,cau-truc-lap-trinh,Kết quả của chương trình sau là gì?,475
+1164b65d-1cba-81af-ba71-c400748034f5,chuong-4,0.55,cau-truc-lap-trinh,Kết quả của chương trình sau là gì?,476
+1164b65d-1cba-8134-8633-ececf53f1a91,chuong-4,0.33,cau-truc-lap-trinh,Kết quả in ra màn hình của chương trình Python sau là gì?,477
+1164b65d-1cba-81a4-b547-e5a3b8e20ce9,chuong-4,0.62,ham-nhap-xuat-du-lieu,"Hàm nào trong Python đọc ký tự từ bàn phím ngay sau khi gõ, không chờ nhấn Enter và các ký tự có hiện ra màn hình?",478
+1164b65d-1cba-8153-a4c1-d6d510b0b920,chuong-4,0.55,cau-truc-lap-trinh,Kết quả nhận được sau khi thực hiện đoạn chương trình sau là gì?,479
+1164b65d-1cba-8151-9c22-c2932d286b32,chuong-4,0.55,toan-tu-bieu-thuc,Kết quả in ra màn hình của chương trình Python sau là gì?,480
+1164b65d-1cba-8171-b7a7-de9565698030,chuong-4,0.55,ham-nhap-xuat-du-lieu,Kết quả của chương trình Python sau là gì?,481
+1164b65d-1cba-810e-9920-df2584855570,chuong-4,0.55,ham-nhap-xuat-du-lieu,Kết quả in ra màn hình của đoạn chương trình Python sau là gì?,482
+1164b65d-1cba-81c2-bfb7-df91c9a3f0de,chuong-4,0.55,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra một xâu kí tự ?,483
+1164b65d-1cba-81b9-a983-fb5f2b5e4f30,chuong-4,0.77,toan-tu-bieu-thuc,Cho biết giá trị của biểu thức: (2 + 4 > 2) and (8 < 2),484
+1164b65d-1cba-81f2-9bdd-cebb4ac07762,chuong-4,0.55,toan-tu-bieu-thuc,Cho biết giá trị của biểu thức 10 >1 là gì ?,485
+1164b65d-1cba-8186-a646-e854b59964be,chuong-4,0.55,toan-tu-bieu-thuc,"Cho a, b là 2 biến thực. Biểu thức nào sau đây là sai ?",486
+1164b65d-1cba-819f-a6e2-c83c2a098688,chuong-4,0.55,toan-tu-bieu-thuc,Phép toán / có ý nghĩa gì?,487
+1164b65d-1cba-81e3-ab2d-c2ca4870dcd0,chuong-4,0.55,cau-truc-lap-trinh,"Kết quả hiển thị của đoạn chương trình sau là gì ?
+",488
+1164b65d-1cba-8110-9f2a-f8c928c62ab6,chuong-4,0.64,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra số thực dạng mũ ?,489
+1164b65d-1cba-8153-a2be-d27fc2b884e6,chuong-4,0.64,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra một số nguyên ?,490
+1164b65d-1cba-814b-acb1-c8a050f3cae9,chuong-4,0.55,cac-phan-tu-co-ban,Cho khai báo dưới đây. Câu lệnh khai báo và khởi tạo trên có nghĩa là:,491
+1164b65d-1cba-8172-a751-e7109a4639ef,chuong-4,0.55,cac-phan-tu-co-ban,Với khai báo biến nào sau đây trong Python là đúng?,492
+1164b65d-1cba-8177-8f0d-efbebe402a92,chuong-4,0.77,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra số có kiểu long int ?,493
+1164b65d-1cba-8104-b2af-c128e3592c98,chuong-4,0.55,cac-phan-tu-co-ban,Đâu là kiểu dữ liệu cơ bản trong ngôn ngữ lập trình python,494
+1164b65d-1cba-813f-b629-c445783855d5,chuong-4,0.64,cac-phan-tu-co-ban,Tên biến nào dưới đây được đặt đúng theo quy tắc đặt tên của ngôn ngữ lập trình python?,495
+1164b65d-1cba-8162-a9fa-caca6b42b0ac,chuong-4,0.92,toan-tu-bieu-thuc,Cho biết kết quả của p sau khi thực hiện đoạn chương trình sau:,496
+1164b65d-1cba-8119-9284-cfb67aa10d7e,chuong-4,0.55,toan-tu-bieu-thuc,"Giả sử x, y là hai số thực. Biểu thức nào dưới đây viết không đúng theo cú pháp của ngôn ngữ lập trình Python?",497
+1164b65d-1cba-8130-b80c-d2cd8d2215c3,chuong-4,0.55,cau-truc-lap-trinh,Cho đoạn chương trình sau. Kết quả nhận được là:,498
+1164b65d-1cba-8127-ae19-e3c5f6aefe5b,chuong-4,0.64,cac-phan-tu-co-ban,Đâu không phải là kiểu dữ liệu đúng trong C?,499
+1164b65d-1cba-81f6-827c-c7a45fe5198f,chuong-4,0.55,gioi-thieu-python,Ngôn ngữ lập trình nào dưới đây là ngôn ngữ lập trình có cấu trúc?,500
+1164b65d-1cba-81ba-b5a3-e68115673d58,chuong-4,0.92,cac-phan-tu-co-ban,Cho khai báo: kt = 'A'. Biến kt sẽ chiếm bao nhiêu byte ?,501
+1164b65d-1cba-8192-a242-e01d25e2bc9d,chuong-4,0.64,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra một kí tự:,502
+1164b65d-1cba-81dc-b305-d078f5e25994,chuong-4,0.55,ham-nhap-xuat-du-lieu,Định dạng nào sau đây dùng để in ra số thực với độ chính xác đơn?,503
+1164b65d-1cba-81dd-911a-c2546a76ad11,chuong-4,0.33,ham-nhap-xuat-du-lieu,"Hàm nào trong Python để nhập một ký tự từ bàn phím ngay sau khi gõ, không chờ nhấn Enter và không hiện ký tự ra màn hình?",504
+1164b65d-1cba-8165-93e4-c5ad83afc837,chuong-4,0.55,gioi-thieu-python,Python được Guido van Rossum phát triển dựa trên ngôn ngữ lập trình nào?,505
+1164b65d-1cba-813a-ad52-e21d83fb79a3,chuong-4,0.64,toan-tu-bieu-thuc,Độ ưu tiên đối với các toán tử logic là:,506

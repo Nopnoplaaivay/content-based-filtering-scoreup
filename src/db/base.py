@@ -65,3 +65,14 @@ class Base:
             raise e
         finally:
             self.close()
+
+    def update_many(self, query, update):
+        try:
+            self.connect()
+            self.connection.update_many(query, update)
+            # LOGGER.info(f"Updated documents with query: {query}.")
+        except Exception as e:
+            LOGGER.error(f"Error updating documents: {e}")
+            raise e
+        finally:
+            self.close()

@@ -28,7 +28,6 @@ class Ratings(Base):
         '''
         try:
             ratings = self.fetch_all()
-            # LOGGER.info(f"Fetched {len(ratings)} ratings from the database.")
             ratings_df = pd.DataFrame(ratings)
             ratings_df = ratings_df.sort_values(by='updated_at', ascending=False)
             ratings_df = ratings_df.drop_duplicates(subset=['user_id', 'cluster'], keep='first')
@@ -37,8 +36,6 @@ class Ratings(Base):
 
             # Label encode user_id 
             user_ids = ratings_df['user_id'].unique()
-            
-            # Load existing user_map
             user_map_path = "src/tmp/users/user_map.json"
             if os.path.exists(user_map_path):
                 with open(user_map_path, "r") as f:
@@ -51,18 +48,18 @@ class Ratings(Base):
             else:
                 user_map = {}
 
-            users = Users()
-            for user_id in user_ids:
-                if user_id not in user_map:
-                    # print(user_id, type(user_id))
-                    user_info = users.fetch_user_info(user_id=user_id)
-                    LOGGER.info(f"CBF model available for new user: {user_info}")
+            # users = Users()
+            # for user_id in user_ids:
+            #     if user_id not in user_map:
+            #         # print(user_id, type(user_id))
+            #         user_info = users.fetch_user_info(user_id=user_id)
+            #         LOGGER.info(f"CBF model available for new user: {user_info}")
 
             user_map = {user_id: idx + 1 for idx, user_id in enumerate(user_ids)}
             ratings_df['user_id_encoded'] = ratings_df['user_id'].map(user_map)
             ratings_df = ratings_df.drop(columns=['user_id'])
-            ratings_df = ratings_df.rename(columns={'user_id_encoded': 'user_id'})
-            ratings_df = ratings_df[['user_id', 'cluster', 'rating']]
+            ratings_df = ratings_df.rename(columns={'user_id_encoded': 'user_id', 'cluster': 'item_id'})
+            ratings_df = ratings_df[['user_id', 'item_id', 'rating']]
             LOGGER.info(f"Generated training data with {ratings_df.shape[0]} entries.")
 
             # save user_map to a file

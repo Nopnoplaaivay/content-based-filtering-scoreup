@@ -5,32 +5,29 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
 from src.db import Ratings
-from src.modules.items_map import ItemsMap
+from src.modules.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 
 class CBFModel:
 
     def __init__(self):
-        self.feature_vectors = ItemsMap().get_features_vector()
         self.n_users = None
         self.rating_train = None
         self.rating_test = None
 
-    def save_weights(self):
+    def save_model(self):
         dir = 'src/tmp/weights'
         os.makedirs(dir, exist_ok=True)
         np.save('src/tmp/weights/content_based_model_weights.npy', self.Yhat)
 
-    def load_weights(self):
+    def load_model(self):
         try:
             self.Yhat = np.load('src/tmp/weights/content_based_model_weights.npy')
             LOGGER.info("Loaded weights successfully.")
         except Exception as e:
             LOGGER.error(f"Error loading weights: {e}")
-            ratings = Ratings()
-            ratings_df = ratings.get_training_data()
             LOGGER.info("Training model...")
-            self.train(ratings_df)
+            self.train()
 
     def train_test_split_data(self, ratings_df, test_size=0.2, random_state=42):
         rating_train = pd.DataFrame(columns=ratings_df.columns)
@@ -61,15 +58,19 @@ class CBFModel:
         # we need to +1 to user_id since in the rate_matrix, id starts from 1 
         # while index in python starts from 0
         ids = np.where(y == user_id)[0] 
-        clusters = rate_matrix[ids, 1]
+        item = rate_matrix[ids, 1]
         ratings = rate_matrix[ids, 2]
-        return (clusters, ratings)
+        return (item, ratings)
 
-    def train(self, ratings_df: pd.DataFrame):
+    def train(self):
+        ratings = Ratings()
+        ratings_df = ratings.get_training_data()
 
         self.n_users = ratings_df['user_id'].nunique()
         self.rating_train, self.rating_test = self.train_test_split_data(ratings_df, test_size=0.2, random_state=42)
-        feature_vectors = self.feature_vectors
+        fv = FeatureVectors()
+        fv.load_fv()
+        feature_vectors = fv.features_vectors
 
         d = feature_vectors.shape[1]
         W = np.zeros((d, self.n_users))
@@ -77,12 +78,12 @@ class CBFModel:
 
         for n in range(self.n_users):
             user_id = n + 1
-            clusters, scores = self.get_items_rated_by_user(self.rating_train, user_id)
-            clusters = list(map(int, clusters))
-            if len(clusters) == 0:
+            item, scores = self.get_items_rated_by_user(self.rating_train, user_id)
+            item = list(map(int, item))
+            if len(item) == 0:
                 continue  # The rating train may not have any rating of user n
             clf = Ridge(alpha=1.0, fit_intercept=True)
-            Xhat = feature_vectors[clusters, :]
+            Xhat = feature_vectors[item, :]
 
             clf.fit(Xhat, scores)
             W[:, n] = clf.coef_
@@ -91,7 +92,7 @@ class CBFModel:
         self.W = W
         self.b = b
         self.Yhat = feature_vectors.dot(W) + b
-        self.save_weights()
+        self.save_model()
         LOGGER.info("Training completed.")
 
     def test_pred(self, user_id):
@@ -102,13 +103,6 @@ class CBFModel:
         print("rated cluster: ", ids)
         print("true ratings: ", scores)
         print("predict ratings: ", predict_ratings)
-
-    def pred(self, user_id):
-        user_index = user_id - 1
-        predicted_ratings = self.Yhat[:, user_index]
-        best_cluster_index = np.argmax(predicted_ratings)
-        best_cluster_rating = predicted_ratings[best_cluster_index]
-        return best_cluster_index, best_cluster_rating
 
     def evaluate(self, rate_matrix):
         se = 0
