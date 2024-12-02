@@ -6,15 +6,16 @@ import pandas as pd
 
 from src.db import Questions
 from src.models.cluster_questions_model import ClusterModel
-from src.models.cluster_model import QuestionClustering
 from src.utils.encode_utils import EncodeQuestionsUtils
 from src.utils.logger import LOGGER
 
 class ItemsMap:
     def __init__(self):
         self.encoder = EncodeQuestionsUtils()
-        # self.clustering_model = QuestionClustering()
         self.cluster_model = ClusterModel()
+
+    def refresh_mapping(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
+        self.gen_qcmap(notion_database_id=notion_database_id)
 
     def get_cluster_map(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         try:
@@ -53,16 +54,13 @@ class ItemsMap:
             if os.path.exists(f"src/tmp/features_vector/{notion_database_id}_features_vector.json"):
                 with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
                     features_vector = json.load(f)
-                # Transform features vector to numpy array
                 transformed_features_vector = np.array(list(features_vector.values()))
-
                 return transformed_features_vector
             else:
                 LOGGER.error(f"Features vector not found for {notion_database_id}")
                 self.gen_qcmap(notion_database_id=notion_database_id)
                 with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "r") as f:
                     features_vector = json.load(f)
-                # Transform features vector to numpy array
                 transformed_features_vector = np.array(list(features_vector.values()))  
                 return transformed_features_vector
         except Exception as e:
@@ -77,8 +75,6 @@ class ItemsMap:
         
         # Prepare df
         question_df, cluster_df = self.cluster_model.gen_cluster_df(raw_questions_df)
-        # LOGGER.info(f"Clustered questions: {question_df}")
-        # LOGGER.info(f"Clustered features: {cluster_df}")
 
         cluster_map = {}
         for cluster in cluster_df['cluster'].unique():
@@ -124,64 +120,3 @@ class ItemsMap:
         os.makedirs('src/tmp/features_vector', exist_ok=True)
         with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "w") as f:
             json.dump(features_vector, f)
-
-
-        # Predict cluster
-        # cluster_labels = self.clustering_model.predict(X)
-        # questions_df['cluster'] = cluster_labels
-
-        # Create feature vector for each cluster
-        # temp_df = questions_df.drop(columns=['question_id', 'concept', 'content'])
-        # temp_df['concept_embedding'] = temp_df['concept_embedding'].apply(lambda x: np.array(x, dtype=float))
-        # temp_df['difficulty'] = temp_df['difficulty'].astype(float)
-
-        # temp_df['combined_features'] = temp_df.apply(combine_features, axis=1)
-
-        # cluster_features = temp_df.groupby('cluster')['combined_features'].apply(lambda x: np.mean(np.stack(x), axis=0)).reset_index()
-
-        # Convert the combined features back to separate columns for easier readability
-        # combined_features_df = pd.DataFrame(cluster_features['combined_features'].tolist(), index=cluster_features['cluster'])
-        # combined_features_df.columns = [f'feature_{i}' for i in range(combined_features_df.shape[1])]
-
-        # Concatenate the cluster column with the combined features
-        # cluster_features = pd.concat([cluster_features['cluster'], combined_features_df], axis=1)
-
-        # # Create the cluster_map
-        # cluster_map = {}
-        # for cluster in cluster_features['cluster']:
-        #     cluster_str = str(cluster)
-        #     features_vector = cluster_features[cluster_features['cluster'] == cluster].iloc[:, 1:].values.flatten().tolist()
-        #     question_ids = questions_df[questions_df['cluster'] == cluster]['question_id'].tolist()
-        #     cluster_map[cluster_str] = {
-        #         "features_vector": features_vector,
-        #         "question_id": question_ids
-        #     }
-
-        # # Calculate cluster difficulty = average difficulty of questions in cluster
-        # questions_df['difficulty'] = questions_df['difficulty'].astype(float)
-        # cluster_difficulty = questions_df.groupby('cluster')['difficulty'].mean().reset_index()
-        # cluster_difficulty.columns = ['cluster', 'cluster_difficulty']
-
-        # for cluster in cluster_difficulty['cluster']:
-        #     cluster_str = str(cluster)
-        #     if cluster_str in cluster_map:
-        #         cluster_map[cluster_str]['cluster_difficulty'] = cluster_difficulty[cluster_difficulty['cluster'] == cluster]['cluster_difficulty'].values[0]
-
-        # # Generate features vector
-        # features_vector = {}
-        # for key, value in cluster_map.items():
-        #     features_vector[key] = value["features_vector"]
-
-        # # Save cluster_map, question_map in json format
-        # os.makedirs('src/tmp/mapping', exist_ok=True)
-        # with open(f"src/tmp/mapping/{notion_database_id}_cluster_map.json", "w") as f:
-        #     json.dump(cluster_map, f)
-
-        # question_map = questions_df.set_index('question_id')['cluster'].to_dict()
-        # with open(f"src/tmp/mapping/{notion_database_id}_question_map.json", "w") as f:
-        #     json.dump(question_map, f)
-
-        # # Save features vector
-        # os.makedirs('src/tmp/features_vector', exist_ok=True)
-        # with open(f"src/tmp/features_vector/{notion_database_id}_features_vector.json", "w") as f:
-        #     json.dump(features_vector, f)

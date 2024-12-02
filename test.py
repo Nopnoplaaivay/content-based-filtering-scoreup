@@ -24,35 +24,33 @@ if __name__ == "__main__":
     # ratings = ratings.get_training_data()
     # print(ratings)
 
-    # data = {
-    #     "user_id": "6747fa55dc9599b62cbebcdb",
-    #     "data": {
-    #         "clusters": [5, 9, 2, 3, 4],
-    #         "rating": 5
-    #     }
-    # }
-    # ratings = Ratings()
-    # ratings.upsert(data)
+    data = {
+        "user_id": "67021b10012649250e92b7da",
+        "data": {
+            "clusters": [43, 47],
+            "rating": 1
+        }
+    }
+    ratings = Ratings()
+    ratings.upsert(data)
 
-
-    LOGGER.info("Training model...")
+    # LOGGER.info("Training model...")
     model = CBFModel()
-    # ratings_df = Ratings().get_training_data()
-    # model.train(ratings_df=ratings_df)
-    # model.load_weights()
+    ratings_df = Ratings().get_training_data()
+    model.train(ratings_df=ratings_df)
+    model.load_weights()
     # print(model.Yhat)
 
-    #
     cbf_recommender = CBFRecommender()
-    p_list = cbf_recommender.get_priority_list("6747fa55dc9599b62cbebcdb")
+    p_list = cbf_recommender.get_priority_list("67021b10012649250e92b7da")
     print(p_list.head(30))
-    user_predicted_ratings = p_list["rating"].values
-
-    current_min, current_max = user_predicted_ratings.min(), user_predicted_ratings.max()
-    desired_min, desired_max = 0, 5
-
-    user_predicted_ratings = (user_predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
-    print(user_predicted_ratings)
+    
+    # user_predicted_ratings = p_list["rating"].values
+    # current_min, current_max = user_predicted_ratings.min(), user_predicted_ratings.max()
+    # desired_min, desired_max = 0, 5
+    #
+    # user_predicted_ratings = (user_predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
+    # print(user_predicted_ratings)
 
     # questions = Questions()
     # raw_questions = questions.fetch_all()

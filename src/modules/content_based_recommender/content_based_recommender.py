@@ -88,13 +88,20 @@ class CBFRecommender:
 
         self.model.load_weights()
         predicted_ratings = self.model.Yhat[:, user_index]
-        clusters = np.argsort(predicted_ratings)[::-1]
+
+        # Standardized
+        current_min, current_max = predicted_ratings.min(), predicted_ratings.max()
+        desired_min, desired_max = 0, 5
+        transformed_predicted_ratings = (predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
+
+        # Get descending order of predicted ratings index
+        clusters = np.argsort(transformed_predicted_ratings)[::-1]
 
         # create priority df with cluster, predicted rating
         priority_df = []
         for cluster in clusters:
             cluster_str = str(cluster)
             if cluster_str in cluster_map:
-                priority_df.append({"cluster": int(cluster_str), "rating": predicted_ratings[cluster]})
+                priority_df.append({"cluster": int(cluster_str), "rating": transformed_predicted_ratings[cluster]})
         priority_df = pd.DataFrame(priority_df)
         return priority_df

@@ -91,7 +91,6 @@ class CBFModel:
         self.W = W
         self.b = b
         self.Yhat = feature_vectors.dot(W) + b
-        print(self.Yhat)
         self.save_weights()
         LOGGER.info("Training completed.")
 
