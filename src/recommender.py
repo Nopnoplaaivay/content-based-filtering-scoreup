@@ -31,14 +31,14 @@ class Recommender:
         ratings = Ratings()
         user_ratings = ratings.fetch_ratings_by_user(user_id)
         if user_ratings is None:
-            if random.random() < 0.99:
+            if random.random() < 0.9:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")
                 return self.lsr_recommend(user_id, max_exercises=max_exercises)
             else:
                 LOGGER.info(f"Recommending based on user level.")
                 return self.llr_recommend(user_id, max_exercises=max_exercises)
         else:
-            if random.random() < 0.9:
+            if random.random() < 0.8:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")
                 return self.lsr_recommend(user_id, max_exercises=max_exercises)
             else:

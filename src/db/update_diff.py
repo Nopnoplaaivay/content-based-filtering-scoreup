@@ -1,7 +1,6 @@
 import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
-from dns.e164 import query
 
 from src.db.entities.questions import Questions
 from src.db.entities.logs import Logs
@@ -149,10 +148,10 @@ class Difficulty:
         LOGGER.info(f"  Normality Score: {result['normality_score']:.4f}")
         
         # Visualize distribution
-        # cls.visualize_distribution(
-        #     result['combined_difficulties'],
-        #     title="Optimized Difficulty Distribution"
-        # )
+        cls.visualize_distribution(
+            result['combined_difficulties'],
+            title="Optimized Difficulty Distribution"
+        )
         
         return result
     
@@ -240,13 +239,15 @@ class Difficulty:
                 raise ValueError("Length of combine_difficulties and questions do not match")
 
             LOGGER.info("Updating difficulties for questions and logs")
-            # for i, ques in enumerate(questions):
-            #     ques_id = ques["_id"]
-            #     difficulty = combine_difficulties[i]
-            #     self.questions.update_one(
-            #         {"_id": ques_id}, {"$set": {"difficulty": difficulty}}
-            #     )
+            for i, ques in enumerate(questions):
+                ques_id = ques["_id"]
+                difficulty = combine_difficulties[i]
+                self.questions.update_one(
+                    {"_id": ques_id}, {"$set": {"difficulty": difficulty}}
+                )
             # Update_many
+            # Convert combined_difficulties to list
+            # combined_difficulties = combined_difficulties.tolist()
             # query = {"_id": {"$in": [ques["_id"] for ques in questions]}}
             # update = {"$set": {"difficulty": combine_difficulties}}
             # self.questions.update_many(query, update)

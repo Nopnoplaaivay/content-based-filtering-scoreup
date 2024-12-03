@@ -15,6 +15,11 @@ class FeatureVectors:
         self.features_vectors = None
         self.metadata = None
 
+    def refresh_fv(self):
+        LOGGER.info('Refreshing features vector...')
+        self.gen_feature_vectors_df()
+
+
     def save_fv(self):
         try:
             os.makedirs("src/tmp/features_vectors", exist_ok=True)
@@ -26,7 +31,7 @@ class FeatureVectors:
 
     def load_fv(self):
         try:
-            self.features_vectors = np.load(f"src/tmp/features_vectors/{self.notion_database_id}_features_vectors.npy")
+            self.features_vectors = np.load(f"src/tmp/features_vectors/{self.notion_database_id}_feature_vectors.npy")
             self.metadata = pd.read_csv(f"src/tmp/mapping/{self.notion_database_id}_metadata.csv")
             LOGGER.info("Loaded features vector successfully.")
         except Exception as e:
@@ -38,6 +43,7 @@ class FeatureVectors:
         questions = Questions()
         raw_questions = questions.fetch_all()
         df = questions.preprocess_questions(raw_questions)
+        df['item_id'] = df.index
 
         LOGGER.info('Feature vectorizing questions...')
         sentence_tranformer = SentenceTransformer('all-MiniLM-L6-v2')

@@ -1,9 +1,11 @@
 import os
+import warnings
 from flask import Flask
 from flask_cors import CORS
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
+warnings.filterwarnings("ignore")
 from src.api import recommend_bp, upsert_bp, training_bp, refresh_bp
 
 app = Flask(__name__)

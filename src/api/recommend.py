@@ -1,5 +1,4 @@
 from flask import Blueprint, request, jsonify
-
 from src.recommender import Recommender
 from src.utils.logger import LOGGER
 

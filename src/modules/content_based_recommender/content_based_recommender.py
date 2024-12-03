@@ -20,7 +20,7 @@ class CBFRecommender:
         # Get items map
         fv = FeatureVectors()
         fv.load_fv()
-        metadata = fv.metadata
+        priority_df = fv.metadata
 
         user_id_encoded = self.user_map[user_id]
         user_index = user_id_encoded - 1
@@ -28,7 +28,6 @@ class CBFRecommender:
         self.model.load_model()
         predicted_ratings = self.model.Yhat[:, user_index]
 
-        # Get descending order of predicted ratings index
         recommendations = {
             "exercise_ids": [],
             "knowledge_concepts": [],
@@ -42,9 +41,9 @@ class CBFRecommender:
         for item in items:
             if len(recommendations["exercise_ids"]) >= max_exercises:
                 break
-            if item < len(metadata):
-                recommendations["clusters"].append(item)
-                question_id = metadata.iloc[item]["question_id"]
+            if item < len(priority_df):
+                recommendations["clusters"].append(int(item))
+                question_id = priority_df.iloc[item]["question_id"]
                 exercise = self.questions.fetch_one(id=question_id)
                 concept = exercise["properties"]["tags"]["multi_select"][0]["name"]
                 knowledge_concepts.add(concept)
