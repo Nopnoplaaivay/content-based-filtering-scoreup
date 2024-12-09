@@ -6,7 +6,9 @@ from src.modules.feature_vectors import FeatureVectors
 from src.models.cbf_model import CBFModel
 from src.modules.content_based_recommender import CBFRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
+from src.modules.hybrid_recommender import HybridRecommender
 from src.recommender import Recommender
+
 
 from src.db import Logs
 from src.db import Questions
@@ -17,7 +19,10 @@ from src.db import Concepts
 from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
-    '''Train model'''
+    hybrid_recommender = HybridRecommender()
+    user_id = "67021b10012649250e92b7da"
+    recommendations = hybrid_recommender.recommendation_list(user_id, max_exercises=10)
+
     # logs = Logs()
     # raw_logs = logs.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
     # logs_df = logs.preprocess_logs(raw_logs)
@@ -37,10 +42,10 @@ if __name__ == "__main__":
     # ratings = Ratings()
     # ratings.upsert(data)
 
-    # # LOGGER.info("Training model...")
+    # LOGGER.info("Training model...")
     # model = CBFModel()
     # model.train()
-    # model.load_weights()
+    # model.load_model()
     # print(model.Yhat)
     # user_id = "67021b10012649250e92b7da"
     # max_exercises = 10
@@ -52,9 +57,9 @@ if __name__ == "__main__":
     # p_list = cbf_recommender.recommend("67021b10012649250e92b7da", max_exercises=10)
     # print(p_list)
 
-    from src.db import Difficulty
-    difficulty = Difficulty()
-    difficulty.update()
+    # from src.db import Difficulty
+    # difficulty = Difficulty()
+    # difficulty.update()
 
     # questions = Questions()
     # raw_questions = questions.fetch_all()

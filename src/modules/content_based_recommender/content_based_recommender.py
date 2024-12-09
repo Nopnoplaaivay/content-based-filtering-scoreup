@@ -76,6 +76,31 @@ class CBFRecommender:
             LOGGER.info("Please call train model api first (POST /train) to generate user map.")
             return None
 
+    def priority_list(self, user_id):
+        fv = FeatureVectors()
+        fv.load_fv()
+        priority_df = fv.metadata
+
+        user_id_encoded = self.user_map[user_id]
+        user_index = user_id_encoded - 1
+
+        self.model.load_model()
+        predicted_ratings = self.model.Yhat[:, user_index]
+
+        # Standardized
+        current_min, current_max = predicted_ratings.min(), predicted_ratings.max()
+        desired_min, desired_max = 0, 5
+        transformed_predicted_ratings = (predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
+        items = np.argsort(transformed_predicted_ratings)[::-1]
+
+        priority_list = []
+        for item in items:
+            exercise_id = priority_df.iloc[item]["question_id"]
+            priority_list.append({"cluster": int(item), "rating": predicted_ratings[item], "exercise_id": exercise_id})
+
+        priority_df = pd.DataFrame(priority_list)
+        return priority_df
+
     # def get_priority_list(self, user_id):
     #     cluster_map = ItemsMap().get_cluster_map()
     #     user_id_encoded = self.user_map[user_id]
@@ -84,10 +109,10 @@ class CBFRecommender:
     #     self.model.load_weights()
     #     predicted_ratings = self.model.Yhat[:, user_index]
 
-    #     # Standardized
-    #     current_min, current_max = predicted_ratings.min(), predicted_ratings.max()
-    #     desired_min, desired_max = 0, 5
-    #     transformed_predicted_ratings = (predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
+        # Standardized
+        # current_min, current_max = predicted_ratings.min(), predicted_ratings.max()
+        # desired_min, desired_max = 0, 5
+        # transformed_predicted_ratings = (predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
 
     #     # Get descending order of predicted ratings index
     #     clusters = np.argsort(transformed_predicted_ratings)[::-1]
