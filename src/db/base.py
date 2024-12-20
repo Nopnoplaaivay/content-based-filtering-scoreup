@@ -55,6 +55,28 @@ class Base:
         finally:
             self.close()
 
+    def insert_one(self, data):
+        try:
+            self.connect()
+            self.connection.insert_one(data)
+            # LOGGER.info(f"Inserted document: {data}.")
+        except Exception as e:
+            LOGGER.error(f"Error inserting document: {e}")
+            raise e
+        finally:
+            self.close()
+
+    def insert_many(self, data):
+        try:
+            self.connect()
+            self.connection.insert_many(data)
+            # LOGGER.info(f"Inserted {len(data)} documents.")
+        except Exception as e:
+            LOGGER.error(f"Error inserting documents: {e}")
+            raise e
+        finally:
+            self.close()
+
     def update_one(self, query, update):
         try:
             self.connect()

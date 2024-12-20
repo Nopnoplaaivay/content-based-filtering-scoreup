@@ -3,14 +3,12 @@ import random
 from src.db import Ratings, Logs, Users
 from src.modules.content_based_recommender import CBFRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
-from src.modules.learner_level_recommender import LLRRecommender
 from src.utils.logger import LOGGER
 
 class Recommender:
     def __init__(self):
         self.cb_recommender = CBFRecommender()
         self.lsr_recommender = LSRRecommender()
-        self.llr_recommender = LLRRecommender()
 
     def recommend(self, user_id, max_exercises=5):
         # Check if user has done any exercises
@@ -31,12 +29,8 @@ class Recommender:
         ratings = Ratings()
         user_ratings = ratings.fetch_ratings_by_user(user_id)
         if user_ratings is None:
-            if random.random() < 0.9:
-                LOGGER.info(f"Recommending based on leitner spaced repetition.")
-                return self.lsr_recommend(user_id, max_exercises=max_exercises)
-            else:
-                LOGGER.info(f"Recommending based on user level.")
-                return self.llr_recommend(user_id, max_exercises=max_exercises)
+            LOGGER.info(f"Recommending based on leitner spaced repetition.")
+            return self.lsr_recommend(user_id, max_exercises=max_exercises)
         else:
             if random.random() < 0.8:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")
@@ -51,8 +45,4 @@ class Recommender:
     
     def lsr_recommend(self, user_id, max_exercises: int):
         recommendations = self.lsr_recommender.recommend(user_id, max_exercises=max_exercises)
-        return recommendations
-    
-    def llr_recommend(self, user_id, max_exercises: int):
-        recommendations = self.llr_recommender.recommend(user_id, max_exercises=max_exercises)
         return recommendations

@@ -101,27 +101,3 @@ class CBFRecommender:
         priority_df = pd.DataFrame(priority_list)
         return priority_df
 
-    # def get_priority_list(self, user_id):
-    #     cluster_map = ItemsMap().get_cluster_map()
-    #     user_id_encoded = self.user_map[user_id]
-    #     user_index = user_id_encoded - 1
-
-    #     self.model.load_weights()
-    #     predicted_ratings = self.model.Yhat[:, user_index]
-
-        # Standardized
-        # current_min, current_max = predicted_ratings.min(), predicted_ratings.max()
-        # desired_min, desired_max = 0, 5
-        # transformed_predicted_ratings = (predicted_ratings - current_min) / (current_max - current_min) * (desired_max - desired_min) + desired_min
-
-    #     # Get descending order of predicted ratings index
-    #     clusters = np.argsort(transformed_predicted_ratings)[::-1]
-
-    #     # create priority df with cluster, predicted rating
-    #     priority_df = []
-    #     for cluster in clusters:
-    #         cluster_str = str(cluster)
-    #         if cluster_str in cluster_map:
-    #             priority_df.append({"cluster": int(cluster_str), "rating": transformed_predicted_ratings[cluster]})
-    #     priority_df = pd.DataFrame(priority_df)
-    #     return priority_df
