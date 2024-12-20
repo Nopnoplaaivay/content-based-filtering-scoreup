@@ -29,7 +29,7 @@ class LSRRecommender:
         self.logs_df.dropna(subset=['item_id'], inplace=True)
         self.logs_df['item_id'] = self.logs_df['item_id'].astype(int)
 
-        self.logs_df.to_csv('logs.csv')
+        # self.logs_df.to_csv('logs.csv')
         # Calculate Fmiss = 4*M_n + 2*M_n-1 + M_n-2 + M_before
         # where:
 
