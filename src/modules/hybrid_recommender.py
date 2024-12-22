@@ -3,7 +3,6 @@ import random
 from src.db import Ratings, Logs, Users
 from src.modules.content_based_recommender import CBFRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
-from src.modules.learner_level_recommender import LLRRecommender
 from src.utils.logger import LOGGER
 
 
