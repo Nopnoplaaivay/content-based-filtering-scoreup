@@ -1,6 +1,6 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify
 
-from src.db import Ratings
+from src.repositories import Ratings
 from src.utils.logger import LOGGER
 
 update_ratings_routes = Blueprint('update_ratings', __name__)
@@ -13,7 +13,7 @@ def update_ratings():
     # Pipeline: Ratings.upsert -> train model
     try:
         ratings.update_implicit_ratings()
-        LOGGER.info(f"Updating implicit rating completed")
+        LOGGER.info(f"DONE updating ratings")
         return jsonify({"status": "success"})
     except Exception as e:
         LOGGER.error(f"Error in update: {e}")

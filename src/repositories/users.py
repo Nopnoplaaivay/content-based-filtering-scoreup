@@ -16,3 +16,5 @@ class Users(BaseRepo):
         except Exception as e:
             LOGGER.error(f"Error fetching user info: {e}")
             raise e
+        finally:
+            self.close()

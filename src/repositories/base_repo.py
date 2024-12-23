@@ -19,7 +19,6 @@ class BaseRepo:
         try:
             self.client = MongoClient(MONGO_URI)
             self.connection = self.client[self.db_name][self.collection_name]
-            # LOGGER.info(f"Connected to MongoDB collection: {self.collection_name}")
         except Exception as e:
             LOGGER.error(f"Error connecting to MongoDB: {e}")
             raise e
@@ -27,20 +26,17 @@ class BaseRepo:
     def close(self):
         if self.client:
             self.client.close()
-            # LOGGER.info("MongoDB connection closed.")
+        LOGGER.info("Closed MongoDB connection.")
 
     def fetch_one(self, id=None, object_id=False):
         try:
             self.connect()
             query = {"_id": ObjectId(id)} if object_id else {"_id": id}
             document = self.connection.find_one(query)
-            # LOGGER.info(f"Fetched document with ID: {id} from {self.collection_name}.")
             return document
         except Exception as e:
             LOGGER.error(f"Error fetching document: {e}")
             raise e
-        finally:
-            self.close()
 
     def fetch_all(self, query=None):
         try:
@@ -52,8 +48,6 @@ class BaseRepo:
         except Exception as e:
             LOGGER.error(f"Error fetching documents: {e}")
             raise e
-        finally:
-            self.close()
 
     def insert_one(self, data):
         try:
@@ -63,38 +57,27 @@ class BaseRepo:
         except Exception as e:
             LOGGER.error(f"Error inserting document: {e}")
             raise e
-        finally:
-            self.close()
 
     def insert_many(self, data):
         try:
             self.connect()
             self.connection.insert_many(data)
-            # LOGGER.info(f"Inserted {len(data)} documents.")
         except Exception as e:
             LOGGER.error(f"Error inserting documents: {e}")
             raise e
-        finally:
-            self.close()
 
     def update_one(self, query, update):
         try:
             self.connect()
             self.connection.update_one(query, update)
-            # LOGGER.info(f"Updated document with query: {query}.")
         except Exception as e:
             LOGGER.error(f"Error updating document: {e}")
             raise e
-        finally:
-            self.close()
 
     def update_many(self, query, update):
         try:
             self.connect()
             self.connection.update_many(query, update)
-            # LOGGER.info(f"Updated documents with query: {query}.")
         except Exception as e:
             LOGGER.error(f"Error updating documents: {e}")
             raise e
-        finally:
-            self.close()

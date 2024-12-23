@@ -5,7 +5,7 @@ import os
 
 from src.repositories.base_repo import BaseRepo
 from src.repositories.rec_logs import RecLogs
-from src.modules.feature_vectors import FeatureVectors
+from src.utils.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 from src.utils.time_utils import TimeUtils
 
@@ -21,6 +21,8 @@ class Ratings(BaseRepo):
         except Exception as e:
             LOGGER.error(f"Error fetching ratings by user: {e}")
             raise e
+        finally:
+            self.close()
 
     def get_training_data(self):
         '''
@@ -50,13 +52,6 @@ class Ratings(BaseRepo):
             else:
                 user_map = {}
 
-            # users = Users()
-            # for user_id in user_ids:
-            #     if user_id not in user_map:
-            #         # print(user_id, type(user_id))
-            #         user_info = users.fetch_user_info(user_id=user_id)
-            #         LOGGER.info(f"CBF model available for new user: {user_info}")
-
             user_map = {user_id: idx + 1 for idx, user_id in enumerate(user_ids)}
             ratings_df['user_id_encoded'] = ratings_df['user_id'].map(user_map)
             ratings_df = ratings_df.drop(columns=['user_id'])
@@ -74,6 +69,8 @@ class Ratings(BaseRepo):
         except Exception as e:
             LOGGER.error(f"Error generating training data: {e}")
             raise e
+        finally:
+            self.close()
 
     def upsert(self, data):
         try:
@@ -88,10 +85,10 @@ class Ratings(BaseRepo):
 
             for cluster in clusters:
                 query = {"user_id": user_id, "cluster": cluster}
-                existing_rating = self.fetch_all(query)[0] if self.fetch_all(query) else None
+                raw_ratings = self.fetch_all(query)
+                existing_rating = raw_ratings[0] if raw_ratings else None
 
                 # Upsert the rating
-                self.connect()
                 if existing_rating:
                     existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
                     existing_rating['updated_at'] = TimeUtils.vn_current_time()
@@ -99,7 +96,7 @@ class Ratings(BaseRepo):
                     messages["updated"].append(message)             
                     
                     # Update the existing rating
-                    self.connection.update_one(query, {"$set": existing_rating})
+                    self.update_one(query, {"$set": existing_rating})
                 else:
                     new_rating = {
                         "user_id": user_id,
@@ -113,14 +110,16 @@ class Ratings(BaseRepo):
                     messages["inserted"].append(message)
 
                     # Insert a new rating
-                    self.connection.insert_one(new_rating)
-                self.close()
+                    self.insert_one(new_rating)
+
             LOGGER.info(f"Upserted ratings {messages}.")
 
             return messages
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")
             raise e
+        finally:
+            self.close()
         
     def update_implicit_ratings(self):
         try:
@@ -181,19 +180,19 @@ class Ratings(BaseRepo):
                 item_id = row["item_id"]
                 implicit_rating = row["implicit_rating"]
                 query = {"user_id": user_id, "cluster": item_id}
-                existing_rating = self.fetch_all(query)[0] if self.fetch_all(query) else None
+                raw_ratings = self.fetch_all(query)
+                existing_rating = raw_ratings[0] if raw_ratings else None
 
                 # Upsert the rating
-                self.connect()
                 if existing_rating:
-                    existing_rating['rating'] = (existing_rating['rating'] + implicit_rating) / 2
+                    existing_rating['rating'] = implicit_rating
                     existing_rating['updated_at'] = TimeUtils.vn_current_time()
                     existing_rating['implicit'] = True
                     message = f"Updated rating with cluster {item_id} - New Rating: {existing_rating['rating']}"  
                     messages["updated"].append(message)             
                     
                     # Update the existing rating with rating and implicit flag
-                    self.connection.update_one(query, {"$set": existing_rating})
+                    self.update_one(query, {"$set": existing_rating})
 
                 else:
                     new_rating = {
@@ -209,10 +208,12 @@ class Ratings(BaseRepo):
                     messages["inserted"].append(message)
 
                     # Insert a new rating
-                    self.connection.insert_one(new_rating)
-                self.close()
+                    self.insert_one(new_rating)
+                LOGGER.info(f"Upserted implicit rating {idx + 1}/{total_ratings}...")
 
             LOGGER.info("DONE")
         except Exception as e:
             LOGGER.error(f"Error initializing implicit rating: {e}")
             raise e
+        finally:
+            self.close()

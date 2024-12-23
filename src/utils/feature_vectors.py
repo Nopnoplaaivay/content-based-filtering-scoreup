@@ -9,7 +9,6 @@ from src.repositories import Questions
 from src.utils.logger import LOGGER
 
 class FeatureVectors:
-
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         self.notion_database_id = notion_database_id
         self.features_vectors = None
@@ -39,24 +38,30 @@ class FeatureVectors:
             self.gen_feature_vectors_df()
 
     def gen_feature_vectors_df(self):
-        LOGGER.info('Fetching questions...')
-        questions = Questions()
-        raw_questions = questions.fetch_all()
-        df = questions.preprocess_questions(raw_questions)
-        df['item_id'] = df.index
+        try:
+            LOGGER.info('Fetching questions...')
+            questions = Questions()
+            raw_questions = questions.fetch_all()
+            df = questions.preprocess_questions(raw_questions)
+            df['item_id'] = df.index
 
-        LOGGER.info('Feature vectorizing questions...')
-        sentence_tranformer = SentenceTransformer('all-MiniLM-L6-v2')
-        encoder = OneHotEncoder()
-        scaler = StandardScaler()
+            LOGGER.info('Feature vectorizing questions...')
+            sentence_tranformer = SentenceTransformer('all-MiniLM-L6-v2')
+            encoder = OneHotEncoder()
+            scaler = StandardScaler()
 
-        text_features = sentence_tranformer.encode(df['content'].tolist())
-        encoded_categorical = encoder.fit_transform(df[['chapter', 'concept']]).toarray()
-        scaled_difficulty = scaler.fit_transform(df[['difficulty']])
-        features = np.hstack([text_features, encoded_categorical, scaled_difficulty])
-        pca = PCA(n_components=9)
-        reduced_fv = pca.fit_transform(features)
+            text_features = sentence_tranformer.encode(df['content'].tolist())
+            encoded_categorical = encoder.fit_transform(df[['chapter', 'concept']]).toarray()
+            scaled_difficulty = scaler.fit_transform(df[['difficulty']])
+            features = np.hstack([text_features, encoded_categorical, scaled_difficulty])
+            pca = PCA(n_components=9)
+            reduced_fv = pca.fit_transform(features)
 
-        self.metadata = df
-        self.features_vectors = reduced_fv
-        self.save_fv()
+            self.metadata = df
+            self.features_vectors = reduced_fv
+            self.save_fv()
+        except Exception as e:
+            LOGGER.error(f"Error generating feature vectors: {e}")
+            raise e
+        finally:
+            return questions.close()

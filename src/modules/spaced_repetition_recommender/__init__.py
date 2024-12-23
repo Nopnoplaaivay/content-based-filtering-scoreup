@@ -1,1 +1,0 @@
-from src.modules.spaced_repetition_recommender.lsr_recommender import LSRRecommender

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify
 
-from src.modules.feature_vectors import FeatureVectors
+from src.utils.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 
 refresh_routes = Blueprint('refresh', __name__)

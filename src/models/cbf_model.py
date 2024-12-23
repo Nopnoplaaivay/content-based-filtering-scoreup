@@ -5,11 +5,10 @@ from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
 from src.repositories import Ratings
-from src.modules.feature_vectors import FeatureVectors
+from src.utils.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 
 class CBFModel:
-
     def __init__(self):
         self.n_users = None
         self.rating_train = None

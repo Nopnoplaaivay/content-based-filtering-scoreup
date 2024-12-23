@@ -1,5 +1,3 @@
-import pandas as pd
-import numpy as np
 from flask import Blueprint, jsonify
 
 from src.models.cbf_model import CBFModel

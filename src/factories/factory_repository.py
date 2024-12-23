@@ -4,14 +4,15 @@ from src.repositories import (
     Questions,
     Concepts,
     Users,
-    Logs
+    Logs,
+    Ratings
 )
 
-from src.modules.feature_vectors import FeatureVectors
+from src.utils.feature_vectors import FeatureVectors
 from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
-class FactoryStrategy:
+class FactoryRepo:
     def __init__(self, notion_database_id):
         self.notion_database_id = notion_database_id
 
@@ -20,6 +21,9 @@ class FactoryStrategy:
 
     def create_logs(self):
         return Logs(notion_database_id=self.notion_database_id)
+    
+    def create_ratings(self):
+        return Ratings(notion_database_id=self.notion_database_id)
 
     def create_concepts(self):
         return Concepts(notion_database_id=self.notion_database_id)

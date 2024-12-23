@@ -2,7 +2,6 @@ import os
 import json
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-# from src.modules.feature_vectors import FeatureVectors
 # from src.models.cbf_model import CBFModel
 # from src.modules.content_based_recommender import CBFRecommender
 # from src.modules.spaced_repetition_recommender import LSRRecommender
@@ -16,27 +15,16 @@ from src.utils.logger import LOGGER
 if __name__ == "__main__":
     user_id = "67021b10012649250e92b7da"
 
-    # ratings = Ratings()
-    # ratings.init_implicit_ratings()
-
     from src.services.strategies import ContentBasedStrategy, SpacedRepetitionStrategy, HybridStrategy
     from src.services.recommendation_service import RecommendationService
-    strategy = ContentBasedStrategy()
+    strategy = HybridStrategy()
+    service = RecommendationService(strategy)
 
-
-    # service = RecommendationService(strategy)
-
-    # recommendations = service.get_recommendations(user_id, max_exercises=10)
-    recommendations = strategy.recommend(user_id, max_exercises=10)
+    recommendations = service.get_recommendations(user_id, max_exercises=10)
     print(recommendations)
 
     # hybrid_recommender = HybridRecommender()
     # recommendations = hybrid_recommender.recommendation_list(user_id, max_exercises=10)
-
-    # logs = Logs()
-    # raw_logs = logs.fetch_logs_by_user(user_id="6747fa55dc9599b62cbebcdb")
-    # logs_df = logs.preprocess_logs(raw_logs)
-    # print(logs_df.head())
 
     # ratings = Ratings()
     # ratings = ratings.get_training_data()
@@ -72,7 +60,6 @@ if __name__ == "__main__":
     # difficulty.update()
 
     # questions = Questions()
-    # raw_questions = questions.fetch_all()
     # questions_df = questions.preprocess_questions(raw_questions)
     # from src.modules.feature_vectors import FeatureVectors
 

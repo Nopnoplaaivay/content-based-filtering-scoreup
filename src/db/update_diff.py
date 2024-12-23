@@ -238,12 +238,14 @@ class Difficulty:
                 raise ValueError("Length of combine_difficulties and questions do not match")
 
             LOGGER.info("Updating difficulties for questions and logs")
+            self.questions.connect()
             for i, ques in enumerate(questions):
                 ques_id = ques["_id"]
                 difficulty = combine_difficulties[i]
                 self.questions.update_one(
                     {"_id": ques_id}, {"$set": {"difficulty": difficulty}}
                 )
+            self.questions.close()
             # Update_many
             # Convert combined_difficulties to list
             # combined_difficulties = combined_difficulties.tolist()
@@ -255,3 +257,5 @@ class Difficulty:
         except Exception as e:
             LOGGER.error(f"Error updating difficulties: {e}")
             raise e
+        finally:
+            return self.logs.close()

@@ -15,6 +15,8 @@ class Logs(BaseRepo):
         except Exception as e:
             LOGGER.error(f"Error fetching logs: {e}")
             raise e
+        finally:
+            self.close()
 
     def preprocess_logs(self, raw_logs):
         """Preprocess logs into a pandas DataFrame."""
@@ -50,3 +52,5 @@ class Logs(BaseRepo):
         except Exception as e:
             LOGGER.error(f"Error fetching user level logs: {e}")
             raise e
+        finally:
+            self.close()
