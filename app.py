@@ -6,7 +6,13 @@ from flask_cors import CORS
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
 warnings.filterwarnings("ignore")
-from src.api import recommend_bp, upsert_bp, training_bp, refresh_bp
+from src.api import (
+    recommend_bp, 
+    upsert_bp, 
+    training_bp, 
+    refresh_bp,
+    update_ratings_bp
+)
 
 app = Flask(__name__)
 CORS(app)
@@ -15,6 +21,7 @@ app.register_blueprint(recommend_bp)
 app.register_blueprint(upsert_bp)
 app.register_blueprint(training_bp)
 app.register_blueprint(refresh_bp)
+app.register_blueprint(update_ratings_bp)
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=os.getenv("PORT", 5000), debug=True)

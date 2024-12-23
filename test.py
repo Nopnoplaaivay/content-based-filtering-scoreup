@@ -9,7 +9,6 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 # from src.modules.hybrid_recommender import HybridRecommender
 # from src.recommender import Recommender
 
-
 from src.db import Logs
 from src.db import Questions
 from src.db import Ratings
@@ -22,15 +21,8 @@ from src.utils.logger import LOGGER
 if __name__ == "__main__":
     user_id = "67021b10012649250e92b7da"
 
-    rec_logs = RecLogs()
-    raw_data = rec_logs.fetch_all()
-    prepared_data = rec_logs.preprocess_logs(raw_data)
-
-    # Reduce the dataframe to unique user_id and question_id with the latest created_at
-    prepared_data = prepared_data.sort_values("created_at", ascending=False)
-    prepared_data = prepared_data.drop_duplicates(subset=["user_id", "question_id"], keep="first")
-    print(prepared_data[prepared_data["answered"] == False])
-
+    ratings = Ratings()
+    ratings.init_implicit_ratings()
 
 
     # hybrid_recommender = HybridRecommender()

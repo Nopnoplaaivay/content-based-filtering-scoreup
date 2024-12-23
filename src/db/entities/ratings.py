@@ -1,9 +1,12 @@
 import pandas as pd
 import json
+import numpy as np
 import os
 
 from src.db.base import Base
 from src.db.entities.users import Users
+from src.db.entities.rec_logs import RecLogs
+from src.modules.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 from src.utils.time_utils import TimeUtils
 
@@ -118,4 +121,101 @@ class Ratings(Base):
             return messages
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")
+            raise e
+        
+    def update_implicit_ratings(self):
+        try:
+            fv = FeatureVectors()
+            fv.load_fv()
+
+            # Update the implicit rating for all users
+            rec_logs = RecLogs(notion_database_id=self.notion_database_id)
+            raw_rec_logs = rec_logs.fetch_all()
+            rec_logs_df = rec_logs.preprocess_logs(raw_rec_logs)
+
+            # Reduce the dataframe to unique user_id and question_id with the latest created_at
+            rec_logs_df = rec_logs_df.sort_values("created_at", ascending=False)
+            rec_logs_df = rec_logs_df.drop_duplicates(subset=["user_id", "question_id"], keep="first")
+
+            # Merge the rec_logs_df with the feature vectors' item_id
+            rec_logs_df = pd.merge(rec_logs_df, fv.metadata, left_on="question_id", right_on="question_id", how="left")
+            rec_logs_df = rec_logs_df.dropna(subset=["item_id"])
+            rec_logs_df = rec_logs_df[["user_id", "item_id", "answered", "timecost", "bookmarked"]]
+
+            # Normalize the timecost
+            time_cost_min = rec_logs_df["timecost"].min()
+            time_cost_max = np.quantile(rec_logs_df["timecost"], 0.95)
+            rec_logs_df = rec_logs_df[rec_logs_df["timecost"] <= time_cost_max]
+            target_min, target_max = 0, 1
+            rec_logs_df["timecost"] = (rec_logs_df["timecost"] - time_cost_min) / (time_cost_max - time_cost_min) * (target_max - target_min) + target_min
+            time_threshold = 1000
+            time_threshold_norm = (time_threshold - time_cost_min) / (time_cost_max - time_cost_min) * (target_max - target_min) + target_min
+
+            # Calculate the implicit rating
+            def calculate_implicit_rating(row):
+                answered = row["answered"] # True if answered, False if not
+                timecost = row["timecost"] # Time cost to answer the question (ms)
+                bookmarked = row["bookmarked"] # 1 if bookmarked, 0 if not
+                
+                # Calculate the implicit rating (0 -> 5)
+                base_rating = 3 if answered else 0
+                if timecost < time_threshold_norm:
+                    base_rating -= 1
+                else:
+                    base_rating += timecost
+                base_rating += bookmarked
+                return min(max(base_rating, 0), 5)
+            
+            rec_logs_df["implicit_rating"] = rec_logs_df.apply(calculate_implicit_rating, axis=1)
+            rec_logs_df.to_csv("src/tmp/implicit_ratings.csv", index=False)
+
+            # Upsert the implicit ratings
+            messages = {
+                "inserted": [],
+                "updated": []
+            }
+
+            for idx, row in rec_logs_df.iterrows():
+                user_id = row["user_id"]
+                item_id = row["item_id"]
+                implicit_rating = row["implicit_rating"]
+                query = {"user_id": user_id, "cluster": item_id}
+                existing_rating = self.fetch_all(query)[0] if self.fetch_all(query) else None
+
+                # Upsert the rating
+                self.connect()
+                if existing_rating:
+                    existing_rating['rating'] = (existing_rating['rating'] + implicit_rating) / 2
+                    existing_rating['updated_at'] = TimeUtils.vn_current_time()
+                    existing_rating['implicit'] = True
+                    message = f"Updated rating with cluster {item_id} - New Rating: {existing_rating['rating']}"  
+                    messages["updated"].append(message)             
+                    
+                    # Update the existing rating with rating and implicit flag
+                    self.connection.update_one(query, {"$set": existing_rating})
+
+                else:
+                    new_rating = {
+                        "user_id": user_id,
+                        "cluster": item_id,
+                        "rating": implicit_rating,
+                        "implicit": True,
+                        "notionDatabaseId": self.notion_database_id,
+                        "created_at": TimeUtils.vn_current_time(),
+                        "updated_at": TimeUtils.vn_current_time()
+                    }
+                    message = f"Inserted rating with cluster {item_id} - Rating: {implicit_rating}"
+                    messages["inserted"].append(message)
+
+                    # Insert a new rating
+                    self.connection.insert_one(new_rating)
+
+                LOGGER.info(f"Upserting implicit rating {idx + 1}/{len(rec_logs_df)}...")
+                self.close()
+
+                
+
+            print(rec_logs_df.head(20))
+        except Exception as e:
+            LOGGER.error(f"Error initializing implicit rating: {e}")
             raise e

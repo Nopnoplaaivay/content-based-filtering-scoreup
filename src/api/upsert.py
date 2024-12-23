@@ -1,9 +1,12 @@
 from flask import Blueprint, request, jsonify
 
+from src.db import Ratings
 from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
 upsert_bp = Blueprint('upsert_rating', __name__)
+
+ratings = Ratings()
 
 @upsert_bp.route('/upsert', methods=['POST'])
 def upsert():
