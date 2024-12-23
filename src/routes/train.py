@@ -5,9 +5,9 @@ from flask import Blueprint, jsonify
 from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
-training_bp = Blueprint('training', __name__)
+training_routes = Blueprint('training', __name__)
 
-@training_bp.route('/train', methods=['POST'])
+@training_routes.route('/train', methods=['POST'])
 def train():
     try:
         '''Train model'''

@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.decomposition import PCA
 from sentence_transformers import SentenceTransformer
 
-from src.db import Questions
+from src.repositories import Questions
 from src.utils.logger import LOGGER
 
 class FeatureVectors:

@@ -2,8 +2,7 @@ import numpy as np
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
-from src.db.entities.questions import Questions
-from src.db.entities.logs import Logs
+from src.repositories import (Questions, Logs)
 from src.utils.logger import LOGGER
 
 class Difficulty:

@@ -3,11 +3,11 @@ from flask import Blueprint, request, jsonify
 from src.db import Ratings
 from src.utils.logger import LOGGER
 
-update_ratings_bp = Blueprint('update_ratings', __name__)
+update_ratings_routes = Blueprint('update_ratings', __name__)
 
 ratings = Ratings()
 
-@update_ratings_bp.route('/update_ratings', methods=['POST'])
+@update_ratings_routes.route('/update_ratings', methods=['POST'])
 def update_ratings():
     global ratings
     # Pipeline: Ratings.upsert -> train model

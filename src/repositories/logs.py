@@ -1,12 +1,12 @@
 import pandas as pd
 
-from src.db.base import Base
+from src.repositories.base_repo import BaseRepo
 from src.utils.logger import LOGGER
 
 
-class RecLogs(Base):
+class Logs(BaseRepo):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        super().__init__(collection_name="recommendation_logs", notion_database_id=notion_database_id)
+        super().__init__(collection_name="logs-questions", notion_database_id=notion_database_id)
 
     def fetch_logs_by_user(self, user_id):
         try:
@@ -27,14 +27,26 @@ class RecLogs(Base):
                     'chapter': log.get('chapter'),
                     'concept': log.get('knowledge_concept'),
                     'difficulty': log.get('difficulty'),
-                    'answered': log.get('answered'),
                     'score': log.get('score'),
-                    'bookmarked': log.get('bookmarked'),
-                    'mastered': log.get('mastered'),
                     'timecost': log.get('time_cost'),
                     'created_at': log.get('created_at'),
                 })
             return pd.DataFrame(data)
         except Exception as e:
             LOGGER.error(f"Error preprocessing logs: {e}")
+            raise e
+
+    def get_user_level(self, user_id):
+        try:
+            logs = self.fetch_logs_by_user(user_id)
+            df = self.preprocess_logs(logs)
+            avg_score = df['score'].mean()
+            if avg_score <= 0.33:
+                return 'Beginner'
+            elif avg_score <= 0.66:
+                return 'Intermediate'
+            else:
+                return 'Advanced'
+        except Exception as e:
+            LOGGER.error(f"Error fetching user level logs: {e}")
             raise e

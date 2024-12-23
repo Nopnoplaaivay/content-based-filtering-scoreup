@@ -7,7 +7,7 @@ from src.utils.logger import LOGGER
 MONGO_URI = os.getenv("MONGO_URL")
 
 
-class Base:
+class BaseRepo:
     def __init__(self, collection_name, notion_database_id="c3a788eb31f1471f9734157e9516f9b6", db_name="codelab1"):
         self.connection = None
         self.client = None

@@ -1,6 +1,6 @@
 import random
 
-from src.db import Ratings, Logs, Users
+from src.repositories import Ratings, Logs, Users
 from src.modules.content_based_recommender import CBFRecommender
 from src.modules.spaced_repetition_recommender import LSRRecommender
 from src.utils.logger import LOGGER
@@ -32,7 +32,7 @@ class Recommender:
             LOGGER.info(f"Recommending based on leitner spaced repetition.")
             return self.lsr_recommend(user_id, max_exercises=max_exercises)
         else:
-            if random.random() < 0.8:
+            if random.random() < 0.7:
                 LOGGER.info(f"Recommending based on leitner spaced repetition.")
                 return self.lsr_recommend(user_id, max_exercises=max_exercises)
             else:

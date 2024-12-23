@@ -2,9 +2,9 @@ from flask import Blueprint, request, jsonify
 from src.recommender import Recommender
 from src.utils.logger import LOGGER
 
-recommend_bp = Blueprint('recommend', __name__)
+recommend_routes = Blueprint('recommend', __name__)
 
-@recommend_bp.route('/recommend', methods=['POST'])
+@recommend_routes.route('/recommend', methods=['POST'])
 def recommend():
     try:
         user_id = request.json['user_id']

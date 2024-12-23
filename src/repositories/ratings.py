@@ -3,14 +3,13 @@ import json
 import numpy as np
 import os
 
-from src.db.base import Base
-from src.db.entities.users import Users
-from src.db.entities.rec_logs import RecLogs
+from src.repositories.base_repo import BaseRepo
+from src.repositories.rec_logs import RecLogs
 from src.modules.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 from src.utils.time_utils import TimeUtils
 
-class Ratings(Base):
+class Ratings(BaseRepo):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         super().__init__(collection_name="ratings", notion_database_id=notion_database_id)
 
@@ -165,9 +164,10 @@ class Ratings(Base):
                     base_rating += timecost
                 base_rating += bookmarked
                 return min(max(base_rating, 0), 5)
-            
+
+            os.makedirs("src/tmp/csv", exist_ok=True)
             rec_logs_df["implicit_rating"] = rec_logs_df.apply(calculate_implicit_rating, axis=1)
-            rec_logs_df.to_csv("src/tmp/implicit_ratings.csv", index=False)
+            rec_logs_df.to_csv("src/tmp/csv/implicit_ratings.csv", index=False)
 
             # Upsert the implicit ratings
             messages = {
@@ -175,6 +175,7 @@ class Ratings(Base):
                 "updated": []
             }
 
+            total_ratings = len(rec_logs_df)
             for idx, row in rec_logs_df.iterrows():
                 user_id = row["user_id"]
                 item_id = row["item_id"]
@@ -209,13 +210,9 @@ class Ratings(Base):
 
                     # Insert a new rating
                     self.connection.insert_one(new_rating)
-
-                LOGGER.info(f"Upserting implicit rating {idx + 1}/{len(rec_logs_df)}...")
                 self.close()
 
-                
-
-            print(rec_logs_df.head(20))
+            LOGGER.info("DONE")
         except Exception as e:
             LOGGER.error(f"Error initializing implicit rating: {e}")
             raise e

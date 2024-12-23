@@ -9,21 +9,26 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 # from src.modules.hybrid_recommender import HybridRecommender
 # from src.recommender import Recommender
 
-from src.db import Logs
-from src.db import Questions
-from src.db import Ratings
-from src.db import Users
-from src.db import Concepts
-from src.db import RecLogs
+from src.repositories import (Logs, Ratings, Questions, Concepts, Users)
 
 from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
     user_id = "67021b10012649250e92b7da"
 
-    ratings = Ratings()
-    ratings.init_implicit_ratings()
+    # ratings = Ratings()
+    # ratings.init_implicit_ratings()
 
+    from src.services.strategies import ContentBasedStrategy, SpacedRepetitionStrategy, HybridStrategy
+    from src.services.recommendation_service import RecommendationService
+    strategy = ContentBasedStrategy()
+
+
+    # service = RecommendationService(strategy)
+
+    # recommendations = service.get_recommendations(user_id, max_exercises=10)
+    recommendations = strategy.recommend(user_id, max_exercises=10)
+    print(recommendations)
 
     # hybrid_recommender = HybridRecommender()
     # recommendations = hybrid_recommender.recommendation_list(user_id, max_exercises=10)

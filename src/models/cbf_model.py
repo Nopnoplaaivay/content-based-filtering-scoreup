@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
-from src.db import Ratings
+from src.repositories import Ratings
 from src.modules.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 

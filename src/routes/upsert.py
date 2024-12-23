@@ -4,11 +4,11 @@ from src.db import Ratings
 from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
-upsert_bp = Blueprint('upsert_rating', __name__)
+upsert_routes = Blueprint('upsert_rating', __name__)
 
 ratings = Ratings()
 
-@upsert_bp.route('/upsert', methods=['POST'])
+@upsert_routes.route('/upsert', methods=['POST'])
 def upsert():
     global ratings
     # Pipeline: Ratings.upsert -> train model
