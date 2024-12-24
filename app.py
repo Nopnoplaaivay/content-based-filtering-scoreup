@@ -4,8 +4,8 @@ from flask import Flask
 from flask_cors import CORS
 
 os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
-
 warnings.filterwarnings("ignore")
+
 from src.routes import (
     recommend_routes,
     training_routes,
