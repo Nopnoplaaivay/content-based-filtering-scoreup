@@ -15,7 +15,6 @@ from src.routes import (
 )
 
 app = Flask(__name__)
-# CORS(app, resources={r"/*": {"origins": "*", }})
 CORS(app)
 
 app.register_blueprint(recommend_routes)
