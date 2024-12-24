@@ -4,9 +4,9 @@ from src.services.strategies import HybridStrategy
 from src.services.recommendation_service import RecommendationService
 from src.utils.logger import LOGGER
 
-recommend_routes = Blueprint('recommend', __name__)
+recommend_routes = Blueprint('recommend', __name__, url_prefix="/api/v1/recommend")
 
-@recommend_routes.route('/recommend', methods=['POST'])
+@recommend_routes.route('/', methods=['POST'])
 def recommend():
     try:
         user_id = request.json['user_id']

@@ -4,7 +4,7 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import Ridge
 
-from src.repositories import Ratings
+from src.repositories import RatingsRepo
 from src.utils.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 
@@ -62,7 +62,7 @@ class CBFModel:
         return (item, ratings)
 
     def train(self):
-        ratings = Ratings()
+        ratings = RatingsRepo()
         ratings_df = ratings.get_training_data()
 
         self.n_users = ratings_df['user_id'].nunique()

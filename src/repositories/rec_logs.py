@@ -4,7 +4,7 @@ from src.repositories.base_repo import BaseRepo
 from src.utils.logger import LOGGER
 
 
-class RecLogs(BaseRepo):
+class RecLogsRepo(BaseRepo):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
         super().__init__(collection_name="recommendation_logs", notion_database_id=notion_database_id)
 

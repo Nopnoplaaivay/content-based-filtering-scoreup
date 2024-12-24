@@ -5,7 +5,7 @@ from sklearn.preprocessing import StandardScaler, OneHotEncoder
 from sklearn.decomposition import PCA
 from sentence_transformers import SentenceTransformer
 
-from src.repositories import Questions
+from src.repositories import QuestionsRepo
 from src.utils.logger import LOGGER
 
 class FeatureVectors:
@@ -40,7 +40,7 @@ class FeatureVectors:
     def gen_feature_vectors_df(self):
         try:
             LOGGER.info('Fetching questions...')
-            questions = Questions()
+            questions = QuestionsRepo()
             raw_questions = questions.fetch_all()
             df = questions.preprocess_questions(raw_questions)
             df['item_id'] = df.index

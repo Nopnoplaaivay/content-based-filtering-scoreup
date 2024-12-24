@@ -1,11 +1,12 @@
 import json
 
 from src.repositories import (
-    Questions,
-    Concepts,
-    Users,
-    Logs,
-    Ratings
+    QuestionsRepo,
+    ConceptsRepo,
+    UsersRepo,
+    LogsRepo,
+    RatingsRepo,
+    RecLogsRepo
 )
 
 from src.utils.feature_vectors import FeatureVectors
@@ -17,19 +18,22 @@ class FactoryRepo:
         self.notion_database_id = notion_database_id
 
     def create_questions(self):
-        return Questions(notion_database_id=self.notion_database_id)
+        return QuestionsRepo(notion_database_id=self.notion_database_id)
 
     def create_logs(self):
-        return Logs(notion_database_id=self.notion_database_id)
+        return LogsRepo(notion_database_id=self.notion_database_id)
+    
+    def create_recommendation_logs(self):
+        return RecLogsRepo(notion_database_id=self.notion_database_id)
     
     def create_ratings(self):
-        return Ratings(notion_database_id=self.notion_database_id)
+        return RatingsRepo(notion_database_id=self.notion_database_id)
 
     def create_concepts(self):
-        return Concepts(notion_database_id=self.notion_database_id)
+        return ConceptsRepo(notion_database_id=self.notion_database_id)
 
     def create_users(self):
-        return Users()
+        return UsersRepo()
 
     def create_model(self):
         return CBFModel()

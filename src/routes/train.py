@@ -3,7 +3,7 @@ from flask import Blueprint, jsonify
 from src.models.cbf_model import CBFModel
 from src.utils.logger import LOGGER
 
-training_routes = Blueprint('training', __name__)
+training_routes = Blueprint('training', __name__, url_prefix="/api/v1/model")
 
 @training_routes.route('/train', methods=['POST'])
 def train():

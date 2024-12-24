@@ -8,7 +8,7 @@ os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 # from src.modules.hybrid_recommender import HybridRecommender
 # from src.recommender import Recommender
 
-from src.repositories import (Logs, Ratings, Questions, Concepts, Users)
+from src.repositories import (Logs, Ratings, Questions, ConceptsRepo, Users)
 
 from src.utils.logger import LOGGER
 

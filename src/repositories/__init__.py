@@ -1,7 +1,7 @@
-from src.repositories.users import Users
-from src.repositories.questions import Questions
-from src.repositories.logs import Logs
-from src.repositories.ratings import Ratings
-from src.repositories.concepts import Concepts
-from src.repositories.rec_logs import RecLogs
+from src.repositories.users import UsersRepo
+from src.repositories.questions import QuestionsRepo
+from src.repositories.logs import LogsRepo
+from src.repositories.upsert import RatingsRepo
+from src.repositories.concepts import ConceptsRepo
+from src.repositories.rec_logs import RecLogsRepo
 

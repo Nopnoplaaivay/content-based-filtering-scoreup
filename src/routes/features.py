@@ -3,10 +3,10 @@ from flask import Blueprint, jsonify
 from src.utils.feature_vectors import FeatureVectors
 from src.utils.logger import LOGGER
 
-refresh_routes = Blueprint('refresh', __name__)
+feature_routes = Blueprint('features', __name__, url_prefix="/api/v1/features")
 
-@refresh_routes.route('/refresh', methods=['GET'])
-def refresh_fv():
+@feature_routes.route('/init', methods=['POST'])
+def init_feature_vector():
     try:
         fv = FeatureVectors()
         fv.refresh_fv()
