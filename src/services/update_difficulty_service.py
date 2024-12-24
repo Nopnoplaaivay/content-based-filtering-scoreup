@@ -184,7 +184,8 @@ class UpdateDifficultyService:
                                 if log["correct_ans"][i] == log["user_ans"][i]
                             ]
                         )
-                        accuracy = correct_answers / total_answers
+
+                        accuracy = 0 if total_answers == 0 else correct_answers / total_answers
                         accuracies.append(accuracy)
                         time_costs.append(log["time_cost"])
 
@@ -195,7 +196,12 @@ class UpdateDifficultyService:
                     max_time_costs = np.max(time_costs)
 
                     # Calculate time difficulty
-                    normalized_time_costs = (time_costs - min_time_costs) / (max_time_costs - min_time_costs)
+                    if min_time_costs == max_time_costs:
+                        normalized_time_costs = np.zeros_like(time_costs)
+                    else:
+                        normalized_time_costs = (time_costs - min_time_costs) / (max_time_costs - min_time_costs)
+
+                    # normalized_time_costs = (time_costs - min_time_costs) / (max_time_costs - min_time_costs)
                     time_costs_difficulty = np.mean(normalized_time_costs)
 
                     # Calculate accuracy difficulty
@@ -203,8 +209,13 @@ class UpdateDifficultyService:
                     low_threshold = np.percentile(accuracies, 27)
                     high_scoring_group = accuracies[accuracies >= high_threshold]
                     low_scoring_group = accuracies[accuracies <= low_threshold]
-                    accuracy_difficulty = (np.mean(high_scoring_group) + np.mean(low_scoring_group)) / 2
 
+                    if len(high_scoring_group) == 0 or len(low_scoring_group) == 0:
+                        accuracy_difficulty = np.nan  # Hoặc giá trị mặc định
+                    else:
+                        accuracy_difficulty = (np.mean(high_scoring_group) + np.mean(low_scoring_group)) / 2
+
+                    # accuracy_difficulty = (np.mean(high_scoring_group) + np.mean(low_scoring_group)) / 2
                     acc_diffs.append(accuracy_difficulty)
                     time_diffs.append(time_costs_difficulty)
                 else:
