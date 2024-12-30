@@ -16,7 +16,7 @@ class HybridStrategy(RecommendationStrategy):
                 "exercise_ids": [],
                 "knowledge_concepts": [],
                 "clusters": [],
-                "message": f"{self.users.fetch_user_info(user_id=user_id).get('name')} ơi! Hãy thử làm một số bài tập để mở khóa chức năng gợi ý học tập nhé!"
+                "message": f"{self.users.fetch_user_info(user_id=user_id).get('full_name')} ơi! Hãy thử làm một số bài tập để mở khóa chức năng gợi ý học tập nhé!"
             }
             return recommendations
         

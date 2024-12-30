@@ -2,12 +2,23 @@ import pandas as pd
 import json
 import os
 
+from src.entities import Ratings
 from src.repositories.base_repo import BaseRepo
 from src.utils.logger import LOGGER
 
 class RatingsRepo(BaseRepo):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        super().__init__(collection_name="ratings", notion_database_id=notion_database_id)
+        super().__init__(collection="ratings", notion_database_id=notion_database_id)
+
+    def fetch_by_user(self, user_id):
+        try:
+            query = {"user_id": user_id}
+            data = self.fetch_one(query)
+            rating = Ratings.from_dict(data) if data else None
+            return rating.to_dict() 
+        except Exception as e:
+            LOGGER.error(f"Error fetching rating by user: {e}")
+            raise e
 
     def fetch_ratings_by_user(self, user_id):
         try:

@@ -1,27 +1,27 @@
 import os
 import json
-os.environ['TF_ENABLE_ONEDNN_OPTS'] = '0'
 
-# from src.models.cbf_model import CBFModel
-# from src.modules.content_based_recommender import CBFRecommender
-# from src.modules.spaced_repetition_recommender import LSRRecommender
-# from src.modules.hybrid_recommender import HybridRecommender
-# from src.recommender import Recommender
-
-from src.repositories import (Logs, Ratings, Questions, ConceptsRepo, Users)
-
-from src.utils.logger import LOGGER
 
 if __name__ == "__main__":
-    user_id = "67021b10012649250e92b7da"
 
-    from src.services.strategies import ContentBasedStrategy, SpacedRepetitionStrategy, HybridStrategy
-    from src.services.recommendation_service import RecommendationService
-    strategy = HybridStrategy()
-    service = RecommendationService(strategy)
+    from src.repositories import (
+        UsersRepo, 
+        ConceptsRepo,
+        RatingsRepo
+    )
 
-    recommendations = service.get_recommendations(user_id, max_exercises=10)
-    print(recommendations)
+    user_id = "6747fa55dc9599b62cbebcdb"
+    # print(UsersRepo().fetch_by_id(user_id=user_id))
+    # print(ConceptsRepo().fetch_by_id(concept_id="thong-tin-xu-ly-thong-tin"))
+    print(RatingsRepo().fetch_by_user(user_id=user_id))
+    
+    # from src.services.strategies import ContentBasedStrategy, SpacedRepetitionStrategy, HybridStrategy
+    # from src.services.recommendation_service import RecommendationService
+    # strategy = HybridStrategy()
+    # service = RecommendationService(strategy)
+    #
+    # recommendations = service.get_recommendations(user_id, max_exercises=10)
+    # print(recommendations)
 
     # hybrid_recommender = HybridRecommender()
     # recommendations = hybrid_recommender.recommendation_list(user_id, max_exercises=10)

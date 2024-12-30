@@ -1,83 +1,110 @@
 import os
 from bson import ObjectId
 from pymongo import MongoClient
+from typing import Dict, List, Optional
 
 from src.utils.logger import LOGGER
+from .repo_interface import RepoInterface
 
 MONGO_URI = os.getenv("MONGO_URL")
 
 
-class BaseRepo:
-    def __init__(self, collection_name, notion_database_id="c3a788eb31f1471f9734157e9516f9b6", db_name="codelab1"):
-        self.connection = None
-        self.client = None
-        self.collection_name = collection_name
+class BaseRepo(RepoInterface):
+    def __init__(
+        self,
+        collection,
+        notion_database_id="c3a788eb31f1471f9734157e9516f9b6",
+        db="codelab1",
+    ):
         self.notion_database_id = notion_database_id
-        self.db_name = db_name
+        self.db = db
+        self.collection = collection
+        self._client = None
+        self._db = None
+        self._collection = None
 
     def connect(self):
-        try:
-            self.client = MongoClient(MONGO_URI)
-            self.connection = self.client[self.db_name][self.collection_name]
-        except Exception as e:
-            LOGGER.error(f"Error connecting to MongoDB: {e}")
-            raise e
+        if not self._client:
+            try:
+                self._client = MongoClient(
+                    MONGO_URI,
+                    maxpoolsize=50,
+                    connectTimeoutMS=30000,
+                    socketTimeoutMS=30000,
+                )
+                self._db = self._client[self.db]
+                self._collection = self._db[self.collection]
+                # self.connection = self._client[self.db][self.collection]
+                LOGGER.info(f"Connected to MongoDB")
+            except Exception as e:
+                LOGGER.error(f"Error connecting to MongoDB: {e}")
+                raise 
 
     def close(self):
-        if self.client:
-            self.client.close()
+        if self._client:
+            self._client.close()
+            self._client = None
+            self._db = None
+            self._collection = None
         LOGGER.info("Closed MongoDB connection.")
 
-    def fetch_one(self, id=None, object_id=False):
+    def __enter__(self):
+        """Context manager entry"""
+        self.connect()
+        return self
+    
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        """Context manager exit"""
+        self.close()
+
+    def fetch_one(self, query=None) -> Optional[Dict]:
         try:
-            self.connect()
-            query = {"_id": ObjectId(id)} if object_id else {"_id": id}
-            document = self.connection.find_one(query)
-            return document
+            with self:
+                document = self._collection.find_one(query)
+                return document
         except Exception as e:
             LOGGER.error(f"Error fetching document: {e}")
-            raise e
+            raise 
 
-    def fetch_all(self, query=None):
+    def fetch_all(self, query=None) -> List[Dict]:
         try:
-            self.connect()
-            query = query or {}
-            documents = list(self.connection.find(query))
-            # LOGGER.info(f"Fetched {len(documents)} documents from {self.collection_name}.")
-            return documents
+            with self:
+                query = query or {}
+                documents = list(self._collection.find(query))
+                return documents
         except Exception as e:
             LOGGER.error(f"Error fetching documents: {e}")
-            raise e
+            raise
 
-    def insert_one(self, data):
+    def insert_one(self, data: Dict) -> str:
         try:
-            self.connect()
-            self.connection.insert_one(data)
-            # LOGGER.info(f"Inserted document: {data}.")
+            with self:
+                self._collection.insert_one(data)
         except Exception as e:
             LOGGER.error(f"Error inserting document: {e}")
-            raise e
+            raise
 
-    def insert_many(self, data):
+    def insert_many(self, data: List[Dict]) -> List[str]:
         try:
-            self.connect()
-            self.connection.insert_many(data)
+            with self:
+                self._collection.insert_many(data)
         except Exception as e:
             LOGGER.error(f"Error inserting documents: {e}")
-            raise e
+            raise
 
-    def update_one(self, query, update):
+    def update_one(self, query: Dict, update: Dict) -> bool:
         try:
-            self.connect()
-            self.connection.update_one(query, update)
+            with self:
+                self._collection.update_one(query, update)
         except Exception as e:
             LOGGER.error(f"Error updating document: {e}")
-            raise e
+            raise
 
-    def update_many(self, query, update):
+    def update_many(self, query: Dict, update: Dict) -> int:
         try:
-            self.connect()
-            self.connection.update_many(query, update)
+            with self:
+                result = self._collection.update_many(query, update)
+                return result.modified_count
         except Exception as e:
             LOGGER.error(f"Error updating documents: {e}")
-            raise e
+            raise

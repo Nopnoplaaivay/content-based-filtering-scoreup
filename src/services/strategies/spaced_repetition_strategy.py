@@ -60,9 +60,9 @@ class SpacedRepetitionStrategy(RecommendationStrategy):
                 knowledge_concepts.add(concept)
                 recommendations["exercise_ids"].append(exercise)
 
-        recommendations["knowledge_concepts"] = [self.concepts.fetch_one(id=concept)["title"] for concept in
+        recommendations["knowledge_concepts"] = [self.concepts.fetch_by_id(concept_id=concept)["title"] for concept in
                                                  list(knowledge_concepts)]
-        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('name')} Ơi!"
+        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('full_name')} Ơi!"
 
         if recommendations["exercise_ids"]:
             concepts_message = ", ".join(recommendations["knowledge_concepts"])

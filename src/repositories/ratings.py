@@ -3,11 +3,12 @@ import json
 import os
 
 from src.repositories.base_repo import BaseRepo
+from src.entities import Ratings
 from src.utils.logger import LOGGER
 
 class RatingsRepo(BaseRepo):
     def __init__(self, notion_database_id="c3a788eb31f1471f9734157e9516f9b6"):
-        super().__init__(collection_name="ratings", notion_database_id=notion_database_id)
+        super().__init__(collection="ratings", notion_database_id=notion_database_id)
 
     def fetch_ratings_by_user(self, user_id):
         try:

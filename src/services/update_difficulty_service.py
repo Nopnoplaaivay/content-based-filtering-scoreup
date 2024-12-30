@@ -260,12 +260,6 @@ class UpdateDifficultyService:
                     {"_id": ques_id}, {"$set": {"difficulty": difficulty}}
                 )
             self.questions.close()
-            # Update_many
-            # Convert combined_difficulties to list
-            # combined_difficulties = combined_difficulties.tolist()
-            # query = {"_id": {"$in": [ques["_id"] for ques in questions]}}
-            # update = {"$set": {"difficulty": combine_difficulties}}
-            # self.questions.update_many(query, update)
 
             LOGGER.info("Difficulties for exercises updated successfully!")
         except Exception as e:

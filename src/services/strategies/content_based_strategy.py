@@ -40,8 +40,8 @@ class ContentBasedStrategy(RecommendationStrategy):
                 recommendations["clusters"].append(int(item))
                 recommendations["exercise_ids"].append(exercise)
 
-        recommendations["knowledge_concepts"] = [self.concepts.fetch_one(id=concept)["title"] for concept in list(knowledge_concepts)]
-        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('name')} Ơi!"
+        recommendations["knowledge_concepts"] = [self.concepts.fetch_by_id(concept_id=concept)["title"] for concept in list(knowledge_concepts)]
+        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('full_name')} Ơi!"
         concept_message = ", ".join(recommendations["knowledge_concepts"])
         messages = [
             f"{hi_message} Những câu hỏi này sẽ giúp cậu làm quen với đa dạng các chủ đề {concept_message} cậu đã học trước đây. Hãy thử sức nhé!",
