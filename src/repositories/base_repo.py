@@ -34,8 +34,7 @@ class BaseRepo(RepoInterface):
                 )
                 self._db = self._client[self.db]
                 self._collection = self._db[self.collection]
-                # self.connection = self._client[self.db][self.collection]
-                LOGGER.info(f"Connected to MongoDB")
+                # LOGGER.info(f"Connected to MongoDB")
             except Exception as e:
                 LOGGER.error(f"Error connecting to MongoDB: {e}")
                 raise 
@@ -46,7 +45,7 @@ class BaseRepo(RepoInterface):
             self._client = None
             self._db = None
             self._collection = None
-        LOGGER.info("Closed MongoDB connection.")
+        # LOGGER.info("Closed MongoDB connection.")
 
     def __enter__(self):
         """Context manager entry"""

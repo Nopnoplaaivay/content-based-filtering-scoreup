@@ -1,4 +1,5 @@
 import numpy as np
+import time
 import scipy.stats as stats
 import matplotlib.pyplot as plt
 
@@ -150,10 +151,10 @@ class UpdateDifficultyService:
         LOGGER.info(f"  Normality Score: {result['normality_score']:.4f}")
 
         # Visualize distribution
-        cls.visualize_distribution(
-            result['combined_difficulties'],
-            title="Optimized Difficulty Distribution"
-        )
+        # cls.visualize_distribution(
+        #     result['combined_difficulties'],
+        #     title="Optimized Difficulty Distribution"
+        # )
 
         return result
 
@@ -252,14 +253,15 @@ class UpdateDifficultyService:
                 raise ValueError("Length of combine_difficulties and questions do not match")
 
             LOGGER.info("Updating difficulties for questions...")
-            self.questions.connect()
             for i, ques in enumerate(questions):
+                if i % 100 == 0:
+                    LOGGER.info(f"Updating question {i}/{len(questions)}")
+                    time.sleep(10)
                 ques_id = ques["_id"]
                 difficulty = combine_difficulties[i]
                 self.questions.update_one(
                     {"_id": ques_id}, {"$set": {"difficulty": difficulty}}
                 )
-            self.questions.close()
 
             LOGGER.info("Difficulties for exercises updated successfully!")
         except Exception as e:

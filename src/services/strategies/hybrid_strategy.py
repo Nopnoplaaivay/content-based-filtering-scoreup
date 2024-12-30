@@ -1,15 +1,15 @@
 import random
 
-
-from src.services.strategies.strategy_interface import RecommendationStrategy
-from src.services.strategies.content_based_strategy import ContentBasedStrategy
-from src.services.strategies.spaced_repetition_strategy import SpacedRepetitionStrategy
+from .strategy_interface import RecommendationStrategy
+from .content_based_strategy import ContentBasedStrategy
+from .spaced_repetition_strategy import SpacedRepetitionStrategy
 from src.utils.logger import LOGGER
+
 
 class HybridStrategy(RecommendationStrategy):
     def recommend(self, user_id, max_exercises=10):
-        user_logs = self.logs.fetch_logs_by_user(user_id)
-        user_ratings = self.ratings.fetch_ratings_by_user(user_id)
+        user_logs = self.logs.fetch_by_user(user_id)
+        user_ratings = self.ratings.fetch_by_user(user_id=user_id)
         if len(user_logs) == 0:
             LOGGER.info(f"User has not done any exercises.")
             recommendations = {

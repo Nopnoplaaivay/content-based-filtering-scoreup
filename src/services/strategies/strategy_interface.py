@@ -18,4 +18,3 @@ class RecommendationStrategy(ABC):
     @abstractmethod
     def recommend(self, user_id, max_exercises):
         pass
-

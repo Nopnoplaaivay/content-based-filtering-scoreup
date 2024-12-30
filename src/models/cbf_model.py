@@ -63,7 +63,7 @@ class CBFModel:
 
     def train(self):
         ratings_repo = RatingsRepo()
-        ratings_df = ratings_repo.get_training_data()
+        ratings_df = ratings_repo.generate_training_data()
 
         self.n_users = ratings_df['user_id'].nunique()
         self.rating_train, self.rating_test = self.train_test_split_data(ratings_df, test_size=0.2, random_state=42)

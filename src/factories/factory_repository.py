@@ -6,7 +6,7 @@ from src.repositories import (
     UsersRepo,
     LogsRepo,
     RatingsRepo,
-    RecLogsRepo
+    RecommendationLogsRepo
 )
 
 from src.utils.feature_vectors import FeatureVectors
@@ -24,7 +24,7 @@ class FactoryRepo:
         return LogsRepo(notion_database_id=self.notion_database_id)
     
     def create_recommendation_logs(self):
-        return RecLogsRepo(notion_database_id=self.notion_database_id)
+        return RecommendationLogsRepo(notion_database_id=self.notion_database_id)
     
     def create_ratings(self):
         return RatingsRepo(notion_database_id=self.notion_database_id)

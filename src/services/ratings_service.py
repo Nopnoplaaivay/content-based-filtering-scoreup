@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import os
-
+import time
 
 from src.repositories import RatingsRepo
 from src.services.base_service import BaseService
@@ -59,8 +59,6 @@ class RatingService(BaseService):
         except Exception as e:
             LOGGER.error(f"Error upserting rating: {e}")
             raise e
-        finally:
-            self.repo.close()
 
     def init_implicit_ratings(self):
         try:
@@ -115,8 +113,13 @@ class RatingService(BaseService):
                 "updated": []
             }
 
-            total_ratings = len(rec_logs_df)
-            for idx, row in rec_logs_df.iterrows():
+            rec_logs_df_copy = rec_logs_df.copy()
+            total_ratings = len(rec_logs_df_copy)
+            for idx, row in rec_logs_df_copy.iterrows():
+                if idx % 100 == 0:
+                    LOGGER.info(f"WAITING FOR 10 SECONDS...")
+                    time.sleep(10)
+
                 user_id = row["user_id"]
                 item_id = row["item_id"]
                 implicit_rating = row["implicit_rating"]
@@ -152,9 +155,8 @@ class RatingService(BaseService):
                     self.repo.insert_one(new_rating)
                 LOGGER.info(f"Upserted implicit rating {idx + 1}/{total_ratings}...")
 
+            LOGGER.info("DONE")
+
         except Exception as e:
             LOGGER.error(f"Error initializing implicit rating: {e}")
             raise e
-        finally:
-            self.repo.close()
-            LOGGER.info("DONE")

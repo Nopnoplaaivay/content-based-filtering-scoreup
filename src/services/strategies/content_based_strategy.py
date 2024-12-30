@@ -25,7 +25,7 @@ class ContentBasedStrategy(RecommendationStrategy):
         knowledge_concepts = set()
         items = np.argsort(predicted_ratings)[::-1]
 
-        already_done_exercise_ids = set([log["exercise_id"] for log in self.logs.fetch_logs_by_user(user_id)])
+        already_done_exercise_ids = set([log["exercise_id"] for log in self.logs.fetch_by_user(user_id)])
 
         for item in items:
             if len(recommendations["exercise_ids"]) >= max_exercises:
@@ -34,14 +34,14 @@ class ContentBasedStrategy(RecommendationStrategy):
                 question_id = priority_df.iloc[item]["question_id"]
                 if question_id in already_done_exercise_ids:
                     continue
-                exercise = self.questions.fetch_one(id=question_id)
+                exercise = self.questions.fetch_one({"_id": question_id})
                 concept = exercise["properties"]["tags"]["multi_select"][0]["name"]
                 knowledge_concepts.add(concept)
                 recommendations["clusters"].append(int(item))
                 recommendations["exercise_ids"].append(exercise)
 
         recommendations["knowledge_concepts"] = [self.concepts.fetch_by_id(concept_id=concept)["title"] for concept in list(knowledge_concepts)]
-        hi_message = f"{self.users.fetch_user_info(user_id=user_id).get('full_name')} Ơi!"
+        hi_message = f"{self.users.fetch_by_id(user_id=user_id).get('full_name')} Ơi!"
         concept_message = ", ".join(recommendations["knowledge_concepts"])
         messages = [
             f"{hi_message} Những câu hỏi này sẽ giúp cậu làm quen với đa dạng các chủ đề {concept_message} cậu đã học trước đây. Hãy thử sức nhé!",
