@@ -1,19 +1,31 @@
 import os
 import json
+from datetime import datetime
 
 from src.utils.logger import LOGGER
+from src.utils.time_utils import TimeUtils
 
 if __name__ == "__main__":
 
     '''
     Test repositories
     '''
+    from src.entities import (
+        Users,
+        Concepts,
+        Ratings,
+        Logs,
+        Questions,
+        ProcessTracking
+    )
+
     from src.repositories import (
         UsersRepo, 
         ConceptsRepo,
         RatingsRepo,
         LogsRepo,
-        QuestionsRepo
+        QuestionsRepo,
+        ProcessTrackingRepo
     )
     
     user_id = "6747fa55dc9599b62cbebcdb"
@@ -24,6 +36,27 @@ if __name__ == "__main__":
     # # print(LogsRepo().fetch_by_user(user_id=user_id))
     # raw_questions = QuestionsRepo().fetch_all()
     # print(QuestionsRepo().preprocess_questions(raw_questions))
+
+    timestamp_str = "2024-11-28T14:46:22.183+00:00"
+    timestamp = datetime.fromisoformat(timestamp_str)
+    process_tracking = {
+        "created_at": timestamp,
+        "updated_at": TimeUtils.vn_current_time(),
+        "collection_name": "ratings",
+        "notion_database_id": "c3a788eb31f1471f9734157e9516f9b6",
+        "key_name": "lastUpdatedday",
+        "key_value":  TimeUtils.vn_current_time()
+    }
+
+    # ProcessTrackingRepo().insert_one(process_tracking)
+    updated_timestamp = datetime.fromisoformat("2024-12-30T09:00:00.153+00:00")
+
+    # Update process tracking
+    process_tracking_repo = ProcessTrackingRepo()
+    process_tracking_repo.update_one(
+        query={"collection_name": "ratings"},
+        update={"$set": {"key_value": updated_timestamp}}
+    )
     
 
     '''
@@ -42,6 +75,7 @@ if __name__ == "__main__":
     '''
     # from src.services.ratings_service import RatingService
     # rating_service = RatingService()
+    # rating_service.update_implicits()
     # rating_service.init_implicit_ratings()
     
     # data = {

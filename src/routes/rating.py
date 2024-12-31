@@ -24,9 +24,9 @@ def upsert_ratings():
         return jsonify({"status": "error", "message": str(e)}), 404
     
 @rating_routes.route("/init", methods=['POST'])
-def init_implicit_ratings():
+def init_implicits():
     try:
-        rating_service.init_implicit_ratings()
+        rating_service.init_implicits()
         LOGGER.info(f"DONE init implicit ratings.")
         return jsonify({"status": "success"}), 200
     except Exception as e:

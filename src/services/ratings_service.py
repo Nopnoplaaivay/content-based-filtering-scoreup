@@ -3,7 +3,7 @@ import pandas as pd
 import os
 import time
 
-from src.repositories import RatingsRepo
+from src.repositories import RatingsRepo, ProcessTrackingRepo
 from src.services.base_service import BaseService
 from src.utils.time_utils import TimeUtils
 from src.utils.logger import LOGGER
@@ -13,54 +13,24 @@ class RatingService(BaseService):
     def __init__(self):
         super().__init__(RatingsRepo())
 
-    def upsert_ratings(self, data):
-        try:
-            user_id = data['user_id']
-            clusters = data['data']['clusters']
-            rating = data['data']['rating']
-            messages = {
-                "user_id": user_id,
-                "inserted": [],
-                "updated": []
-            }
+    def update_implicits(self):
+        condition = {"collection_name": "ratings"}
+        process_tracking_repo = ProcessTrackingRepo()
+        tracking_record = process_tracking_repo.fetch_one(condition)
+        if len(tracking_record) == 0:
+            condition.update({"key_value": TimeUtils.vn_current_time()})
+            process_tracking_repo.insert_one(condition)
+            self.init_implicits()
+        else:
+            last_updated = tracking_record["key_value"]
+            # if TimeUtils.vn_current_time() - last_updated > 86400:
+            process_tracking_repo.update_one(
+                query=condition,
+                update={"$set": {"key_value": TimeUtils.vn_current_time()}}
+            )
 
-            for cluster in clusters:
-                query = {"user_id": user_id, "cluster": cluster}
-                raw_ratings = self.repo.fetch_all(query)
-                existing_rating = raw_ratings[0] if raw_ratings else None
 
-                # Upsert the rating
-                if existing_rating:
-                    existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
-                    existing_rating['updated_at'] = TimeUtils.vn_current_time()
-                    message = f"Updated rating with cluster {cluster} - New Rating: {existing_rating['rating']}"
-                    messages["updated"].append(message)
-
-                    # Update the existing rating
-                    self.repo.update_one(query, {"$set": existing_rating})
-                else:
-                    new_rating = {
-                        "user_id": user_id,
-                        "cluster": cluster,
-                        "rating": rating,
-                        "notionDatabaseId": self.repo.notion_database_id,
-                        "created_at": TimeUtils.vn_current_time(),
-                        "updated_at": TimeUtils.vn_current_time()
-                    }
-                    message = f"Inserted rating with cluster {cluster} - Rating: {rating}"
-                    messages["inserted"].append(message)
-
-                    # Insert a new rating
-                    self.repo.insert_one(new_rating)
-
-            LOGGER.info(f"Upserted ratings {messages}.")
-
-            return messages
-        except Exception as e:
-            LOGGER.error(f"Error upserting rating: {e}")
-            raise e
-
-    def init_implicit_ratings(self):
+    def init_implicits(self):
         try:
             # Update the implicit rating for all users
             fv = self.factory.load_feature_vectors()
@@ -159,4 +129,51 @@ class RatingService(BaseService):
 
         except Exception as e:
             LOGGER.error(f"Error initializing implicit rating: {e}")
+            raise e
+
+    def upsert_ratings(self, data):
+        try:
+            user_id = data['user_id']
+            clusters = data['data']['clusters']
+            rating = data['data']['rating']
+            messages = {
+                "user_id": user_id,
+                "inserted": [],
+                "updated": []
+            }
+
+            for cluster in clusters:
+                query = {"user_id": user_id, "cluster": cluster}
+                raw_ratings = self.repo.fetch_all(query)
+                existing_rating = raw_ratings[0] if raw_ratings else None
+
+                # Upsert the rating
+                if existing_rating:
+                    existing_rating['rating'] = (existing_rating['rating'] + rating) / 2
+                    existing_rating['updated_at'] = TimeUtils.vn_current_time()
+                    message = f"Updated rating with cluster {cluster} - New Rating: {existing_rating['rating']}"
+                    messages["updated"].append(message)
+
+                    # Update the existing rating
+                    self.repo.update_one(query, {"$set": existing_rating})
+                else:
+                    new_rating = {
+                        "user_id": user_id,
+                        "cluster": cluster,
+                        "rating": rating,
+                        "notionDatabaseId": self.repo.notion_database_id,
+                        "created_at": TimeUtils.vn_current_time(),
+                        "updated_at": TimeUtils.vn_current_time()
+                    }
+                    message = f"Inserted rating with cluster {cluster} - Rating: {rating}"
+                    messages["inserted"].append(message)
+
+                    # Insert a new rating
+                    self.repo.insert_one(new_rating)
+
+            LOGGER.info(f"Upserted ratings {messages}.")
+
+            return messages
+        except Exception as e:
+            LOGGER.error(f"Error upserting rating: {e}")
             raise e

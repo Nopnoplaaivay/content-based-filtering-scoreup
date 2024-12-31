@@ -19,8 +19,7 @@ class Logs:
         bookmarked: Union[int, bool, None],
         mastered: Union[int, bool, None],
         created_at: datetime,
-        updated_at: datetime,
-
+        updated_at: datetime
     ):
         self._id = _id
         self.user_id = user_id
