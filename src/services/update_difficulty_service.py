@@ -4,7 +4,7 @@ import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 
-from src.factories.factory_repository import FactoryRepo
+from src.factories import FactoryRepo
 from src.utils.logger import LOGGER
 
 

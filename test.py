@@ -37,16 +37,14 @@ if __name__ == "__main__":
     # raw_questions = QuestionsRepo().fetch_all()
     # print(QuestionsRepo().preprocess_questions(raw_questions))
 
-    timestamp_str = "2024-11-28T14:46:22.183+00:00"
-    timestamp = datetime.fromisoformat(timestamp_str)
-    process_tracking = {
-        "created_at": timestamp,
-        "updated_at": TimeUtils.vn_current_time(),
-        "collection_name": "ratings",
-        "notion_database_id": "c3a788eb31f1471f9734157e9516f9b6",
-        "key_name": "lastUpdatedday",
-        "key_value":  TimeUtils.vn_current_time()
-    }
+    # process_tracking = {
+    #     "created_at": timestamp,
+    #     "updated_at": TimeUtils.vn_current_time(),
+    #     "collection_name": "ratings",
+    #     "notion_database_id": "c3a788eb31f1471f9734157e9516f9b6",
+    #     "key_name": "lastUpdatedday",
+    #     "key_value":  TimeUtils.vn_current_time()
+    # }
 
     # ProcessTrackingRepo().insert_one(process_tracking)
     updated_timestamp = datetime.fromisoformat("2024-12-30T09:00:00.153+00:00")
@@ -73,10 +71,10 @@ if __name__ == "__main__":
     '''
     Test services
     '''
-    # from src.services.ratings_service import RatingService
-    # rating_service = RatingService()
-    # rating_service.update_implicits()
-    # rating_service.init_implicit_ratings()
+    from src.services.ratings_service import RatingService
+    rating_service = RatingService()
+    rating_service.update_implicits()
+    # rating_service.init_implicits
     
     # data = {
     #     "user_id": "67021b10012649250e92b7da",
@@ -85,8 +83,7 @@ if __name__ == "__main__":
     #         "rating": 1
     #     }
     # }
-    # ratings = Ratings()
-    # rating_service.upsert(data)
+    # rating_service.upsert_ratings(data)
 
 
     '''
@@ -112,8 +109,6 @@ if __name__ == "__main__":
     '''
     # Thay đổi /recommend --> /api/v1/recommend: same body request
     # Thay đổi /upsert --> /api/v1/ratings/upsert
-
-    # Một số api mới nma hình như m không call:
 
     # API train: api/v1/model/train
     # API khởi tạo implicit rating: /api/v1/ratings/init

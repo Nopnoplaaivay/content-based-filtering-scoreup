@@ -6,7 +6,8 @@ from src.repositories import (
     UsersRepo,
     LogsRepo,
     RatingsRepo,
-    RecommendationLogsRepo
+    RecommendationLogsRepo,
+    ProcessTrackingRepo
 )
 
 from src.utils.feature_vectors import FeatureVectors
@@ -34,6 +35,9 @@ class FactoryRepo:
 
     def create_users(self):
         return UsersRepo()
+    
+    def create_process_tracking(self):
+        return ProcessTrackingRepo()
 
     def create_model(self):
         return CBFModel()

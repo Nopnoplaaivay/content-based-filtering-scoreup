@@ -32,3 +32,13 @@ def init_implicits():
     except Exception as e:
         LOGGER.error(f"Error in init implicit ratings: {e}")
         return jsonify({"status": "error", "message": str(e)}), 404
+    
+@rating_routes.route("/update", methods=['POST'])
+def update_implicits():
+    try:
+        rating_service.update_implicits()
+        LOGGER.info(f"DONE update implicit ratings.")
+        return jsonify({"status": "success"}), 200
+    except Exception as e:
+        LOGGER.error(f"Error in update implicit ratings: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 404
