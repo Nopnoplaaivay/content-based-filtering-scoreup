@@ -47,14 +47,14 @@ if __name__ == "__main__":
     # }
 
     # ProcessTrackingRepo().insert_one(process_tracking)
-    updated_timestamp = datetime.fromisoformat("2024-12-30T09:00:00.153+00:00")
+    # updated_timestamp = datetime.fromisoformat("2024-12-30T09:00:00.153+00:00")
 
     # Update process tracking
-    process_tracking_repo = ProcessTrackingRepo()
-    process_tracking_repo.update_one(
-        query={"collection_name": "ratings"},
-        update={"$set": {"key_value": updated_timestamp}}
-    )
+    # process_tracking_repo = ProcessTrackingRepo()
+    # process_tracking_repo.update_one(
+    #     query={"collection_name": "ratings"},
+    #     update={"$set": {"key_value": updated_timestamp}}
+    # )
     
 
     '''
@@ -71,9 +71,10 @@ if __name__ == "__main__":
     '''
     Test services
     '''
-    from src.services.ratings_service import RatingService
-    rating_service = RatingService()
-    rating_service.update_implicits()
+    # from src.services.ratings_service import RatingService
+    # rating_service = RatingService()
+    # rating_service.update_newest_ratings_daily()
+    # rating_service.update_implicits()
     # rating_service.init_implicits
     
     # data = {
@@ -105,12 +106,28 @@ if __name__ == "__main__":
     # print(feature_vectors.features_vectors)
 
     '''
-    API notes
-    '''
-    # Thay đổi /recommend --> /api/v1/recommend: same body request
-    # Thay đổi /upsert --> /api/v1/ratings/upsert
+    Production API paths: http://101.96.66.218:8019/ or https://scoreup-rcm.whoisduyviet.id.vn/api/v1/recommend
 
-    # API train: api/v1/model/train
-    # API khởi tạo implicit rating: /api/v1/ratings/init
-    # API khởi tạo features vector: /api/v1/features/init
-    # API update độ khó: /api/v1/questions/update
+    API notes
+    Thay đổi /recommend --> /api/v1/recommend: same body request
+    Thay đổi /upsert --> /api/v1/ratings/upsert
+
+    API recommend [POST]: http://127.0.0.1:8019/api/v1/recommend
+    Body request:
+        {
+            "user_id": "67021b10012649250e92b7da"
+        }
+    API upsert [POST]: http://127.0.0.1:8019/api/v1/ratings/upsert
+        {
+            "user_id": "66f22bf5c5434edfec4e3acf",
+            "data": {
+                "clusters": [125, 46],
+                "rating": 5
+            }
+        }
+
+    API train [POST]: http://127.0.0.1:8019/api/v1/model/train
+    API update implicit rating [POST]: http://127.0.0.1:8019/api/v1/ratings/update
+    API khởi tạo features vector [POST]: http://127.0.0.1:8019/api/v1/features/init
+    API update độ khó [POST]: http://127.0.0.1:8019/api/v1/questions/update
+    '''

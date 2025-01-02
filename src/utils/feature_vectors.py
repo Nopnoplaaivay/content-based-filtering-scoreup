@@ -32,7 +32,7 @@ class FeatureVectors:
         try:
             self.features_vectors = np.load(f"src/tmp/features_vectors/{self.notion_database_id}_feature_vectors.npy")
             self.metadata = pd.read_csv(f"src/tmp/mapping/{self.notion_database_id}_metadata.csv")
-            LOGGER.info("Loaded features vector successfully.")
+            # LOGGER.info("Loaded features vector successfully.")
         except Exception as e:
             LOGGER.error(f"Error loading features vector: {e}")
             self.gen_feature_vectors_df()

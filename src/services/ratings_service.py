@@ -3,16 +3,13 @@ import pandas as pd
 import os
 import time
 from typing import Dict, List, Optional
+import datetime
 
 from src.entities import ProcessTracking
 from src.repositories import RatingsRepo, ProcessTrackingRepo
 from src.services.base_service import BaseService
 from src.utils.time_utils import TimeUtils
 from src.utils.logger import LOGGER
-
-
-
-        
 
 
 class RatingService(BaseService):
@@ -28,56 +25,64 @@ class RatingService(BaseService):
         self.recommendation_logs_repo = self.factory.create_recommendation_logs()
         self.feature_vectors = self.factory.load_feature_vectors()
 
-    '''
-    Hàm này dùng để update implicit ratings dựa trên user interactions từ lần update trước đến giờ
-    '''
-    def update_implicits(self) -> None:
-        """Updates implicit ratings based on user interactions since last update."""
-        tracking_record = self._get_or_create_tracking_record()
-        
-        if not tracking_record:
-            LOGGER.info("No tracking record found. Initializing implicit ratings...")
-            self.init_implicits()
-            return
-            
-        last_updated = tracking_record["key_value"]
-        rec_logs_df = self._get_processed_logs({"created_at": {"$gt": last_updated}})
-        self._process_and_save_ratings(rec_logs_df, "implicit_ratings_last_updated.csv")
 
-    '''
-    Hàm này dùng để khởi tạo implicit ratings cho tất cả user
-    '''
-    def init_implicits(self) -> None:
-        """Initializes implicit ratings for all users."""
+    def update_newest_ratings_daily(self) -> bool:
         try:
-            rec_logs_df = self._get_processed_logs()
-            self._process_and_save_ratings(rec_logs_df, "implicit_ratings.csv")
-        except Exception as e:
-            LOGGER.error(f"Error initializing implicit rating: {e}")
-            raise
-
-    '''
-    Check xem đã có tracking record chưa, nếu chưa thì tạo mới
-    '''
-    def _get_or_create_tracking_record(self) -> Optional[Dict]:
-        """Gets or creates a tracking record for the ratings collection."""
-        condition = {"collection_name": "ratings"}
-        process_tracking_repo = ProcessTrackingRepo()
-        tracking_record = process_tracking_repo.fetch_one(condition)
-        
-        if not tracking_record:
-            new_tracking_record = {
-                "created_at": TimeUtils.vn_current_time(),
-                "updated_at": TimeUtils.vn_current_time(),
-                "collection_name": "ratings",
-                "notion_database_id": self.repo.notion_database_id,
-                "key_name": "lastUpdatedday",
-                "key_value": TimeUtils.vn_current_time()
-            }
-            process_tracking_repo.insert_one(new_tracking_record)
-            return None
+            condition = {"collection_name": "ratings"}
+            tracking_records = self.process_tracking_repo.fetch_all(condition)
+            if len(tracking_records) == 0:
+                self.process_tracking_repo.insert_one({
+                    "created_at": TimeUtils.vn_current_time(),
+                    "updated_at": TimeUtils.vn_current_time(),
+                    "collection_name": "ratings",
+                    "notion_database_id": self.repo.notion_database_id,
+                    "key_name": "lastUpdatedday",
+                    "key_value": None
+                })
+                tracking_records = self.process_tracking_repo.fetch_all(condition)
+            if len(tracking_records) > 1:
+                LOGGER.error("More than one tracking record found.")
+                raise Exception("More than one tracking record found.")
+            tracking_record = tracking_records[0]
+            key_value = tracking_record.get("key_value")
+            if key_value is not None:
+                last_updated_day = key_value
+                if  TimeUtils.vn_current_time() - last_updated_day < datetime.timedelta(days=1):
+                    LOGGER.info("No Ratings were updated less than a day ago.")
+                    return False
+                continue_updated_day = last_updated_day - datetime.timedelta(days=1)
+                LOGGER.info(f"Continue Updated Day: {continue_updated_day}")
+            else:
+                continue_updated_day = datetime.datetime(2024, 11, 1)
+                LOGGER.info(f"Start Updated Day: {continue_updated_day}")
             
-        return tracking_record
+            self.update_newest_ratings_from_date(from_date=continue_updated_day, tracking_record=tracking_record)
+            LOGGER.info("DONE")
+            return True
+        except Exception as e:
+            LOGGER.error(f"Error updating newest rating daily: {e}")
+            raise e
+
+    def update_newest_ratings_from_date(self, from_date: datetime.datetime, tracking_record: Dict) -> None:
+        last_day = TimeUtils.vn_current_time()
+        last_day = last_day - datetime.timedelta(days=1)
+        while from_date < last_day:
+            # Get rating logs on from_date only
+            end_from_date = from_date + datetime.timedelta(days=1)
+            rec_logs_df = self._get_processed_logs({"created_at": {"$gt": from_date, "$lt": end_from_date}})
+            if len(rec_logs_df) == 0:
+                from_date += datetime.timedelta(days=1)
+                continue
+            LOGGER.info(f"Processing ratings from {from_date} to {end_from_date}...")
+            # Update from date
+            from_date = rec_logs_df["created_at"].max()
+            # Upsert ratings
+            self._process_and_upsert_ratings(rec_logs_df)
+            self.process_tracking_repo.update_one(
+                query={"collection_name": "ratings"},
+                update={"$set": {"key_value": from_date}}
+            )
+
 
     '''
     Lấy và xử lý recommendation logs
@@ -86,6 +91,8 @@ class RatingService(BaseService):
         """Retrieves and processes recommendation logs."""
         raw_rec_logs = self.recommendation_logs_repo.fetch_all(query or {})
         rec_logs_df = self.recommendation_logs_repo.preprocess_logs(raw_rec_logs)
+        if len(rec_logs_df) == 0:
+            return pd.DataFrame()
         
         # Get latest entries for each user-question pair
         rec_logs_df = rec_logs_df.sort_values("created_at", ascending=False)
@@ -100,10 +107,10 @@ class RatingService(BaseService):
             how="left"
         )
         rec_logs_df = rec_logs_df.dropna(subset=["item_id"])
-        return rec_logs_df[["user_id", "item_id", "answered", "timecost", "bookmarked"]]
+        return rec_logs_df[["user_id", "item_id", "answered", "timecost", "bookmarked", "created_at"]]
 
     '''
-    Hàm này dùng để chuẩn hóa timecost 
+    Chuẩn hóa và tính toán implicit ratings
     '''
     def _normalize_timecost(self, df: pd.DataFrame) -> pd.DataFrame:
         """Normalizes timecost values in the dataframe."""
@@ -121,18 +128,12 @@ class RatingService(BaseService):
                         
         return df, self._normalize_threshold(time_cost_min, time_cost_max)
 
-    '''
-    Hàm này dùng để chuẩn hóa ngưỡng thời gian sử dụng cùng scale với timecost
-    '''
     def _normalize_threshold(self, min_val: float, max_val: float) -> float:
         """Normalizes the time threshold using the same scale as timecost."""
         return (self.TIME_THRESHOLD_MS - min_val) / (max_val - min_val) * \
                (self.TIMECOST_NORM_BOUNDS[1] - self.TIMECOST_NORM_BOUNDS[0]) + \
                self.TIMECOST_NORM_BOUNDS[0]
 
-    '''
-    Tính toán implicit ratings
-    '''
     def _calculate_implicit_rating(self, row: pd.Series, time_threshold_norm: float) -> float:
         """Calculates implicit rating based on user interactions."""
         base_rating = 3 if row["answered"] else 0
@@ -148,7 +149,7 @@ class RatingService(BaseService):
     '''
     Tính toán và lưu implicit ratings
     '''
-    def _process_and_save_ratings(self, df: pd.DataFrame, filename: str) -> None:
+    def _process_and_upsert_ratings(self, df: pd.DataFrame) -> None:
         """Processes ratings and saves them to database and CSV."""
         # Normalize timecost và tính ratings
         df, time_threshold_norm = self._normalize_timecost(df)
@@ -156,19 +157,7 @@ class RatingService(BaseService):
             lambda row: self._calculate_implicit_rating(row, time_threshold_norm),
             axis=1
         )
-        
-        # Lưu implicit ratings vào file CSV
-        os.makedirs(self.CSV_OUTPUT_DIR, exist_ok=True)
-        df.to_csv(os.path.join(self.CSV_OUTPUT_DIR, filename), index=False)
-        
-        # Update tất cả ratings
-        self._upsert_ratings(df)
 
-    '''
-    Update tất cả ratings
-    '''
-    def _upsert_ratings(self, df: pd.DataFrame) -> None:
-        """Upserts ratings to the database."""
         total_ratings = len(df)
         
         for idx, row in df.iterrows():
@@ -211,6 +200,11 @@ class RatingService(BaseService):
             
         LOGGER.info(f"Upserted implicit rating {idx + 1}/{total}...")
 
+
+
+    '''
+    Upsert rating for API
+    '''
     def upsert_ratings(self, data):
         try:
             user_id = data['user_id']
